@@ -211,6 +211,26 @@ body {
   background-color: transparent !important;
 }
 
+/* Strip every antd wrapper layer around the folder popover (background, drop
+   shadow and backdrop blur) so the icons appear to float with no bar at all. */
+.ant-popover:has(.weg-folder-popover),
+.ant-popover:has(.weg-folder-popover) .ant-popover-content,
+.ant-popover:has(.weg-folder-popover) .ant-popover-inner,
+.ant-popover:has(.weg-folder-popover) .ant-popover-inner-content {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* the active theme paints a tile background behind each icon; force it off in
+   the popover so the icons float with no bar/tile at all. */
+.weg-folder-popover .weg-item-icon {
+  background: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
 /** Folder / group item */
 .weg-item-folder {
   position: relative;
