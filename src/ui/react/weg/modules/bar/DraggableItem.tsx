@@ -8,6 +8,7 @@ import { $settings, isHorizontalDock } from "../shared/state/settings.ts";
 import { Alignment, SeelenWegSide } from "@seelen-ui/lib/types";
 import { useTranslation } from "react-i18next";
 import { $interactables, getWindowsForItem } from "../shared/state/windows.ts";
+import { $folder_drag_over_dock, $folder_extracted_drag_id } from "../shared/state/items.ts";
 
 interface Props extends PropsWithChildren {
   item: SwItem;
@@ -16,11 +17,14 @@ interface Props extends PropsWithChildren {
 }
 
 export function DraggableItem({ children, item, index, ghost }: Props) {
+  // An item being dragged out of a folder starts above/beside the dock, so it
+  // must move freely to travel into the dock; normal dock items stay axis-locked.
+  const isExtracting = $folder_extracted_drag_id.value === item.id;
   const sortable = useSortable({
     id: item.id,
     index,
     type: item.type,
-    modifiers: [isHorizontalDock.value ? RestrictToHorizontalAxis : RestrictToVerticalAxis],
+    modifiers: isExtracting ? [] : [isHorizontalDock.value ? RestrictToHorizontalAxis : RestrictToVerticalAxis],
   });
 
   const { t } = useTranslation();
@@ -66,11 +70,18 @@ export function DraggableItem({ children, item, index, ghost }: Props) {
       break;
   }
 
+  // While an extracted folder item is dragged outside the dock, collapse its
+  // slot so no ghost is left behind (kept in the DOM so dnd-kit keeps dragging).
+  const collapsed = isExtracting && !$folder_drag_over_dock.value;
+
   return (
     <div
       ref={sortable.ref}
-      style={{ opacity: sortable.isDragging || ghost ? 0.3 : 1 }}
+      style={collapsed
+        ? { width: 0, height: 0, padding: 0, margin: 0, overflow: "hidden", opacity: 0, pointerEvents: "none" }
+        : { opacity: sortable.isDragging || ghost ? 0.3 : 1 }}
       data-dragging={sortable.isDragging}
+      data-item-id={item.id}
       className="weg-item-drag-container"
       // this was added here to avoid need to pass it to all the items types,
       // this avoid the double context menu of dock menu and dock items.

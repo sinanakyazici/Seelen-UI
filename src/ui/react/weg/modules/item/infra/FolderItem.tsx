@@ -4,19 +4,20 @@ import { SeelenWegSide, WegItemType } from "@seelen-ui/lib/types";
 import { convertFileSrc } from "@tauri-apps/api/core";
 import { CollisionPriority } from "@dnd-kit/abstract";
 import { useDroppable } from "@dnd-kit/react";
+import { useSortable } from "@dnd-kit/react/sortable";
 import { FileIcon, Icon } from "libs/ui/react/components/Icon/index.tsx";
 import { cx } from "libs/ui/react/utils/styling.ts";
 import { Popover } from "antd";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import type { AppOrFileWegItem, FolderWegItem } from "../../shared/types.ts";
 
-import { $dock_state_actions } from "../../shared/state/items.ts";
+import { $dock_state_actions, $folder_dragging_from } from "../../shared/state/items.ts";
 import { $folder_icon_actions, $folder_icons } from "../../shared/state/folderIcons.ts";
 import { $settings, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
-import { $focused, $interactables, getWindowsForItem } from "../../shared/state/windows.ts";
-import { launchItem } from "./UserApplicationContextMenu.tsx";
+import { $delayedFocused, $focused, $interactables, getWindowsForItem } from "../../shared/state/windows.ts";
+import { getUserApplicationContextMenu, launchItem } from "./UserApplicationContextMenu.tsx";
 
 /** Renders the same "open sign" (line when focused / dot when running) used by app items. */
 function OpenSign({ windows }: { windows: { hwnd: number }[] }) {
@@ -78,8 +79,22 @@ const PRESET_COLORS: Array<{ label: string; value: string | null; icon: string; 
 const identifier = crypto.randomUUID();
 const colorSubmenuIdentifier = crypto.randomUUID();
 const onFolderMenuClick = "weg::folder_menu_click";
+const onFolderItemMenuClick = "weg::folder_item_menu_click";
 
 let pendingFolderId: string | null = null;
+let pendingFolderItemRemove: { folderId: string; entryId: string } | null = null;
+
+// Folder-popover-only action: remove an entry from the group (the shared app
+// context menu has no concept of folders).
+Widget.self.webview.listen(onFolderItemMenuClick, ({ payload }) => {
+  const { key } = payload as { key: string };
+  const target = pendingFolderItemRemove;
+  pendingFolderItemRemove = null;
+  if (!target) return;
+  if (key === "remove_from_folder") {
+    $dock_state_actions.deleteItemFromFolder(target.folderId, target.entryId);
+  }
+});
 
 Widget.self.webview.listen(onFolderMenuClick, ({ payload }) => {
   const { key } = payload as { key: string };
@@ -115,8 +130,102 @@ function getPopoverPlacement(position: SeelenWegSide) {
   }
 }
 
+type FolderEntry = FolderWegItem["items"][number];
+
+/**
+ * A single app icon inside the folder popover. It is a real dnd-kit sortable so
+ * that dragging it out of the folder hands off to the dock's drag system (see
+ * DockItems.onDragStart, which pulls it onto the dock on the same drag).
+ */
+function FolderPopoverItem({ folderId, entry, index }: { folderId: string; entry: FolderEntry; index: number }) {
+  const { t } = useTranslation();
+  const appItem = { type: WegItemType.AppOrFile, ...entry } as AppOrFileWegItem;
+  const entryWindows = getWindowsForItem(appItem, $interactables.value);
+
+  const sortable = useSortable({
+    id: entry.id,
+    index,
+    type: WegItemType.AppOrFile,
+    // isolate from the dock's sortable group so it doesn't reorder dock items
+    // while still inside the popover; the dock takes over once extracted.
+    group: `folder:${folderId}`,
+    data: { fromFolder: folderId },
+  });
+
+  return (
+    <div
+      ref={sortable.ref}
+      style={{ opacity: sortable.isDragging ? 0.3 : 1 }}
+      className="weg-folder-popover-item"
+      title={entry.displayName}
+      onContextMenu={(e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        const { alignX, alignY } = getDockContextMenuAlignment($settings.value.position);
+        const baseMenu = getUserApplicationContextMenu(t, appItem, entryWindows, { includePinning: false });
+        pendingFolderItemRemove = { folderId, entryId: entry.id };
+        invoke(SeelenCommand.TriggerContextMenu, {
+          menu: {
+            ...baseMenu,
+            items: [
+              ...baseMenu.items,
+              { type: "Separator" },
+              {
+                type: "Item",
+                key: "remove_from_folder",
+                icon: "IoRemoveCircleOutline",
+                label: t("folder_item.remove_from_group", "Remove from group"),
+                callbackEvent: onFolderItemMenuClick,
+              },
+            ],
+            alignX,
+            alignY,
+          },
+          forwardTo: null,
+        });
+      }}
+      onClick={() => {
+        const win = entryWindows[0];
+        if (!win) {
+          // not running: open it
+          launchItem(appItem, false);
+        } else {
+          // already running: focus the existing window (toggle, like the dock)
+          invoke(SeelenCommand.WegToggleWindowState, {
+            hwnd: win.hwnd,
+            wasFocused: $delayedFocused.value?.hwnd === win.hwnd,
+          });
+        }
+      }}
+    >
+      <FileIcon className="weg-item-icon" path={entry.relaunch?.icon || entry.path} umid={entry.umid} />
+      <OpenSign windows={entryWindows} />
+      {entryWindows.length > 0 && (
+        <button
+          type="button"
+          className="weg-folder-popover-remove"
+          title={t("app_menu.close", "Close")}
+          onClick={(e) => {
+            e.stopPropagation();
+            entryWindows.forEach((w) => {
+              invoke(SeelenCommand.WegCloseApp, { hwnd: w.hwnd });
+            });
+          }}
+        >
+          <Icon iconName="IoClose" />
+        </button>
+      )}
+    </div>
+  );
+}
+
 export const FolderItem = memo(({ item }: Props) => {
   const { t } = useTranslation();
+
+  // Keep the popover open while a drag started from this folder is in flight,
+  // otherwise the hover trigger closes it the moment the drag grabs the pointer.
+  const [hoverOpen, setHoverOpen] = useState(false);
+  const popoverOpen = hoverOpen || $folder_dragging_from.value === item.id;
 
   const iconColor = item.color ?? "var(--system-accent-color)";
 
@@ -255,6 +364,8 @@ export const FolderItem = memo(({ item }: Props) => {
       placement={getPopoverPlacement($settings.value.position)}
       trigger="hover"
       arrow={false}
+      open={popoverOpen}
+      onOpenChange={setHoverOpen}
       getPopupContainer={() => document.getElementById("root") ?? document.body}
       content={
         <div
@@ -265,36 +376,9 @@ export const FolderItem = memo(({ item }: Props) => {
             e.preventDefault();
           }}
         >
-          {item.items.map((entry) => {
-            const appItem = { type: WegItemType.AppOrFile, ...entry } as AppOrFileWegItem;
-            const entryWindows = getWindowsForItem(appItem, $interactables.value);
-            return (
-              <div
-                key={entry.id}
-                className="weg-folder-popover-item"
-                title={entry.displayName}
-                onClick={() => launchItem(appItem, false)}
-              >
-                <FileIcon
-                  className="weg-item-icon"
-                  path={entry.relaunch?.icon || entry.path}
-                  umid={entry.umid}
-                />
-                <OpenSign windows={entryWindows} />
-                <button
-                  type="button"
-                  className="weg-folder-popover-remove"
-                  title={t("folder_item.remove_from_group", "Remove from group")}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    $dock_state_actions.removeItemFromFolder(item.id, entry.id);
-                  }}
-                >
-                  <Icon iconName="IoClose" />
-                </button>
-              </div>
-            );
-          })}
+          {item.items.map((entry, index) => (
+            <FolderPopoverItem key={entry.id} folderId={item.id} entry={entry} index={index} />
+          ))}
         </div>
       }
     >

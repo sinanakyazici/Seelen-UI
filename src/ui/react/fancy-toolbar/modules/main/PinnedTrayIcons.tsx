@@ -5,7 +5,6 @@ import { useEffect, useState } from "preact/hooks";
 import { baseItem } from "../shared/state/default.ts";
 import { $toolbar_dragging, $toolbar_state } from "../shared/state/items.ts";
 
-const PINNED_TRAY_STORAGE_KEY = "seelen:pinned-tray-icons";
 const PINNED_TRAY_CHANGED_EVENT = "seelen:pinned-tray-icons-changed";
 const GET_PINNED_TRAY_ICONS_COMMAND = "get_pinned_tray_icons";
 const SET_PINNED_TRAY_ICONS_COMMAND = "set_pinned_tray_icons";
@@ -44,27 +43,14 @@ function normalizePinnedTrayIcon(value: unknown): PinnedTrayIcon | null {
   return null;
 }
 
-function getPinnedTrayIcons() {
+async function getStoredPinnedTrayIcons(): Promise<PinnedTrayIcon[]> {
   try {
-    return (JSON.parse(localStorage.getItem(PINNED_TRAY_STORAGE_KEY) || "[]") as unknown[])
-      .map(normalizePinnedTrayIcon)
-      .filter((entry): entry is PinnedTrayIcon => !!entry);
+    // The backend file is the single source of truth (no localStorage fallback,
+    // so clearing it actually clears the pins).
+    return await invoke(GET_PINNED_TRAY_ICONS_COMMAND as any) as PinnedTrayIcon[];
   } catch {
     return [];
   }
-}
-
-async function getStoredPinnedTrayIcons() {
-  try {
-    const icons = await invoke(GET_PINNED_TRAY_ICONS_COMMAND as any) as PinnedTrayIcon[];
-    if (icons.length) {
-      return icons;
-    }
-  } catch {
-    // Fall back to the old frontend storage while migrating existing pins.
-  }
-
-  return getPinnedTrayIcons();
 }
 
 function getItemName(item: SysTrayIcon) {
@@ -85,8 +71,37 @@ function getItemName(item: SysTrayIcon) {
  * pinned icon so it stays consistent even if the underlying window handle
  * changes (the live tray item is still matched via `matchesPinnedTrayIcon`).
  */
+/**
+ * A tooltip stripped of its volatile, numeric parts (temperatures, fan speeds,
+ * percentages, etc.) so it stays the same across tray updates AND across
+ * restarts. e.g. "Left: 57%" -> "Left: %", "CPU 0\nCore #0: 56°C" -> stable.
+ */
+function normalizeTooltip(tooltip: string): string {
+  return tooltip.replace(/\d+/g, "").replace(/\s+/g, " ").trim();
+}
+
+/**
+ * Stable identity for a pinned tray icon, used for both the toolbar item id and
+ * for matching the live tray icon. It must survive restarts, so it never uses
+ * the window handle (which changes every boot) nor the raw tooltip (whose
+ * numeric values change constantly):
+ *   1. guid               — stable when present
+ *   2. normalized tooltip — stable label for guid-less icons (sensors, etc.)
+ *   3. serialized id       — last-resort fallback (e.g. no tooltip at all)
+ */
+function stableKey(guid: string | null, tooltip: string, fallback: string): string {
+  if (guid) return `guid::${guid}`;
+  const normalized = normalizeTooltip(tooltip);
+  if (normalized) return `tip::${normalized}`;
+  return `sid::${fallback}`;
+}
+
 function stableKeyFromPinnedIcon(pinnedIcon: PinnedTrayIcon): string {
-  return pinnedIcon.guid ? `guid::${pinnedIcon.guid}` : `sid::${pinnedIcon.key}`;
+  return stableKey(pinnedIcon.guid, pinnedIcon.tooltip, pinnedIcon.key);
+}
+
+function stableKeyFromTrayIcon(item: SysTrayIcon): string {
+  return stableKey(item.guid, item.tooltip, trayIdKey(item.stable_id));
 }
 
 function toolbarIdFromStableKey(key: string): string {
@@ -104,9 +119,7 @@ function toPinnedTrayIcon(item: SysTrayIcon): PinnedTrayIcon {
 }
 
 function matchesPinnedTrayIcon(item: SysTrayIcon, pinnedIcon: PinnedTrayIcon) {
-  return trayIdKey(item.stable_id) === pinnedIcon.key ||
-    (!!item.guid && item.guid === pinnedIcon.guid) ||
-    (!!item.tooltip && item.tooltip === pinnedIcon.tooltip);
+  return stableKeyFromTrayIcon(item) === stableKeyFromPinnedIcon(pinnedIcon);
 }
 
 function hasIdentityData(pinnedIcon: PinnedTrayIcon) {
@@ -114,7 +127,6 @@ function hasIdentityData(pinnedIcon: PinnedTrayIcon) {
 }
 
 async function setStoredPinnedTrayIcons(icons: PinnedTrayIcon[]) {
-  localStorage.setItem(PINNED_TRAY_STORAGE_KEY, JSON.stringify(icons));
   await (invoke as any)(SET_PINNED_TRAY_ICONS_COMMAND, { pinnedIcons: icons });
 }
 

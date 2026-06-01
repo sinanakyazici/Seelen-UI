@@ -52,13 +52,17 @@ export function getUserApplicationContextMenu(
   t: TFunction,
   item: AppOrFileWegItem,
   windows: UserAppWindow[],
+  options: { includePinning?: boolean } = {},
 ): ContextMenu {
+  const { includePinning = true } = options;
   pendingAppItem = item;
   pendingAppWindows = windows;
 
   const items: ContextMenuItem[] = [];
 
-  if (!item.preventPinning) {
+  // Pin / unpin / remove-from-taskbar only make sense for items living directly
+  // on the dock; folder popover items pass includePinning: false to hide them.
+  if (includePinning && !item.preventPinning) {
     if (item.pinned) {
       items.push({
         type: "Item",

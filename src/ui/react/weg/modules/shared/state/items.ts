@@ -30,6 +30,26 @@ export const HARDCODED_SEPARATOR_RIGHT: SeparatorWegItem = {
 
 export const $dock_state = signal(getStateFromStored(await invoke(SeelenCommand.StateGetWegItems)));
 
+/**
+ * Id of the item currently being dragged out of a folder onto the dock. While
+ * set, that dock item drops its axis restriction so it can travel from the
+ * popover (above the dock) down into the dock instead of floating in mid-air.
+ */
+export const $folder_extracted_drag_id = signal<string | null>(null);
+
+/**
+ * Whether the cursor is currently over the dock during a folder-extract drag.
+ * When false the extracted item collapses its dock slot so no ghost is left
+ * behind while the cursor is outside the dock.
+ */
+export const $folder_drag_over_dock = signal(true);
+
+/**
+ * Id of the folder a drag currently originates from (set for the whole drag, so
+ * the popover can be kept open while reordering even though the hover is lost).
+ */
+export const $folder_dragging_from = signal<string | null>(null);
+
 subscribe(SeelenEvent.WegAddItem, (e) => {
   const item: WegItem = {
     ...e.payload,
@@ -227,6 +247,50 @@ export const $dock_state_actions = {
       next.push(restored);
     } else {
       next.splice(separatorIdx, 0, restored);
+    }
+    $dock_state.value = { ...$dock_state.value, items: next };
+  },
+  /** Remove an entry from a folder and discard it entirely (not restored to the dock). */
+  deleteItemFromFolder(folderId: string, itemId: string) {
+    $dock_state.value = {
+      ...$dock_state.value,
+      items: $dock_state.value.items.map((i) => {
+        if (i.id === folderId && i.type === WegItemType.Folder) {
+          return { ...i, items: i.items.filter((it) => it.id !== itemId) };
+        }
+        return i;
+      }),
+    };
+  },
+  /**
+   * Move an entry out of a folder back onto the dock, inserting it before
+   * `beforeItemId` (or at the end of the centre group when null). Used when the
+   * user drags a popover item and drops it at a specific spot on the dock.
+   */
+  insertItemFromFolderAt(folderId: string, itemId: string, beforeItemId: string | null) {
+    const items = [...$dock_state.value.items];
+    const folder = items.find(
+      (i): i is Extract<WegItem, { type: "Folder" }> => i.id === folderId && i.type === WegItemType.Folder,
+    );
+    if (!folder) return;
+    const data = folder.items.find((it) => it.id === itemId);
+    if (!data) return;
+
+    const next = items.map((i) => {
+      if (i.id === folderId && i.type === WegItemType.Folder) {
+        return { ...i, items: i.items.filter((it) => it.id !== itemId) };
+      }
+      return i;
+    });
+
+    const restored: WegItem = { type: WegItemType.AppOrFile, ...data };
+    const beforeIdx = beforeItemId ? next.findIndex((i) => i.id === beforeItemId) : -1;
+    if (beforeIdx === -1) {
+      const separatorIdx = next.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
+      if (separatorIdx === -1) next.push(restored);
+      else next.splice(separatorIdx, 0, restored);
+    } else {
+      next.splice(beforeIdx, 0, restored);
     }
     $dock_state.value = { ...$dock_state.value, items: next };
   },

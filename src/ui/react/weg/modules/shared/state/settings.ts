@@ -117,29 +117,24 @@ export const $widget_rect = computed(() => {
   );
 
   switch ($settings.value.position) {
+    // Non-touch: the (transparent, click-through) webview spans the full work
+    // area along the dock's axis so popovers/previews can grow without being
+    // clipped at half-screen. Only the hitbox stays the dock strip.
     case SeelenWegSide.Left:
       hitboxRect.right = hitboxRect.left + size;
-      webviewRect.right = $isTouchPrimary.value
-        ? hitboxRect.right
-        : workArea.right - Math.round((workArea.right - workArea.left) / 2);
+      webviewRect.right = $isTouchPrimary.value ? hitboxRect.right : workArea.right;
       break;
     case SeelenWegSide.Right:
       hitboxRect.left = hitboxRect.right - size;
-      webviewRect.left = $isTouchPrimary.value
-        ? hitboxRect.left
-        : workArea.left + Math.round((workArea.right - workArea.left) / 2);
+      webviewRect.left = $isTouchPrimary.value ? hitboxRect.left : workArea.left;
       break;
     case SeelenWegSide.Top:
       hitboxRect.bottom = hitboxRect.top + size;
-      webviewRect.bottom = $isTouchPrimary.value
-        ? hitboxRect.bottom
-        : workArea.top + Math.round((workArea.bottom - workArea.top) / 2);
+      webviewRect.bottom = $isTouchPrimary.value ? hitboxRect.bottom : workArea.bottom;
       break;
     case SeelenWegSide.Bottom:
       hitboxRect.top = hitboxRect.bottom - size;
-      webviewRect.top = $isTouchPrimary.value
-        ? hitboxRect.top
-        : workArea.bottom - Math.round((workArea.bottom - workArea.top) / 2);
+      webviewRect.top = $isTouchPrimary.value ? hitboxRect.top : workArea.top;
       break;
   }
 

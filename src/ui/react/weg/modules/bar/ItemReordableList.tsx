@@ -12,7 +12,13 @@ import { UserApplication } from "../item/infra/UserApplication.tsx";
 
 import type { SwItem } from "../shared/types.ts";
 
-import { $dock_state, $dock_state_actions } from "../shared/state/items.ts";
+import {
+  $dock_state,
+  $dock_state_actions,
+  $folder_drag_over_dock,
+  $folder_dragging_from,
+  $folder_extracted_drag_id,
+} from "../shared/state/items.ts";
 import { DraggableItem } from "./DraggableItem.tsx";
 import { ShowDesktopModule } from "../item/infra/ShowDesktop.tsx";
 import { $settings } from "../shared/state/settings.ts";
@@ -51,6 +57,24 @@ const visibleItems = computed(() => {
   });
 });
 
+// State for an in-flight "drag an item out of a folder" operation. When such a
+// drag starts we pull the item onto the dock (so dnd-kit gives it the same live
+// reorder preview as normal dock items); on drop we either keep it where it
+// landed or, if it was released outside the dock, delete it.
+let folderDragId: string | null = null;
+let folderDragFromId: string | null = null;
+let folderDragExtracted = false;
+let folderDragLastPointer = { x: 0, y: 0 };
+const onFolderDragPointerMove = (e: PointerEvent) => {
+  folderDragLastPointer = { x: e.clientX, y: e.clientY };
+  $folder_drag_over_dock.value = isInsideDock(e.clientX, e.clientY);
+};
+
+function isInsideDock(x: number, y: number) {
+  const r = document.querySelector(".taskbar")?.getBoundingClientRect();
+  return !!r && x >= r.left && x <= r.right && y >= r.top && y <= r.bottom;
+}
+
 /**
  * Resolves the folder id for a drop target. A folder exposes two overlapping
  * droppables: a dedicated "folder-drop" zone and its own sortable droppable
@@ -73,8 +97,46 @@ export function DockItems() {
 
   return (
     <DragDropProvider
+      onDragStart={(event) => {
+        const { source } = event.operation;
+        const fromFolder = (source?.data as { fromFolder?: string } | undefined)?.fromFolder;
+        if (source && fromFolder) {
+          // Don't extract yet: while the cursor stays in the popover the item is
+          // reordered among its folder siblings; it is only pulled onto the dock
+          // once the cursor crosses into the dock (see onDragOver).
+          folderDragId = String(source.id);
+          folderDragFromId = fromFolder;
+          folderDragExtracted = false;
+          $folder_extracted_drag_id.value = null;
+          $folder_drag_over_dock.value = true;
+          $folder_dragging_from.value = fromFolder;
+          document.addEventListener("pointermove", onFolderDragPointerMove);
+        }
+      }}
       onDragOver={(event) => {
         const { source, target } = event.operation;
+
+        // Folder item still inside the popover (not handed off to the dock yet).
+        if (folderDragId && folderDragId === String(source?.id) && !folderDragExtracted && folderDragFromId) {
+          if (isInsideDock(folderDragLastPointer.x, folderDragLastPointer.y)) {
+            // crossed into the dock -> extract onto the dock; dnd-kit keeps
+            // dragging it (same id) with the dock's live preview from here.
+            folderDragExtracted = true;
+            $folder_extracted_drag_id.value = String(source!.id);
+            $dock_state_actions.insertItemFromFolderAt(folderDragFromId, String(source!.id), folderDragFromId);
+            return;
+          }
+          // reorder within the folder (vertical popover list)
+          const fromId = folderDragFromId;
+          $dock_state.value = {
+            ...$dock_state.value,
+            items: $dock_state.value.items.map((i) =>
+              i.id === fromId && i.type === WegItemType.Folder ? { ...i, items: move(i.items, event) } : i
+            ),
+          };
+          return;
+        }
+
         // While dragging an app over a folder, don't reorder; let it nest on drop.
         if (source?.type === WegItemType.AppOrFile && resolveFolderId(target)) {
           return;
@@ -84,10 +146,31 @@ export function DockItems() {
       }}
       onDragEnd={(event) => {
         const { source, target } = event.operation;
+
+        const wasFolderDrag = folderDragId === String(source?.id);
+        const extracted = folderDragExtracted;
+        if (wasFolderDrag) {
+          folderDragId = null;
+          folderDragFromId = null;
+          folderDragExtracted = false;
+          $folder_extracted_drag_id.value = null;
+          $folder_drag_over_dock.value = true;
+          $folder_dragging_from.value = null;
+          document.removeEventListener("pointermove", onFolderDragPointerMove);
+        }
+
         if (source?.type !== WegItemType.AppOrFile) return;
+
         const folderId = resolveFolderId(target);
         if (folderId && folderId !== String(source.id)) {
           $dock_state_actions.moveItemToFolder(String(source.id), folderId);
+          return;
+        }
+
+        // Extracted onto the dock then released outside it -> delete. If it never
+        // left the popover (reorder only) the folder order is already updated.
+        if (wasFolderDrag && extracted && !isInsideDock(folderDragLastPointer.x, folderDragLastPointer.y)) {
+          $dock_state_actions.remove(String(source.id));
         }
       }}
     >
@@ -106,7 +189,17 @@ export function DockItems() {
       <DragOverlay>
         {(source) => {
           const item = visibleItems.value.find((c) => c.id === source.id);
-          return item ? ItemByType(item, true) : null;
+          if (item) return ItemByType(item, true);
+          // folder popover item being reordered inside its popover
+          for (const it of $dock_state.value.items) {
+            if (it.type === WegItemType.Folder) {
+              const entry = it.items.find((e) => e.id === source.id);
+              if (entry) {
+                return <UserApplication item={{ type: WegItemType.AppOrFile, ...entry }} isOverlay />;
+              }
+            }
+          }
+          return null;
         }}
       </DragOverlay>
     </DragDropProvider>

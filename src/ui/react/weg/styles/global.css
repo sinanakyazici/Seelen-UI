@@ -159,11 +159,11 @@ body {
   }
 }
 
-/* Square (full-bleed) icons fill the whole box while round icons have
-   transparent margins baked into their image, making spacing look uneven.
-   Scale square icons down a touch so every icon has consistent breathing room. */
-.weg-item-icon[data-shape="square"] {
-  transform: scale(0.82);
+/* Round/non-square icons carry transparent margins inside their image. Scale
+   them up so the visible logo fills the slot (the transparent overflow is
+   invisible, so it doesn't overlap neighbours). */
+.weg-item-icon[data-shape="unknown"] {
+  transform: scale(1.25);
   transform-origin: center;
 }
 
@@ -215,9 +215,9 @@ body {
 .weg-item-folder {
   position: relative;
 
-  /* Render the folder icon slightly larger than regular dock items. */
+  /* fill the slot like the other icons (no edge spacing) */
   .weg-item-folder-icon {
-    transform: scale(1.4);
+    transform: scale(1.25);
     transform-origin: center;
   }
 
@@ -253,15 +253,17 @@ body {
 
 /** Folder hover popover (items aligned vertically) */
 .weg-folder-popover {
-  /* Match the taskbar background (theme-defined). */
-  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
+  /* transparent: no background bar, icons float on their own */
+  background-color: transparent;
   border-radius: 15px;
-  padding: var(--config-padding);
+  /* vertical padding for the bar; minimal horizontal so icons sit near the edges */
+  padding: var(--config-padding) calc(var(--config-padding) / 2);
   display: flex;
   flex-direction: column;
   gap: var(--config-space-between-items);
-  max-height: 80vh;
-  overflow-y: auto;
+  /* width stays fixed (items have a fixed width); height grows with the icons
+     and a hovered icon may overflow the bar horizontally. */
+  overflow: visible;
 
   /* Self-contained "open sign" for the vertical popover. The theme scopes its
      own open-sign under `.weg-item`, which the popover items are not, so we
@@ -295,77 +297,91 @@ body {
 
   .weg-folder-popover-item {
     position: relative;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* extra bottom padding leaves room for the open-sign below the icon */
-    padding: 4px 4px 8px;
+    /* fixed width keeps the bar width constant; a growing icon overflows
+       horizontally instead of widening the bar. */
+    width: var(--config-item-size);
+    /* no side padding; minimal top; a little bottom room for the open-sign */
+    padding: 2px 0 5px;
     border-radius: 6px;
-    cursor: pointer;
+    /* keep the normal cursor (don't switch to a hand/pointer) */
+    cursor: default;
+
+    /* no per-item background; only the bar itself is coloured */
+    background: transparent;
+
+    /* margin animates so magnified items push their neighbours apart in the
+       column (flex gap + margin), keeping the gaps and growing the bar's
+       height instead of letting icons overlap vertically. */
+    transition: margin 200ms cubic-bezier(0.25, 1, 0.5, 1);
 
     &:hover {
-      backdrop-filter: brightness(0.92);
-
       .weg-folder-popover-remove {
         opacity: 1;
+        /* the hovered icon scales 1.5 from center (overflowing the item);
+           sit the button on the enlarged icon's top-right corner so ~25% of it
+           overflows the icon (top and right). */
+        transform: translate(
+          calc(var(--config-item-size) * 0.25 + 4.5px),
+          calc(var(--config-item-size) * -0.25 - 2.5px)
+        );
       }
     }
 
     .weg-item-icon {
+      background: none;
+      /* same size as the dock icons */
       width: var(--config-item-size);
       height: var(--config-item-size);
       flex-shrink: 0;
-      /* Wave magnification: grow the actual icon size so the column reflows
-         and neighbours are pushed away (mirrors the dock-wave-animation theme,
-         applied to the vertical folder list). */
-      transition: width 200ms cubic-bezier(0.25, 1, 0.5, 1), height 200ms cubic-bezier(0.25, 1, 0.5, 1);
+      /* grow via transform so the icon overflows the bar freely horizontally
+         (no reflow, no squeezing inside the fixed-width item). */
+      transform-origin: center;
+      transition: transform 200ms cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .weg-folder-popover-remove {
       position: absolute;
       top: 0;
       right: 0;
+      /* above the hovered icon (which scales up with z-index 2) so it stays
+         clickable and visible */
+      z-index: 3;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 16px;
-      height: 16px;
-      border: none;
+      width: 18px;
+      height: 18px;
+      border: 1px solid rgb(255 255 255 / 30%);
       border-radius: 50%;
-      background-color: rgb(0 0 0 / 60%);
+      background-color: rgb(0 0 0 / 80%);
       color: #fff;
-      font-size: 10px;
+      font-size: 12px;
       cursor: pointer;
       opacity: 0;
+      /* follow the icon as it scales (same timing as the icon transform) */
+      transform-origin: center;
+      transition: transform 200ms cubic-bezier(0.25, 1, 0.5, 1), opacity 200ms, background-color 200ms;
 
       &:hover {
-        background-color: rgb(220 50 50 / 90%);
+        background-color: rgb(0 0 0 / 95%);
       }
     }
   }
 
-  /* --- Wave magnification (vertical) --- */
-  --wave-1: 1.18; /* hovered item */
-  --wave-2: 1.09; /* immediate neighbours */
-  --wave-3: 1.03; /* second neighbours */
-
-  /* hovered */
+  /* macOS-dock style magnification: the hovered icon grows the most and its
+     immediate neighbours grow a little. Icons scale via transform (overflowing
+     the bar horizontally), while the items gain vertical margin so they push
+     each other apart — no vertical overlap, gaps preserved, bar grows taller. */
   .weg-folder-popover-item:hover .weg-item-icon {
-    width: calc(var(--config-item-size) * var(--wave-1));
-    height: calc(var(--config-item-size) * var(--wave-1));
+    transform: scale(1.5);
+    z-index: 2;
   }
 
-  /* immediate neighbours (next + previous) */
-  .weg-folder-popover-item:hover + .weg-folder-popover-item .weg-item-icon,
-  .weg-folder-popover-item:has(+ .weg-folder-popover-item:hover) .weg-item-icon {
-    width: calc(var(--config-item-size) * var(--wave-2));
-    height: calc(var(--config-item-size) * var(--wave-2));
-  }
-
-  /* second neighbours */
-  .weg-folder-popover-item:hover + .weg-folder-popover-item + .weg-folder-popover-item .weg-item-icon,
-  .weg-folder-popover-item:has(+ .weg-folder-popover-item + .weg-folder-popover-item:hover) .weg-item-icon {
-    width: calc(var(--config-item-size) * var(--wave-3));
-    height: calc(var(--config-item-size) * var(--wave-3));
+  .weg-folder-popover-item:hover {
+    margin-block: calc(var(--config-item-size) * 0.25);
   }
 }

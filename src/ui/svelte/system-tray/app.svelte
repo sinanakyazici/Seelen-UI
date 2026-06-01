@@ -6,7 +6,6 @@
   import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { Icon, MissingIcon } from "libs/ui/svelte/components/Icon";
 
-  const PINNED_TRAY_STORAGE_KEY = "seelen:pinned-tray-icons";
   const PINNED_TRAY_CHANGED_EVENT = "seelen:pinned-tray-icons-changed";
   const GET_PINNED_TRAY_ICONS_COMMAND = "get_pinned_tray_icons";
   const SET_PINNED_TRAY_ICONS_COMMAND = "set_pinned_tray_icons";
@@ -76,66 +75,38 @@
     };
   }
 
-  function normalizePinnedTrayIcon(value: unknown): PinnedTrayIcon | null {
-    if (typeof value === "string") {
-      try {
-        return {
-          key: value,
-          stableId: JSON.parse(value) as SysTrayIconId,
-          tooltip: "",
-          guid: null,
-          uid: null,
-        };
-      } catch {
-        return null;
-      }
-    }
 
-    if (typeof value === "object" && value !== null && "key" in value && "stableId" in value) {
-      return value as PinnedTrayIcon;
-    }
-
-    return null;
-  }
-
-  function getLocalPinnedTrayIcons() {
+  async function getPinnedTrayIcons() {
+    // The backend file is the single source of truth (no localStorage fallback).
     try {
-      return (JSON.parse(localStorage.getItem(PINNED_TRAY_STORAGE_KEY) || "[]") as unknown[])
-        .map(normalizePinnedTrayIcon)
-        .filter((entry): entry is PinnedTrayIcon => !!entry);
+      return await (invoke as any)(GET_PINNED_TRAY_ICONS_COMMAND) as PinnedTrayIcon[];
     } catch {
       return [];
     }
   }
 
-  async function getPinnedTrayIcons() {
-    try {
-      const icons = await (invoke as any)(GET_PINNED_TRAY_ICONS_COMMAND) as PinnedTrayIcon[];
-      if (icons.length) {
-        return icons;
-      }
-    } catch {
-      // Fall back to the old frontend storage while migrating existing pins.
-    }
-
-    const localIcons = getLocalPinnedTrayIcons();
-    if (localIcons.length) {
-      await setPinnedTrayIcons(localIcons);
-    }
-    return localIcons;
-  }
-
   async function setPinnedTrayIcons(icons: PinnedTrayIcon[]) {
     pinnedTrayIcons = icons;
-    localStorage.setItem(PINNED_TRAY_STORAGE_KEY, JSON.stringify(icons));
     await (invoke as any)(SET_PINNED_TRAY_ICONS_COMMAND, { pinnedIcons: icons });
     emit(PINNED_TRAY_CHANGED_EVENT, icons);
   }
 
+  // Keep this stable identity in sync with the toolbar's PinnedTrayIcons.tsx:
+  // guid, else a tooltip stripped of its volatile numbers, else the serialized id.
+  function normalizeTooltip(tooltip: string) {
+    return tooltip.replace(/\d+/g, "").replace(/\s+/g, " ").trim();
+  }
+
+  function stableKey(guid: string | null, tooltip: string, fallback: string) {
+    if (guid) return `guid::${guid}`;
+    const normalized = normalizeTooltip(tooltip);
+    if (normalized) return `tip::${normalized}`;
+    return `sid::${fallback}`;
+  }
+
   function matchesPinnedTrayIcon(item: SysTrayIcon, pinnedIcon: PinnedTrayIcon) {
-    return trayIdKey(item.stable_id) === pinnedIcon.key ||
-      (!!item.guid && item.guid === pinnedIcon.guid) ||
-      (!!item.tooltip && item.tooltip === pinnedIcon.tooltip);
+    return stableKey(item.guid, item.tooltip, trayIdKey(item.stable_id)) ===
+      stableKey(pinnedIcon.guid, pinnedIcon.tooltip, pinnedIcon.key);
   }
 
   function isPinned(item: SysTrayIcon) {
