@@ -65,6 +65,18 @@ body {
   }
 }
 
+/* Force square dock corners. The active theme rounds the bar via its
+   background/bg-layers; override every dock container layer so the dock keeps
+   square corners regardless of theme. Scoped through #root (an id) so it wins
+   over the theme. */
+#root .taskbar,
+#root .weg-items-container,
+#root .weg-items,
+#root .bg-layers,
+#root .taskbar > * {
+  border-radius: 0 !important;
+}
+
 /** Taskbar Styles */
 .taskbar {
   position: relative;
