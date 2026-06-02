@@ -18,6 +18,18 @@ interface SyncPayload {
 
 const CLIENT_ID = crypto.randomUUID();
 
+/**
+ * Stable identity for an app/file item: the same real app shares this key even
+ * across different pinned instances (which have distinct random ids). Used to
+ * prevent adding the same icon to a folder more than once. Mirrors the window
+ * matching rule: prefer umid, then the relaunch command, then the path.
+ */
+function appIdentity(
+  item: { umid?: string | null; path?: string | null; relaunch?: { command?: string | null } | null },
+) {
+  return (item.umid || item.relaunch?.command || item.path || "").toLowerCase();
+}
+
 export const HARDCODED_SEPARATOR_LEFT: SeparatorWegItem = {
   id: "hardcoded-separator-1",
   type: WegItemType.Separator,
@@ -58,6 +70,24 @@ subscribe(SeelenEvent.WegAddItem, (e) => {
   };
 
   const items = [...$dock_state.value.items];
+
+  // Don't add the same app twice: skip if an equivalent app (matched by umid /
+  // relaunch command / path) is already on the dock, either as a top-level item
+  // or nested inside any folder.
+  const key = appIdentity(item as Extract<WegItem, { type: "AppOrFile" }>);
+  if (key) {
+    const exists = items.some((i) => {
+      if (i.type === WegItemType.AppOrFile) {
+        return appIdentity(i as Extract<WegItem, { type: "AppOrFile" }>) === key;
+      }
+      if (i.type === WegItemType.Folder) {
+        return i.items.some((it) => appIdentity(it) === key);
+      }
+      return false;
+    });
+    if (exists) return;
+  }
+
   const separatorIdx = items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
   items.splice(separatorIdx, 0, item);
   $dock_state.value = { ...$dock_state.value, items };
@@ -211,14 +241,20 @@ export const $dock_state_actions = {
     if (!moving || itemId === folderId) return;
 
     const { type: _type, ...data } = moving as Extract<WegItem, { type: "AppOrFile" }>;
+    const movingKey = appIdentity(data);
 
     $dock_state.value = {
       ...$dock_state.value,
+      // The dragged item always leaves the dock (filtered out). It is appended
+      // to the folder only if the same app isn't already there (match by umid /
+      // relaunch command / path, not by item id) so the same icon can't be
+      // added to the same group twice — a duplicate just merges into the
+      // existing entry instead.
       items: items
         .filter((i) => i.id !== itemId)
         .map((i) => {
           if (i.id === folderId && i.type === WegItemType.Folder) {
-            if (i.items.some((it) => it.id === data.id)) return i;
+            if (i.items.some((it) => appIdentity(it) === movingKey)) return i;
             return { ...i, items: [...i.items, data] };
           }
           return i;
@@ -293,6 +329,26 @@ export const $dock_state_actions = {
       next.splice(beforeIdx, 0, restored);
     }
     $dock_state.value = { ...$dock_state.value, items: next };
+  },
+  /**
+   * Remove any other top-level dock app/file items that are the same app as
+   * `keepId` (matched by umid / relaunch command / path), keeping only `keepId`.
+   * Used after an item is dropped onto the dock so the same icon can't end up
+   * pinned twice on the dock.
+   */
+  removeDuplicatesOf(keepId: string) {
+    const items = $dock_state.value.items;
+    const keep = items.find((i) => i.id === keepId && i.type === WegItemType.AppOrFile);
+    if (!keep) return;
+    const key = appIdentity(keep as Extract<WegItem, { type: "AppOrFile" }>);
+    if (!key) return;
+    const next = items.filter((i) =>
+      i.id === keepId || i.type !== WegItemType.AppOrFile ||
+      appIdentity(i as Extract<WegItem, { type: "AppOrFile" }>) !== key
+    );
+    if (next.length !== items.length) {
+      $dock_state.value = { ...$dock_state.value, items: next };
+    }
   },
   changeFolderColor(id: string, color: string | null) {
     $dock_state.value = {

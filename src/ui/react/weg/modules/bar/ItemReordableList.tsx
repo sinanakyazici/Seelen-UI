@@ -171,6 +171,10 @@ export function DockItems() {
         // left the popover (reorder only) the folder order is already updated.
         if (wasFolderDrag && extracted && !isInsideDock(folderDragLastPointer.x, folderDragLastPointer.y)) {
           $dock_state_actions.remove(String(source.id));
+        } else if (wasFolderDrag && extracted && isInsideDock(folderDragLastPointer.x, folderDragLastPointer.y)) {
+          // Kept on the dock: if the same app was already pinned there, drop the
+          // older copy so the icon isn't pinned to the dock twice.
+          $dock_state_actions.removeDuplicatesOf(String(source.id));
         }
       }}
     >

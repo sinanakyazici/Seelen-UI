@@ -211,24 +211,46 @@ body {
   background-color: transparent !important;
 }
 
-/* Strip every antd wrapper layer around the folder popover (background, drop
-   shadow and backdrop blur) so the icons appear to float with no bar at all. */
+/* Make the folder popover icons float: strip the antd popover panel chrome
+   (background, frosted-glass blur, drop shadow, border) on every wrapper layer,
+   plus our own container / item / icon-figure backgrounds. Scoped through #root
+   (an id) so it wins over the active theme regardless of source order. A flag-
+   color test confirmed the dark "tile" was the antd panel; the theme does not
+   style popover icons at all. Square opaque app icons keep their own baked-in
+   artwork (no CSS can strip that); transparent icons now sit on bare desktop. */
 .ant-popover:has(.weg-folder-popover),
 .ant-popover:has(.weg-folder-popover) .ant-popover-content,
 .ant-popover:has(.weg-folder-popover) .ant-popover-inner,
-.ant-popover:has(.weg-folder-popover) .ant-popover-inner-content {
+.ant-popover:has(.weg-folder-popover) .ant-popover-inner-content,
+.ant-popover:has(.weg-folder-popover) .ant-popover-arrow,
+#root .weg-folder-popover,
+#root .weg-folder-popover-item,
+#root .weg-folder-popover .weg-item-icon,
+#root .weg-folder-popover .weg-item-icon::before,
+#root .weg-folder-popover .weg-item-icon::after {
   background: transparent !important;
+  background-color: transparent !important;
   box-shadow: none !important;
+  /* kill any drop-shadow/edge line the theme or antd draws around the panel */
+  filter: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
+  border: none !important;
+  outline: none !important;
 }
-
-/* the active theme paints a tile background behind each icon; force it off in
-   the popover so the icons float with no bar/tile at all. */
-.weg-folder-popover .weg-item-icon {
-  background: none !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
+/* antd's popover arrow is a rotated square with its own background/shadow that
+   can read as a faint line at the bar's edge; remove it entirely. */
+.ant-popover:has(.weg-folder-popover) .ant-popover-arrow,
+.ant-popover:has(.weg-folder-popover) .ant-popover-arrow::before,
+.ant-popover:has(.weg-folder-popover) .ant-popover-arrow::after {
+  display: none !important;
+}
+/* antd adds default padding on the inner content box, creating an area (and a
+   visible edge) around the icons; collapse it so the column hugs the icons. */
+.ant-popover:has(.weg-folder-popover) .ant-popover-inner,
+.ant-popover:has(.weg-folder-popover) .ant-popover-inner-content {
+  padding: 0 !important;
+  min-width: 0 !important;
 }
 
 /** Folder / group item */
@@ -276,10 +298,14 @@ body {
   /* transparent: no background bar, icons float on their own */
   background-color: transparent;
   border-radius: 15px;
-  /* vertical padding for the bar; minimal horizontal so icons sit near the edges */
-  padding: var(--config-padding) calc(var(--config-padding) / 2);
+  /* No horizontal padding: the "bar" hugs the icons exactly so there's no
+     surrounding box edge/line. Keep small vertical padding for breathing room.
+     Width shrinks to the icon column (the items carry the fixed width). */
+  padding: var(--config-padding) 0;
+  width: fit-content;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--config-space-between-items);
   /* width stays fixed (items have a fixed width); height grows with the icons
      and a hovered icon may overflow the bar horizontally. */
@@ -361,6 +387,17 @@ body {
          (no reflow, no squeezing inside the fixed-width item). */
       transform-origin: center;
       transition: transform 200ms cubic-bezier(0.25, 1, 0.5, 1);
+
+      /* Make every icon occupy the SAME square footprint. The base FileIcon
+         <img> uses height:100%/width:auto, so non-square icons render at a
+         different visual size. Pin the image (and the accent mask) to fill the
+         square and contain inside it so all icons look equally sized. */
+      > img,
+      > div {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+      }
     }
 
     .weg-folder-popover-remove {
