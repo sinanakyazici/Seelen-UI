@@ -84,6 +84,9 @@ devtools:
   load: Laste
   settings_file: Innstillingsfilen
   shared_components: SLU standardkomponenter
+  simulate_dialog:
+    label: Simuler dialog
+    trigger: Avtrekker
   simulate_perm:
     label: Simuler forespørsel om widgettillatelse
     result_allowed: ✓ Tillatelse gitt
@@ -274,6 +277,7 @@ sides:
   top: Topp
 toolbar:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Skjul automatisk er ikke tilgjengelig på enheter med berøringsskjerm
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling
@@ -302,10 +306,12 @@ wall:
   coverage_pause_threshold: Pauseterskel (vindusdekning)
   create: Skape
   create_collection: Opprett samling
-  default_collection: Standard samling
+  default_collection: Standard tapet eller samling
+  default_collection_description: >-
+    Brukes på alle skjermer og arbeidsområder som ikke har et spesifikt
+    overstyringssett.
   delete_collection: Slett samling
   edit_collection: Rediger samling
-  enable: Aktiver bakgrunnssjef
   extend: Utvid primær
   fit:
     contain: Inneholde
@@ -327,6 +333,7 @@ wall:
   overlayColor: Overleggsfarge
   overlayMixBlendMode: Overlegg blandingsmodus
   per_monitor: Per skjerm
+  per_monitor_config: Konfigurasjon per skjerm
   playback: Avspillingshastighet
   position:
     bottom: Bunn
@@ -344,15 +351,16 @@ wall:
   use_accent_color: Bruk bakgrunnsfarge
   wallpaper_collection: Tapet samling
   wallpaper_settings: Bakgrunnsinnstillinger
+  wallpapers: Bakgrunnsbilder
   wallpapers_and_collections: Bakgrunnsbilder og samlinger
   withOverlay: Med overlegg
   workspace_collections: Arbeidsområdesamlinger
 weg:
   auto_hide: Skjul automatisk
+  auto_hide_touch_disabled: Skjul automatisk er ikke tilgjengelig på enheter med berøringsskjerm
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling
-  enable: Aktiver dock/oppgavelinje
   filtering: Varen filtrering
   gap: Mellomrom
   hide_mode:
@@ -424,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: Sorter (omorganiser vinduer mens du drar)
     swap: Bytt (bytt vinduer på dra-enden)
-  enable: Aktiver flislegging av vindusleder
   layout: Oppsett
   resize_delta: Endre størrelse på Delta (%)
   space_between_containers: Plass mellom containere

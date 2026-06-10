@@ -2,6 +2,7 @@ app_menu:
   close: បិត
   close_multiple: បិទទាំងអស់
   copy_handles: ចម្លងចំណុចទាញ
+  edit_app_icon: កែសម្រួលរូបតំណាងកម្មវិធី
   kill: ដំណើរការសម្លាប់
   kill_multiple: សម្លាប់ដំណើរការទាំងអស់។
   open_file_location: បើកទីតាំងឯកសារ
@@ -12,6 +13,7 @@ app_menu:
   run_as: ដំណើរការ​ជា​រ​អ្នកគ្រប់គ្រង
   unpin: អក្គោអិន
 context_menu:
+  edit_icon: កែសម្រួលរូបតំណាង
   remove_module: យកម៉ូឌុលចេញ
   reorder_disable: ចាក់សោរបារភារកិច្ច
   reorder_enable: ដោះសោរបារភារកិច្ច
@@ -31,6 +33,8 @@ taskbar_menu:
   task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច
   trash_bin: បន្ថែមម៉ូឌុល Recycle Bin
 trash_bin:
+  edit_icon_empty: កែសម្រួលរូបតំណាង (ទទេ)
+  edit_icon_full: កែសម្រួលរូបតំណាង (ពេញ)
   empty_bin: ធុងសំរាមទទេ
   label: ធុងសំរាម
 weg:

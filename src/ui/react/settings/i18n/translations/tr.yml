@@ -84,6 +84,9 @@ devtools:
   load: Yükle
   settings_file: Ayarlar Dosyası
   shared_components: SLU Standart Bileşenleri
+  simulate_dialog:
+    label: Diyalog Simülasyonu
+    trigger: Tetiklemek
   simulate_perm:
     label: Widget İzin İsteğini Simüle Et
     result_allowed: ✓ İzin verildi
@@ -274,6 +277,7 @@ sides:
   top: Üst
 toolbar:
   auto_hide: Otomatik Gizle
+  auto_hide_touch_disabled: Otomatik gizleme dokunmatik ekranlı cihazlarda kullanılamaz
   delay_to_hide: Gizleme gecikmesi
   delay_to_show: Gösterme gecikmesi
   dock_side: Pozisyon
@@ -302,10 +306,12 @@ wall:
   coverage_pause_threshold: Duraklatma eşiği (pencere kapsamı)
   create: Yaratmak
   create_collection: Koleksiyon Oluştur
-  default_collection: Varsayılan Koleksiyon
+  default_collection: Varsayılan duvar kağıdı veya koleksiyon
+  default_collection_description: >-
+    Belirli bir geçersiz kılma ayarı olmayan tüm monitörlere ve çalışma
+    alanlarına uygulanır.
   delete_collection: Koleksiyonu Sil
   edit_collection: Koleksiyonu Düzenle
-  enable: Duvar Kağıdı Yöneticisini Etkinleştir
   extend: Birincil'i genişlet
   fit:
     contain: Konteyner
@@ -329,6 +335,7 @@ wall:
   overlayColor: Kaplama Rengi
   overlayMixBlendMode: Kaplama Karışım Karışım Modu
   per_monitor: Monitör başına
+  per_monitor_config: Monitör Başına Yapılandırma
   playback: Oynatma hızı
   position:
     bottom: Alt
@@ -346,15 +353,16 @@ wall:
   use_accent_color: Duvar kağıdı vurgu rengini kullan
   wallpaper_collection: Duvar Kağıdı Koleksiyonu
   wallpaper_settings: Duvar Kağıdı Ayarları
+  wallpapers: Duvar Kağıtları
   wallpapers_and_collections: Duvar Kağıtları ve Koleksiyonlar
   withOverlay: Kaplama ile
   workspace_collections: Çalışma Alanı Koleksiyonları
 weg:
   auto_hide: Otomatik Gizle
+  auto_hide_touch_disabled: Otomatik gizleme dokunmatik ekranlı cihazlarda kullanılamaz
   delay_to_hide: Gizleme gecikmesi
   delay_to_show: Gösterme gecikmesi
   dock_side: Konum
-  enable: Dock/Görev Çubuğunu Etkinleştir
   filtering: Öğe Filtreleme
   gap: Boşluk
   hide_mode:
@@ -426,7 +434,6 @@ wm:
   drag_behavior_options:
     sort: Sırala (sürüklerken pencereleri yeniden sıralayın)
     swap: Değiştir (sürükleme ucunda pencereleri değiştir)
-  enable: Döşeme Pencere Yöneticisini Etkinleştir
   layout: Düzen
   resize_delta: Yeniden Boyutlandırma Değişimi (%)
   space_between_containers: Konteynerler Arası Boşluk

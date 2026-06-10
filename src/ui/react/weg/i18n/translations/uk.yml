@@ -2,6 +2,7 @@ app_menu:
   close: Закрити
   close_multiple: Закрити все
   copy_handles: Копіювати ідентифікатор
+  edit_app_icon: Змінити значок програми
   kill: Зупинити процес
   kill_multiple: Зупинити всі процеси
   open_file_location: Розташування відкритого файлу
@@ -12,6 +13,7 @@ app_menu:
   run_as: Запустити від імені адміністратора
   unpin: Відкріпити
 context_menu:
+  edit_icon: Значок редагування
   remove_module: Видалити модуль
   reorder_disable: Блокування панелі завдань
   reorder_enable: Розблокувати панель завдань
@@ -31,6 +33,8 @@ taskbar_menu:
   task_manager: Диспетчер задач
   trash_bin: Додайте модуль кошика
 trash_bin:
+  edit_icon_empty: Значок редагування (порожній)
+  edit_icon_full: Значок редагування (повний)
   empty_bin: Очистити корзину
   label: Кошик
 weg:

@@ -2,6 +2,7 @@ app_menu:
   close: Tæt
   close_multiple: Luk alt
   copy_handles: Kopier håndtag
+  edit_app_icon: Rediger app-ikon
   kill: Aflivningsproces
   kill_multiple: Dræb alle processer
   open_file_location: Åbn filplacering
@@ -12,6 +13,7 @@ app_menu:
   run_as: Kør som administrator
   unpin: Unpin
 context_menu:
+  edit_icon: Rediger ikon
   remove_module: Fjern modul
   reorder_disable: Lås proceslinjen
   reorder_enable: Lås proceslinjen op
@@ -31,6 +33,8 @@ taskbar_menu:
   task_manager: Task Manager
   trash_bin: Tilføj papirkurvsmodul
 trash_bin:
+  edit_icon_empty: Rediger ikon (tomt)
+  edit_icon_full: Rediger ikon (fuldstændig)
   empty_bin: Tøm papirkurven
   label: Papirkurv
 weg:

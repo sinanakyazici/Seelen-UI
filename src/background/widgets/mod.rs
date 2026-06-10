@@ -19,15 +19,16 @@ use seelen_core::{
     handlers::SeelenEvent,
     resource::ResourceId,
     state::{
-        context_menu::ContextMenu, WidgetDebugInfo, WidgetInstanceMode, WidgetStatus,
-        WidgetTriggerPayload,
+        context_menu::ContextMenu, dialog::Dialog, Alignment, WidgetDebugInfo, WidgetInstanceMode,
+        WidgetStatus, WidgetTriggerPayload,
     },
+    system_state::ZOrder,
     Rect,
 };
 use tauri::{Emitter, Manager};
 
 use crate::{
-    app::get_app_handle,
+    app::{emit_to_webviews, get_app_handle},
     error::Result,
     resources::RESOURCES,
     state::application::FULL_STATE,
@@ -146,6 +147,33 @@ pub fn trigger_context_menu(
     trigger_widget_inner(payload, Some(owner_hwnd))
 }
 
+/// Trigger a dialog from within a widget (the owner webview is used for event routing).
+#[tauri::command(async)]
+pub fn trigger_dialog(dialog: Dialog, webview: tauri::WebviewWindow) -> Result<()> {
+    let owner = WidgetWebviewLabel::try_from_raw(webview.label())?;
+    let owner_hwnd = webview.hwnd()?.0 as isize;
+
+    let mut payload = WidgetTriggerPayload::new("@seelen/dialog".into());
+    payload.instance_id = Some(dialog.identifier);
+
+    payload.add_custom_arg("dialog", serde_json::to_value(&dialog)?);
+    payload.add_custom_arg("owner", serde_json::to_value(&owner.raw)?);
+
+    trigger_widget_inner(payload, Some(owner_hwnd))
+}
+
+/// Trigger a dialog from backend code (no owner webview; button events are emitted globally).
+pub fn trigger_dialog_backend(dialog: Dialog) -> Result<()> {
+    let mut payload = WidgetTriggerPayload::new("@seelen/dialog".into());
+    payload.instance_id = Some(dialog.identifier);
+    payload.align_x = Some(Alignment::Center);
+    payload.align_y = Some(Alignment::Center);
+
+    payload.add_custom_arg("dialog", serde_json::to_value(&dialog)?);
+
+    trigger_widget_inner(payload, None)
+}
+
 #[tauri::command(async)]
 pub fn get_self_window_handle(webview: tauri::WebviewWindow) -> Result<isize> {
     Ok(webview.hwnd()?.0 as isize)
@@ -181,10 +209,24 @@ pub fn set_self_position(webview: tauri::WebviewWindow, rect: Rect) -> Result<()
 }
 
 #[tauri::command(async)]
-pub fn bring_self_to_top(webview: tauri::WebviewWindow) -> Result<()> {
+pub fn set_self_z_order(webview: tauri::WebviewWindow, z_order: ZOrder) -> Result<()> {
     use windows::Win32::Foundation::HWND;
+    use windows::Win32::UI::WindowsAndMessaging::{
+        HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST,
+    };
     let hwnd = HWND(webview.hwnd()?.0);
-    WindowsApi::bring_to_top(hwnd)
+
+    WindowsApi::set_z_order(
+        hwnd,
+        match z_order {
+            ZOrder::TopMost => HWND_TOPMOST,
+            ZOrder::NoTopMost => HWND_NOTOPMOST,
+            ZOrder::Top => HWND_TOP,
+            ZOrder::Bottom => HWND_BOTTOM,
+        },
+    )?;
+
+    Ok(())
 }
 
 pub fn show_settings() -> Result<()> {
@@ -241,6 +283,25 @@ fn widget_data_dir(webview: &tauri::WebviewWindow) -> Result<PathBuf> {
     Ok(path)
 }
 
+pub fn notify_widget_statuses_change() {
+    std::thread::spawn(|| {
+        let mut result = Vec::new();
+        WIDGET_MANAGER.deployments.for_each(|(_, deployment)| {
+            deployment.pods.for_each(|(_, pod)| {
+                result.push(WidgetDebugInfo {
+                    label: pod.label.raw.clone(),
+                    widget_id: pod.label.widget_id.to_string(),
+                    monitor_id: pod.label.monitor_id.as_ref().map(|m| m.to_string()),
+                    instance_id: pod.label.instance_id.map(|id| id.to_string()),
+                    status: *pod.status(),
+                    webview_window_id: pod.hwnd(),
+                });
+            });
+        });
+        emit_to_webviews(SeelenEvent::WidgetDebugInfoChanged, result);
+    });
+}
+
 #[tauri::command(async)]
 pub fn debug_get_widgets_statuses() -> Vec<WidgetDebugInfo> {
     let mut result = Vec::new();
@@ -252,6 +313,7 @@ pub fn debug_get_widgets_statuses() -> Vec<WidgetDebugInfo> {
                 monitor_id: pod.label.monitor_id.as_ref().map(|m| m.to_string()),
                 instance_id: pod.label.instance_id.map(|id| id.to_string()),
                 status: *pod.status(),
+                webview_window_id: pod.hwnd(),
             });
         });
     });

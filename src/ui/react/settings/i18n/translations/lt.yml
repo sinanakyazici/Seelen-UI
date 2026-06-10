@@ -85,6 +85,9 @@ devtools:
   load: Įkelti
   settings_file: Nustatymų failas
   shared_components: SLU standartiniai komponentai
+  simulate_dialog:
+    label: Imituoti dialogą
+    trigger: Trigeris
   simulate_perm:
     label: Imituoti valdiklio leidimo užklausą
     result_allowed: ✓ Leidimas suteiktas
@@ -274,6 +277,7 @@ sides:
   top: Viršus
 toolbar:
   auto_hide: Automatinis slėptuvė
+  auto_hide_touch_disabled: Automatinis slėpimas negalimas įrenginiuose su jutikliniu ekranu
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
   dock_side: Pozicija
@@ -302,10 +306,12 @@ wall:
   coverage_pause_threshold: Pristabdymo slenkstis (lango aprėptis)
   create: Sukurti
   create_collection: Sukurti kolekciją
-  default_collection: Numatytoji kolekcija
+  default_collection: Numatytasis ekrano užsklanda arba kolekcija
+  default_collection_description: >-
+    Taikoma visiems monitoriams ir darbo sritims, kuriose nėra konkretaus
+    nepaisymo rinkinio.
   delete_collection: Ištrinti kolekciją
   edit_collection: Redaguoti kolekciją
-  enable: Įgalinkite tapetų tvarkytuvę
   extend: Prailginti pirminį
   fit:
     contain: Sudėtis
@@ -327,6 +333,7 @@ wall:
   overlayColor: Perdangos spalva
   overlayMixBlendMode: Perdangos mišinio režimas
   per_monitor: Vienam monitoriui
+  per_monitor_config: Konfigūracija vienam monitoriui
   playback: Atkūrimo greitis
   position:
     bottom: Dugnas
@@ -344,15 +351,16 @@ wall:
   use_accent_color: Naudokite tapetų akcento spalvą
   wallpaper_collection: Tapetų kolekcija
   wallpaper_settings: Fono nustatymai
+  wallpapers: Užsklandos
   wallpapers_and_collections: Užsklandos ir kolekcijos
   withOverlay: Su perdanga
   workspace_collections: Darbo vietos kolekcijos
 weg:
   auto_hide: Automatinis slėptuvė
+  auto_hide_touch_disabled: Automatinis slėpimas negalimas įrenginiuose su jutikliniu ekranu
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
   dock_side: Pozicija
-  enable: Įgalinti doką/užduočių juostą
   filtering: Elementų filtravimas
   gap: Tarpas
   hide_mode:
@@ -423,7 +431,6 @@ wm:
   drag_behavior_options:
     sort: Rūšiuoti (pertvarkykite langus vilkdami)
     swap: Sukeisti (keisti langus vilkimo pabaigoje)
-  enable: Įgalinkite plytelių langų tvarkyklę
   layout: Išdėstymas
   resize_delta: Pakeisti deltos dydį (%)
   space_between_containers: Tarpas tarp konteinerių

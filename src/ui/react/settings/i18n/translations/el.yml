@@ -86,6 +86,9 @@ devtools:
   load: Φορτώνω
   settings_file: Αρχείο ρυθμίσεων
   shared_components: Πρότυπα εξαρτήματα SLU
+  simulate_dialog:
+    label: Προσομοίωση διαλόγου
+    trigger: Σκανδάλη
   simulate_perm:
     label: Προσομοίωση αιτήματος άδειας γραφικού στοιχείου
     result_allowed: ✓ Χορηγήθηκε άδεια
@@ -283,6 +286,7 @@ sides:
   top: Μπλουζα
 toolbar:
   auto_hide: Αυτόματη απόκρυψη
+  auto_hide_touch_disabled: Η αυτόματη απόκρυψη δεν είναι διαθέσιμη σε συσκευές με οθόνη αφής
   delay_to_hide: Καθυστέρηση για απόκρυψη
   delay_to_show: Καθυστέρηση εμφάνισης
   dock_side: Θέση
@@ -311,10 +315,12 @@ wall:
   coverage_pause_threshold: Όριο παύσης (κάλυψη παραθύρου)
   create: Δημιουργώ
   create_collection: Δημιουργία συλλογής
-  default_collection: Προεπιλεγμένη συλλογή
+  default_collection: Προεπιλεγμένη ταπετσαρία ή συλλογή
+  default_collection_description: >-
+    Εφαρμόζεται σε όλες τις οθόνες και τους χώρους εργασίας που δεν έχουν
+    συγκεκριμένο σύνολο παράκαμψης.
   delete_collection: Διαγραφή συλλογής
   edit_collection: Επεξεργασία συλλογής
-  enable: Ενεργοποίηση διαχειριστή ταπετσαρίας
   extend: Επέκταση πρωτοβάθμιας
   fit:
     contain: Περιέχει
@@ -338,6 +344,7 @@ wall:
   overlayColor: Χρώμα επικάλυψης
   overlayMixBlendMode: Λειτουργία ανάμειξης μίξης επικάλυψης
   per_monitor: Ανά οθόνη
+  per_monitor_config: Διαμόρφωση ανά οθόνη
   playback: Ταχύτητα αναπαραγωγής
   position:
     bottom: Κάτω μέρος
@@ -355,15 +362,16 @@ wall:
   use_accent_color: Χρησιμοποιήστε χρώμα έμφασης ταπετσαρίας
   wallpaper_collection: Συλλογή ταπετσαριών
   wallpaper_settings: Ρυθμίσεις ταπετσαρίας
+  wallpapers: Ταπετσαρίες
   wallpapers_and_collections: Ταπετσαρίες & Συλλογές
   withOverlay: Με επικάλυψη
   workspace_collections: Συλλογές χώρου εργασίας
 weg:
   auto_hide: Αυτόματη απόκρυψη
+  auto_hide_touch_disabled: Η αυτόματη απόκρυψη δεν είναι διαθέσιμη σε συσκευές με οθόνη αφής
   delay_to_hide: Καθυστέρηση για απόκρυψη
   delay_to_show: Καθυστέρηση εμφάνισης
   dock_side: Θέση
-  enable: Ενεργοποίηση λίστα/γραμμή εργασιών
   filtering: Φιλτράρισμα στοιχείων
   gap: Χάσμα
   hide_mode:
@@ -435,7 +443,6 @@ wm:
   drag_behavior_options:
     sort: Ταξινόμηση (αναδιάταξη των παραθύρων κατά τη μεταφορά)
     swap: Εναλλαγή (εναλλαγή παραθύρων στο τέλος μεταφοράς)
-  enable: Ενεργοποίηση διαχειριστή παραθύρων πλακιδίων
   layout: Διάταξη
   resize_delta: Αλλαγή μεγέθους Delta (%)
   space_between_containers: Χώρος μεταξύ των εμπορευματοκιβωτίων

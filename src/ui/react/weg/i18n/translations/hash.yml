@@ -1,6 +1,7 @@
 app_menu.close: 9f573bb7
 app_menu.close_multiple: c6854928
 app_menu.copy_handles: 6b7d5704
+app_menu.edit_app_icon: a54ca00
 app_menu.kill: 7ddd2ef4
 app_menu.kill_multiple: 8407dc88
 app_menu.open_file_location: ad864d7a
@@ -10,6 +11,7 @@ app_menu.pin_to_left: 530b1064
 app_menu.pin_to_right: 31db0440
 app_menu.run_as: b120b0b9
 app_menu.unpin: 8d405748
+context_menu.edit_icon: 3e13e39
 context_menu.remove_module: 7ca72fa8
 context_menu.reorder_disable: 84ba2562
 context_menu.reorder_enable: 8aa9ce10
@@ -24,6 +26,8 @@ taskbar_menu.settings: a9d006ec
 taskbar_menu.start: 8de2be73
 taskbar_menu.task_manager: 8c6c6106
 taskbar_menu.trash_bin: 75515c23
+trash_bin.edit_icon_empty: c33a6eeb
+trash_bin.edit_icon_full: 8fa2be98
 trash_bin.empty_bin: d3cac42
 trash_bin.label: 654391f5
 weg.empty: ce67d228

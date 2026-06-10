@@ -78,6 +78,9 @@ devtools:
   load: ロード
   settings_file: 設定ファイル
   shared_components: SLU標準コンポーネント
+  simulate_dialog:
+    label: シミュレーションダイアログ
+    trigger: トリガー
   simulate_perm:
     label: ウィジェットの許可リクエストをシミュレートする
     result_allowed: ✓ 許可の付与
@@ -251,6 +254,7 @@ sides:
   top: 上
 toolbar:
   auto_hide: 自動的に隠す
+  auto_hide_touch_disabled: 自動非表示はタッチ スクリーン デバイスでは利用できません
   delay_to_hide: 隠れるまでの時間
   delay_to_show: 表示されるまでの時間
   dock_side: ポジション
@@ -279,10 +283,10 @@ wall:
   coverage_pause_threshold: 一時停止しきい値 (ウィンドウ カバレッジ)
   create: 作成する
   create_collection: コレクションを作成
-  default_collection: デフォルトのコレクション
+  default_collection: デフォルトの壁紙またはコレクション
+  default_collection_description: 特定のオーバーライド セットを持たないすべてのモニターとワークスペースに適用されます。
   delete_collection: コレクションの削除
   edit_collection: コレクションの編集
-  enable: 壁紙マネージャーを有効にする
   extend: 拡張
   fit:
     contain: コンテイン
@@ -304,6 +308,7 @@ wall:
   overlayColor: オーバーレイカラー
   overlayMixBlendMode: オーバーレイミックスブレンドモード
   per_monitor: モニターごと
+  per_monitor_config: モニターごとの構成
   playback: 再生速度
   position:
     bottom: 下
@@ -321,15 +326,16 @@ wall:
   use_accent_color: 壁紙のアクセントカラーを使用する
   wallpaper_collection: 壁紙コレクション
   wallpaper_settings: 壁紙の設定
+  wallpapers: 壁紙
   wallpapers_and_collections: 壁紙とコレクション
   withOverlay: オーバーレイ付き
   workspace_collections: ワークスペースコレクション
 weg:
   auto_hide: 自動的に隠す
+  auto_hide_touch_disabled: 自動非表示はタッチ スクリーン デバイスでは利用できません
   delay_to_hide: 隠れるまでの時間
   delay_to_show: 表示されるまでの時間
   dock_side: 位置
-  enable: ドック（タスクバー）を有効にする
   filtering: アイテムのフィルタリング
   gap: アイテム間のスペース
   hide_mode:
@@ -398,7 +404,6 @@ wm:
   drag_behavior_options:
     sort: 並べ替え (ドラッグしながらウィンドウの順序を変更)
     swap: スワップ (ドラッグ終了時にウィンドウをスワップ)
-  enable: タイリングウィンドウマネージャーを有効にする
   layout: レイアウト
   resize_delta: リサイズ時の変化率（％）
   space_between_containers: ウィンドウ間の間隔

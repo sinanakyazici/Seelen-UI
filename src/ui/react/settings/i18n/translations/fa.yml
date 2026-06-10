@@ -84,6 +84,9 @@ devtools:
   load: بار
   settings_file: پرونده تنظیمات
   shared_components: اجزای استاندارد SLU
+  simulate_dialog:
+    label: شبیه سازی دیالوگ
+    trigger: ماشه
   simulate_perm:
     label: درخواست مجوز ویجت را شبیه سازی کنید
     result_allowed: ✓ مجوز داده شده است
@@ -272,6 +275,7 @@ sides:
   top: بالا
 toolbar:
   auto_hide: پنهان خودکار
+  auto_hide_touch_disabled: پنهان کردن خودکار در دستگاه های صفحه لمسی در دسترس نیست
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت
@@ -300,10 +304,12 @@ wall:
   coverage_pause_threshold: آستانه مکث (پوشش پنجره)
   create: ایجاد کنید
   create_collection: ایجاد مجموعه
-  default_collection: مجموعه پیش‌فرض
+  default_collection: تصویر زمینه یا مجموعه پیش فرض
+  default_collection_description: >-
+    برای همه مانیتورها و فضاهای کاری که مجموعه ای از حذف خاصی ندارند اعمال می
+    شود.
   delete_collection: حذف مجموعه
   edit_collection: ویرایش مجموعه
-  enable: مدیر تصویر زمینه را فعال کنید
   extend: اولیه را گسترش دهید
   fit:
     contain: حاوی بودن
@@ -325,6 +331,7 @@ wall:
   overlayColor: رنگ روکش
   overlayMixBlendMode: حالت مخلوط مخلوط روکش
   per_monitor: در هر مانیتور
+  per_monitor_config: پیکربندی هر مانیتور
   playback: سرعت پخش
   position:
     bottom: پایین
@@ -342,15 +349,16 @@ wall:
   use_accent_color: از رنگ تاکیدی کاغذ دیواری استفاده کنید
   wallpaper_collection: مجموعه کاغذ دیواری
   wallpaper_settings: تنظیمات کاغذ دیواری
+  wallpapers: تصاویر پس زمینه
   wallpapers_and_collections: تصاویر پس زمینه و مجموعه ها
   withOverlay: با روکش
   workspace_collections: مجموعه های فضای کاری
 weg:
   auto_hide: پنهان خودکار
+  auto_hide_touch_disabled: پنهان کردن خودکار در دستگاه های صفحه لمسی در دسترس نیست
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت
-  enable: Dock/TaskBar را فعال کنید
   filtering: فیلتر کردن مورد
   gap: شکاف
   hide_mode:
@@ -420,7 +428,6 @@ wm:
   drag_behavior_options:
     sort: مرتب سازی (ترتیب مجدد پنجره ها در حین کشیدن)
     swap: تعویض (تعویض پنجره ها در انتهای کشیدن)
-  enable: مدیر پنجره کاشی کاری را فعال کنید
   layout: چیدمان
   resize_delta: تغییر اندازه دلتا (٪)
   space_between_containers: فضای بین ظروف

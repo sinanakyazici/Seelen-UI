@@ -85,6 +85,9 @@ devtools:
   load: Opteretiti
   settings_file: Datoteka postavki
   shared_components: SLU standardne komponente
+  simulate_dialog:
+    label: Simuliraj dijalog
+    trigger: Trigger
   simulate_perm:
     label: Simulirajte zahtjev za dozvolu za widget
     result_allowed: ✓ Dozvola data
@@ -272,6 +275,9 @@ sides:
   top: Vrh
 toolbar:
   auto_hide: Auto se sakrio
+  auto_hide_touch_disabled: >-
+    Automatsko skrivanje nije dostupno na uređajima sa ekranom osjetljivim na
+    dodir
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
   dock_side: Položaj
@@ -300,10 +306,12 @@ wall:
   coverage_pause_threshold: Prag pauze (pokrivenost prozora)
   create: Kreiraj
   create_collection: Kreiraj kolekciju
-  default_collection: Default Collection
+  default_collection: Zadana pozadina ili kolekcija
+  default_collection_description: >-
+    Primjenjuje se na sve monitore i radne prostore koji nemaju određeni skup
+    zaobilaženja.
   delete_collection: Izbriši kolekciju
   edit_collection: Uredi kolekciju
-  enable: Omogućite menadžer pozadina
   extend: Produžite primarni
   fit:
     contain: Sadržiti
@@ -325,6 +333,7 @@ wall:
   overlayColor: Boja prekrivanja
   overlayMixBlendMode: Prekrivač miks mod mješavine
   per_monitor: Po monitoru
+  per_monitor_config: Konfiguracija po monitoru
   playback: Brzina reprodukcije
   position:
     bottom: Dno
@@ -342,15 +351,18 @@ wall:
   use_accent_color: Koristite akcentnu boju pozadine
   wallpaper_collection: Kolekcija tapeta
   wallpaper_settings: Postavke pozadine
+  wallpapers: Pozadine
   wallpapers_and_collections: Pozadine i kolekcije
   withOverlay: Sa prekrivanjem
   workspace_collections: Zbirke radnog prostora
 weg:
   auto_hide: Auto se sakrio
+  auto_hide_touch_disabled: >-
+    Automatsko skrivanje nije dostupno na uređajima sa ekranom osjetljivim na
+    dodir
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
   dock_side: Položaj
-  enable: Omogući pristanište / traku zadataka
   filtering: Filtriranje predmeta
   gap: Jaz
   hide_mode:
@@ -422,7 +434,6 @@ wm:
   drag_behavior_options:
     sort: Sortiraj (promijeni redoslijed prozora tokom prevlačenja)
     swap: Zamijeni (zamijeni prozore na kraju povlačenja)
-  enable: Omogući oblaganje menadžera prozora
   layout: Izgled
   resize_delta: Promijenite veličinu Delta (%)
   space_between_containers: Prostor između kontejnera

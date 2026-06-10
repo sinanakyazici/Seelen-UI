@@ -83,6 +83,9 @@ devtools:
   load: Load
   settings_file: Settings File
   shared_components: SLU Standard Components
+  simulate_dialog:
+    label: Simulate Dialog
+    trigger: Trigger
   simulate_perm:
     label: Simulate Widget Permission Request
     result_allowed: ✓ Permission granted
@@ -269,6 +272,7 @@ sides:
   top: Top
 toolbar:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Auto hide is not available on touch screen devices
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
   dock_side: Position
@@ -297,10 +301,12 @@ wall:
   coverage_pause_threshold: Pause threshold (window coverage)
   create: Create
   create_collection: Create Collection
-  default_collection: Default Collection
+  default_collection: Default wallpaper or collection
+  default_collection_description: >-
+    Applied to all monitors and workspaces that do not have a specific override
+    set.
   delete_collection: Delete Collection
   edit_collection: Edit Collection
-  enable: Enable Wallpaper Manager
   extend: Extend primary
   fit:
     contain: Contain
@@ -322,6 +328,7 @@ wall:
   overlayColor: Overlay Color
   overlayMixBlendMode: Overlay Mix Blend Mode
   per_monitor: Per monitor
+  per_monitor_config: Per-Monitor Configuration
   playback: Playback speed
   position:
     bottom: Bottom
@@ -339,15 +346,16 @@ wall:
   use_accent_color: Use wallpaper accent color
   wallpaper_collection: Wallpaper Collection
   wallpaper_settings: Wallpaper Settings
+  wallpapers: Wallpapers
   wallpapers_and_collections: Wallpapers & Collections
   withOverlay: With Overlay
   workspace_collections: Workspace Collections
 weg:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Auto hide is not available on touch screen devices
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
   dock_side: Position
-  enable: Enable Dock/Taskbar
   filtering: Item Filtering
   gap: Gap
   hide_mode:
@@ -417,7 +425,6 @@ wm:
   drag_behavior_options:
     sort: Sort (reorder windows while dragging)
     swap: Swap (swap windows on drag end)
-  enable: Enable Tiling Window Manager
   layout: Layout
   resize_delta: Resize Delta (%)
   space_between_containers: Space Between Containers

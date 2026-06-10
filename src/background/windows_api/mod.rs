@@ -85,8 +85,8 @@ use windows::{
             Shutdown::{ExitWindowsEx, LockWorkStation, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
             SystemInformation::{GetComputerNameExW, COMPUTER_NAME_FORMAT},
             Threading::{
-                AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
-                OpenProcess, OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
+                GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
+                OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
                 PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION,
             },
         },
@@ -100,15 +100,15 @@ use windows::{
                 KF_FLAG_DEFAULT, SHELLEXECUTEINFOW, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                BringWindowToTop, FindWindowExW, GetClassNameW, GetDesktopWindow,
-                GetForegroundWindow, GetParent, GetSystemMetrics, GetWindow, GetWindowLongW,
-                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
-                IsWindowVisible, IsZoomed, PostMessageW, SendMessageW, SetForegroundWindow,
-                SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
-                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
-                SPIF_UPDATEINIFILE, SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
-                SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER, SW_SHOWNORMAL,
+                FindWindowExW, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
+                GetSystemMetrics, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
+                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
+                PostMessageW, SendMessageW, SetForegroundWindow, SetWindowPos, ShowWindow,
+                ShowWindowAsync, SystemParametersInfoW, GWL_EXSTYLE, GWL_STYLE, GW_OWNER,
+                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
+                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
+                SPI_GETDESKWALLPAPER, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
+                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_SHOWNORMAL,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WS_SIZEBOX,
                 WS_THICKFRAME,
             },
@@ -243,17 +243,6 @@ impl WindowsApi {
         session_id
     }
 
-    /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow
-    pub fn get_foreground_window() -> HWND {
-        let mut hwnd = unsafe { GetForegroundWindow() };
-        // based on windows doc, get foreground can return null while window is losing activation
-        // so we wait until we get a valid window
-        while hwnd.is_invalid() {
-            hwnd = unsafe { GetForegroundWindow() };
-        }
-        hwnd
-    }
-
     pub fn is_window(hwnd: HWND) -> bool {
         unsafe { IsWindow(Some(hwnd)) }.into()
     }
@@ -278,10 +267,13 @@ impl WindowsApi {
 
         let rc_monitor = WindowsApi::monitor_rect(WindowsApi::monitor_from_window(hwnd))?;
         let window_rect = WindowsApi::get_inner_window_rect(hwnd)?;
-        Ok(window_rect.left <= rc_monitor.left
-            && window_rect.top <= rc_monitor.top
-            && window_rect.right >= rc_monitor.right
-            && window_rect.bottom >= rc_monitor.bottom)
+        // Allow 1px tolerance: Electron/Chromium apps adjust their rect by 1px on focus loss
+        // (borderless-maximized mode), which would otherwise break fullscreen detection.
+        const TOLERANCE: i32 = 1;
+        Ok(window_rect.left <= rc_monitor.left + TOLERANCE
+            && window_rect.top <= rc_monitor.top + TOLERANCE
+            && window_rect.right >= rc_monitor.right - TOLERANCE
+            && window_rect.bottom >= rc_monitor.bottom - TOLERANCE)
     }
 
     pub fn is_cloaked(hwnd: HWND) -> Result<bool> {
@@ -369,30 +361,43 @@ impl WindowsApi {
         Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_ASYNCWINDOWPOS)
     }
 
-    pub fn bring_to_top(hwnd: HWND) -> Result<()> {
-        unsafe { BringWindowToTop(hwnd)? };
-        Ok(())
+    pub fn set_z_order(hwnd: HWND, order: HWND) -> Result<()> {
+        Self::set_position(
+            hwnd,
+            Some(order),
+            &RECT::default(),
+            SWP_NOMOVE | SWP_NOSIZE | SWP_ASYNCWINDOWPOS,
+        )
     }
 
-    #[allow(dead_code)]
-    pub fn attach_thread_input(thread_id: u32, attach_to: u32, attach: bool) -> Result<()> {
-        unsafe { AttachThreadInput(thread_id, attach_to, attach).ok()? };
-        Ok(())
+    /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getforegroundwindow
+    /// If not interactive session will always return null (lock screen) or while changing active window.
+    pub fn get_foreground_window() -> HWND {
+        unsafe { GetForegroundWindow() }
     }
 
-    pub fn set_foreground(hwnd: HWND) -> Result<()> {
-        let window = Window::from(hwnd);
+    pub fn set_foreground(target_hwnd: HWND) -> Result<()> {
+        let window = Window::from(target_hwnd);
 
-        if !unsafe { SetForegroundWindow(hwnd).as_bool() } {
+        if !unsafe { SetForegroundWindow(target_hwnd).as_bool() } {
             // https://stackoverflow.com/questions/10740346/setforegroundwindow-only-working-while-visual-studio-is-open
             let keyboard = Keyboard::new();
             keyboard.send_keys("{alt}")?;
             // this can fail but still be successful.
-            let _ = unsafe { SetForegroundWindow(hwnd) };
+            let _ = unsafe { SetForegroundWindow(target_hwnd) };
         }
 
-        // extra validation
-        if Window::get_foregrounded() != window {
+        // based on windows doc, get foreground can return null while window is losing activation
+        // so we wait until we get a valid window.
+        let mut focus_hwnd = Self::get_foreground_window();
+        let mut retries = 0;
+        while focus_hwnd != target_hwnd && retries < 10 {
+            std::thread::sleep(std::time::Duration::from_millis(1));
+            focus_hwnd = Self::get_foreground_window();
+            retries += 1;
+        }
+
+        if focus_hwnd != target_hwnd {
             return Err("Failed to set foreground window".into());
         }
 

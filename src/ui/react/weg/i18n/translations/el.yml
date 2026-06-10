@@ -2,6 +2,7 @@ app_menu:
   close: Κλείσε
   close_multiple: Κλείσ'τα όλα
   copy_handles: Λαβές αντιγράφων
+  edit_app_icon: Επεξεργασία εικονιδίου εφαρμογής
   kill: Διαδικασία θανάτωσης
   kill_multiple: Σκοτώστε όλες τις διαδικασίες
   open_file_location: Ανοίξτε την τοποθεσία αρχείου
@@ -12,6 +13,7 @@ app_menu:
   run_as: Εκτελέστε ως διαχειριστής
   unpin: Ξεκαρφιτσώνω
 context_menu:
+  edit_icon: Επεξεργασία εικονιδίου
   remove_module: Αφαιρέστε τη μονάδα
   reorder_disable: Κλείδωμα γραμμής εργασιών
   reorder_enable: Ξεκλείδωμα της γραμμής εργασιών
@@ -31,6 +33,8 @@ taskbar_menu:
   task_manager: Task Manager
   trash_bin: Προσθήκη μονάδας κάδου ανακύκλωσης
 trash_bin:
+  edit_icon_empty: Εικονίδιο επεξεργασίας (κενό)
+  edit_icon_full: Εικονίδιο επεξεργασίας (πλήρες)
   empty_bin: Άδειος Κάδος Ανακύκλωσης
   label: Κάδος Ανακύκλωσης
 weg:

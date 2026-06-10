@@ -1,14 +1,21 @@
-import { effect } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
 import { lazyRune } from "libs/ui/svelte/utils/LazyRune.svelte.ts";
 
-let widget = Widget.getCurrent();
+const widget = Widget.getCurrent();
+
+// +++++++++++++++++++++++ Reactive State +++++++++++++++++++++++
 
 let showing = $state(false);
 let autoConfirm = $state(false);
 
-let windows = lazyRune(() => invoke(SeelenCommand.GetUserAppWindows));
-subscribe(SeelenEvent.UserAppWindowsChanged, windows.setByPayload);
+let windows = lazyRune(async () =>
+  (await invoke(SeelenCommand.GetUserAppWindows)).toSorted(
+    (a, b) => b.lastForegroundAt - a.lastForegroundAt,
+  )
+);
+subscribe(SeelenEvent.UserAppWindowsChanged, ({ payload }) => {
+  windows.value = payload.toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt);
+});
 
 let previews = lazyRune(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
 subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, previews.setByPayload);
@@ -23,17 +30,19 @@ subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 
 await Promise.all([windows.init(), previews.init(), focusedWinId.init(), monitors.init()]);
 
-let selectedWindow = $state<number | null>(focusedWinId.value);
+let selectedWindow = $state<number | null>(focusedWinId.value ?? null);
 
-// Only sync with focused window when task switcher is hidden
+// Sync selectedWindow with focused window when the switcher is not visible
 $effect.root(() => {
   $effect(() => {
     if (!showing) {
       const win = windows.value.find((w) => w.hwnd === focusedWinId.value);
-      selectedWindow = win?.hwnd || null;
+      selectedWindow = win?.hwnd ?? null;
     }
   });
 });
+
+// +++++++++++++++++++++++ State Class +++++++++++++++++++++++
 
 class State {
   get showing() {
@@ -55,87 +64,88 @@ class State {
   get selectedWindow() {
     return selectedWindow;
   }
+
   set selectedWindow(value: number | null) {
     selectedWindow = value;
-  }
-
-  /**
-   * Optimistically moves the selected window to the front of the array
-   * for fast UI responsiveness. The backend will send the updated order
-   * via events, but this provides immediate visual feedback.
-   */
-  moveSelectedToFront(hwnd: number) {
-    const currentWindows = windows.value;
-    const selectedIndex = currentWindows.findIndex((w) => w.hwnd === hwnd);
-
-    if (selectedIndex > 0) {
-      // Only reorder if not already at the front
-      const reordered = [
-        currentWindows[selectedIndex]!,
-        ...currentWindows.slice(0, selectedIndex),
-        ...currentWindows.slice(selectedIndex + 1),
-      ];
-      windows.value = reordered;
-    }
   }
 }
 
 export const globalState = new State();
 
-// +++++++++++++++++++++++ Triggering +++++++++++++++++++++++
+// +++++++++++++++++++++++ Visibility +++++++++++++++++++++++
 
 $effect.root(() => {
   $effect(() => {
+    let cancelled = false;
+
     if (showing) {
-      widget.show().then(() => widget.focus());
+      widget.show().then(async () => {
+        if (cancelled) {
+          return;
+        }
+
+        // double check for fast keyboard trigger
+        let isPressing = await invoke(SeelenCommand.GetKeyState, { key: "Alt" });
+        if (isPressing) {
+          await widget.focus();
+        } else {
+          onAltKeyUp();
+        }
+      });
     } else {
       widget.hide();
     }
+
+    return () => {
+      cancelled = true;
+    };
+  });
+
+  // Hide when focus leaves the widget
+  $effect(() => {
+    if (focusedWinId.value !== widget.windowId) {
+      showing = false;
+    }
   });
 });
+
+// +++++++++++++++++++++++ Triggering +++++++++++++++++++++++
+
+function onAltKeyUp() {
+  if (showing && selectedWindow && autoConfirm) {
+    showing = false;
+    invoke(SeelenCommand.WegToggleWindowState, {
+      hwnd: selectedWindow,
+      wasFocused: false,
+    });
+  }
+}
 
 widget.onTrigger((payload) => {
   const direction: string = (payload.customArgs?.direction as string) || "next";
   const autoConfirmValue: boolean = (payload.customArgs?.autoConfirm as boolean) || false;
 
-  // Don't show if there are no windows
   if (windows.value.length === 0) {
     return;
   }
 
-  // If switcher was hidden, use focused window as starting point
+  // Use the currently selected window when already showing, otherwise start from focused
   const currentHwnd = showing ? selectedWindow : focusedWinId.value;
 
-  // Only set autoConfirm on first show (when switcher was hidden)
+  let index = windows.value.findIndex((w) => w.hwnd === currentHwnd);
+  if (direction === "next") {
+    if (index === -1) index = windows.value.length - 1;
+    selectedWindow = windows.value[(index + 1) % windows.value.length]?.hwnd ?? null;
+  } else if (direction === "previous") {
+    if (index === -1) index = 0;
+    selectedWindow = windows.value[(index - 1 + windows.value.length) % windows.value.length]?.hwnd ?? null;
+  }
+
+  // Only capture autoConfirm on the first trigger (when switcher was hidden)
   if (!showing) {
     autoConfirm = autoConfirmValue;
   }
   showing = true;
-
-  let index = windows.value.findIndex((w) => w.hwnd === currentHwnd);
-  if (direction === "next") {
-    if (index === -1) {
-      index = windows.value.length - 1; // Will cycle to 0 with (index + 1) % length
-    }
-    selectedWindow = windows.value[(index + 1) % windows.value.length]?.hwnd || null;
-  } else if (direction === "previous") {
-    if (index === -1) {
-      index = 0; // Will cycle to last with (index - 1 + length) % length
-    }
-    selectedWindow = windows.value[(index - 1 + windows.value.length) % windows.value.length]?.hwnd || null;
-  }
-});
-
-effect(() => {
-  if (focusedWinId.value === widget.windowId) {
-    invoke(SeelenCommand.GetKeyState, { key: "Alt" }).then((isPressing) => {
-      if (!isPressing) {
-        window.dispatchEvent(new KeyboardEvent("keyup", { key: "Alt" }));
-      }
-    });
-  } else {
-    showing = false;
-  }
 });
 
 window.onkeydown = (e) => {
@@ -145,27 +155,21 @@ window.onkeydown = (e) => {
 };
 
 window.onkeyup = (e) => {
-  if (e.key === "Alt" && showing && selectedWindow && autoConfirm) {
-    showing = false;
-    invoke(SeelenCommand.WegToggleWindowState, {
-      hwnd: selectedWindow,
-      wasFocused: false,
-    });
-    // Optimistically reorder UI before backend updates
-    globalState.moveSelectedToFront(selectedWindow);
+  if (e.key === "Alt") {
+    onAltKeyUp();
   }
 };
 
 // +++++++++++++++++++++++ Sizing +++++++++++++++++++++++
 
-let primaryMonitor = $derived.by(() => {
-  return monitors.value.find((m) => m.isPrimary) || monitors.value[0];
-});
+let primaryMonitor = $derived.by(
+  () => monitors.value.find((m) => m.isPrimary) || monitors.value[0],
+);
 
 $effect.root(() => {
   $effect(() => {
     if (primaryMonitor) {
-      Widget.getCurrent().setPosition(primaryMonitor.rect);
+      widget.setPosition(primaryMonitor.rect);
     }
   });
 });

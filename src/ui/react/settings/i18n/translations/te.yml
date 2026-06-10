@@ -84,6 +84,9 @@ devtools:
   load: లోడ్ చేయండి
   settings_file: సెట్టింగుల ఫైల్
   shared_components: SLU ప్రామాణిక భాగాలు
+  simulate_dialog:
+    label: డైలాగ్‌ని అనుకరించండి
+    trigger: ట్రిగ్గర్
   simulate_perm:
     label: విడ్జెట్ అనుమతి అభ్యర్థనను అనుకరించండి
     result_allowed: ✓ అనుమతి మంజూరు చేయబడింది
@@ -275,6 +278,7 @@ sides:
   top: టాప్
 toolbar:
   auto_hide: ఆటో దాచు
+  auto_hide_touch_disabled: టచ్ స్క్రీన్ పరికరాలలో స్వీయ దాచు అందుబాటులో లేదు
   delay_to_hide: దాచడానికి ఆలస్యం
   delay_to_show: చూపించడానికి ఆలస్యం
   dock_side: స్థానం
@@ -303,10 +307,12 @@ wall:
   coverage_pause_threshold: పాజ్ థ్రెషోల్డ్ (విండో కవరేజ్)
   create: సృష్టించు
   create_collection: సేకరణను సృష్టించండి
-  default_collection: డిఫాల్ట్ సేకరణ
+  default_collection: డిఫాల్ట్ వాల్‌పేపర్ లేదా సేకరణ
+  default_collection_description: >-
+    నిర్దిష్ట ఓవర్‌రైడ్ సెట్ లేని అన్ని మానిటర్‌లు మరియు వర్క్‌స్పేస్‌లకు
+    వర్తించబడుతుంది.
   delete_collection: సేకరణను తొలగించండి
   edit_collection: సేకరణను సవరించండి
-  enable: వాల్పేపర్ మేనేజర్‌ను ప్రారంభించండి
   extend: ప్రాథమికంగా విస్తరించండి
   fit:
     contain: కలిగి
@@ -330,6 +336,7 @@ wall:
   overlayColor: అతివ్యాప్తి రంగు
   overlayMixBlendMode: అతివ్యాప్తి మిక్స్ బ్లెండ్ మోడ్
   per_monitor: ప్రతి మానిటర్
+  per_monitor_config: ప్రతి-మానిటర్ కాన్ఫిగరేషన్
   playback: ప్లేబ్యాక్ వేగం
   position:
     bottom: దిగువ
@@ -347,15 +354,16 @@ wall:
   use_accent_color: వాల్‌పేపర్ యాస రంగును ఉపయోగించండి
   wallpaper_collection: వాల్‌పేపర్ కలెక్షన్
   wallpaper_settings: వాల్‌పేపర్ సెట్టింగ్‌లు
+  wallpapers: వాల్‌పేపర్‌లు
   wallpapers_and_collections: వాల్‌పేపర్‌లు & సేకరణలు
   withOverlay: అతివ్యాప్తితో
   workspace_collections: కార్యస్థల సేకరణలు
 weg:
   auto_hide: ఆటో దాచు
+  auto_hide_touch_disabled: టచ్ స్క్రీన్ పరికరాలలో స్వీయ దాచు అందుబాటులో లేదు
   delay_to_hide: దాచడానికి ఆలస్యం
   delay_to_show: చూపించడానికి ఆలస్యం
   dock_side: స్థానం
-  enable: డాక్/టాస్క్‌బార్‌ని ప్రారంభించండి
   filtering: అంశం వడపోత
   gap: గ్యాప్
   hide_mode:
@@ -427,7 +435,6 @@ wm:
   drag_behavior_options:
     sort: క్రమబద్ధీకరించు (డ్రాగ్ చేస్తున్నప్పుడు విండోలను క్రమాన్ని మార్చండి)
     swap: స్వాప్ (డ్రాగ్ ఎండ్‌లో విండోలను స్వాప్ చేయండి)
-  enable: టైలింగ్ విండో మేనేజర్‌ను ప్రారంభించండి
   layout: లేఅవుట్
   resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి
   space_between_containers: కంటైనర్ల మధ్య ఖాళీ

@@ -86,6 +86,9 @@ devtools:
   load: ஏற்றவும்
   settings_file: அமைப்புகள் கோப்பு
   shared_components: SLU நிலையான கூறுகள்
+  simulate_dialog:
+    label: உரையாடலை உருவகப்படுத்து
+    trigger: தூண்டுதல்
   simulate_perm:
     label: விட்ஜெட் அனுமதி கோரிக்கையை உருவகப்படுத்தவும்
     result_allowed: ✓ அனுமதி வழங்கப்பட்டது
@@ -278,6 +281,7 @@ sides:
   top: மேல்
 toolbar:
   auto_hide: ஆட்டோ மறை
+  auto_hide_touch_disabled: தொடுதிரை சாதனங்களில் தானியங்கு மறை கிடைக்காது
   delay_to_hide: மறைக்க தாமதம்
   delay_to_show: காட்ட தாமதம்
   dock_side: நிலை
@@ -306,10 +310,12 @@ wall:
   coverage_pause_threshold: இடைநிறுத்த வாசல் (சாளர கவரேஜ்)
   create: உருவாக்கு
   create_collection: சேகரிப்பை உருவாக்கவும்
-  default_collection: இயல்புநிலை சேகரிப்பு
+  default_collection: இயல்புநிலை வால்பேப்பர் அல்லது சேகரிப்பு
+  default_collection_description: >-
+    குறிப்பிட்ட மேலெழுதுதல் செட் இல்லாத அனைத்து மானிட்டர்கள் மற்றும்
+    பணியிடங்களுக்கும் பொருந்தும்.
   delete_collection: சேகரிப்பை நீக்கு
   edit_collection: தொகுப்பைத் திருத்து
-  enable: வால்பேப்பர் மேலாளரை இயக்கவும்
   extend: முதன்மையை நீட்டவும்
   fit:
     contain: கட்டுப்படுத்தவும்
@@ -333,6 +339,7 @@ wall:
   overlayColor: மேலடுக்கு நிறம்
   overlayMixBlendMode: மேலடுக்கு கலவை கலவை பயன்முறை
   per_monitor: ஒரு மானிட்டருக்கு
+  per_monitor_config: ஒவ்வொரு மானிட்டர் உள்ளமைவு
   playback: பின்னணி வேகம்
   position:
     bottom: கீழே
@@ -350,15 +357,16 @@ wall:
   use_accent_color: வால்பேப்பர் உச்சரிப்பு வண்ணத்தைப் பயன்படுத்தவும்
   wallpaper_collection: வால்பேப்பர் சேகரிப்பு
   wallpaper_settings: வால்பேப்பர் அமைப்புகள்
+  wallpapers: வால்பேப்பர்கள்
   wallpapers_and_collections: வால்பேப்பர்கள் & தொகுப்புகள்
   withOverlay: மேலடுக்கு
   workspace_collections: பணியிட தொகுப்புகள்
 weg:
   auto_hide: தானாக மறை
+  auto_hide_touch_disabled: தொடுதிரை சாதனங்களில் தானியங்கு மறை கிடைக்காது
   delay_to_hide: மறைக்க தாமதம்
   delay_to_show: காட்ட தாமதம்
   dock_side: நிலை
-  enable: டாக்/டாஸ்க்பாரை இயக்கவும்
   filtering: பொருள் வடிகட்டுதல்
   gap: இடைவெளி
   hide_mode:
@@ -430,7 +438,6 @@ wm:
   drag_behavior_options:
     sort: வரிசைப்படுத்தவும் (இழுக்கும்போது சாளரங்களை மறுவரிசைப்படுத்தவும்)
     swap: இடமாற்று (இழுக்கும் முனையில் சாளரங்களை மாற்றவும்)
-  enable: டைலிங் சாளர மேலாளரை இயக்கவும்
   layout: தளவமைப்பு
   resize_delta: டெல்டாவின் அளவை மாற்று (%)
   space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி

@@ -2,6 +2,7 @@ app_menu:
   close: Đóng
   close_multiple: Đóng tất cả
   copy_handles: Sao chép tay cầm
+  edit_app_icon: Chỉnh sửa biểu tượng ứng dụng
   kill: Quá trình tiêu diệt
   kill_multiple: Giết tất cả các tiến trình
   open_file_location: Mở vị trí file
@@ -12,6 +13,7 @@ app_menu:
   run_as: Chạy như quản trị viên
   unpin: Giải nén
 context_menu:
+  edit_icon: Chỉnh sửa biểu tượng
   remove_module: Xóa mô-đun
   reorder_disable: Khóa thanh tác vụ
   reorder_enable: Mở khóa Thanh nhiệm vụ
@@ -31,6 +33,8 @@ taskbar_menu:
   task_manager: Trình quản lý tác vụ
   trash_bin: Thêm mô-đun thùng rác
 trash_bin:
+  edit_icon_empty: Biểu tượng chỉnh sửa (Trống)
+  edit_icon_full: Biểu tượng chỉnh sửa (Đầy đủ)
   empty_bin: Thùng rác trống
   label: Thùng rác
 weg:

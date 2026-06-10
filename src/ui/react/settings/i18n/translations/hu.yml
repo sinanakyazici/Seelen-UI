@@ -84,6 +84,9 @@ devtools:
   load: Betöltés
   settings_file: Beállítási fájl
   shared_components: SLU szabványos komponensek
+  simulate_dialog:
+    label: Szimulációs párbeszédpanel
+    trigger: Kioldó
   simulate_perm:
     label: Szimulálja a Widget engedélykérését
     result_allowed: ✓ Engedély megadva
@@ -278,6 +281,7 @@ sides:
   top: Felső
 toolbar:
   auto_hide: Autóbizalom
+  auto_hide_touch_disabled: Az automatikus elrejtés nem érhető el érintőképernyős eszközökön
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
   dock_side: Pozíció
@@ -306,10 +310,12 @@ wall:
   coverage_pause_threshold: Szünet küszöbértéke (ablak lefedettsége)
   create: Teremt
   create_collection: Gyűjtemény létrehozása
-  default_collection: Alapértelmezett gyűjtemény
+  default_collection: Alapértelmezett háttérkép vagy gyűjtemény
+  default_collection_description: >-
+    Minden olyan monitorra és munkaterületre vonatkozik, amely nem rendelkezik
+    meghatározott felülírással.
   delete_collection: Gyűjtemény törlése
   edit_collection: Gyűjtemény szerkesztése
-  enable: Engedélyezze a háttérképkezelőt
   extend: Hosszabbítsa meg az elsődleges
   fit:
     contain: Tartalmazza a  címet.
@@ -333,6 +339,7 @@ wall:
   overlayColor: Overlay szín
   overlayMixBlendMode: Overlay Mix keverési mód
   per_monitor: Monitoronként
+  per_monitor_config: Monitoronkénti konfiguráció
   playback: Lejátszási sebesség
   position:
     bottom: Alul
@@ -350,15 +357,16 @@ wall:
   use_accent_color: Használjon tapéta kiemelő színt
   wallpaper_collection: Háttérkép gyűjtemény
   wallpaper_settings: Háttérkép beállításai
+  wallpapers: Háttérképek
   wallpapers_and_collections: Háttérképek és gyűjtemények
   withOverlay: Overlay-vel
   workspace_collections: Munkaterület-gyűjtemények
 weg:
   auto_hide: Automatikus elrejtés
+  auto_hide_touch_disabled: Az automatikus elrejtés nem érhető el érintőképernyős eszközökön
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
   dock_side: Pozíció
-  enable: Engedélyezze a dokkolót/tálcát
   filtering: Elemszűrés
   gap: Rés
   hide_mode:
@@ -429,7 +437,6 @@ wm:
   drag_behavior_options:
     sort: Rendezés (ablakok átrendezése húzás közben)
     swap: Csere (ablak cseréje a húzás végén)
-  enable: Engedélyezze a csempe ablakkezelőt
   layout: Elrendezés
   resize_delta: Átméretezze a DELTA -t (%)
   space_between_containers: Hely a konténerek között

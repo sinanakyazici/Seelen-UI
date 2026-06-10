@@ -85,6 +85,9 @@ devtools:
   load: Charger
   settings_file: Fichier de paramètres
   shared_components: Composants standards SLU
+  simulate_dialog:
+    label: Boîte de dialogue Simuler
+    trigger: Déclenchement
   simulate_perm:
     label: Simuler une demande d'autorisation de widget
     result_allowed: ✓ Autorisation accordée
@@ -277,6 +280,9 @@ sides:
   top: Haut
 toolbar:
   auto_hide: Masquer automatiquement
+  auto_hide_touch_disabled: >-
+    Le masquage automatique n'est pas disponible sur les appareils à écran
+    tactile
   delay_to_hide: Délai avant de masquer
   delay_to_show: Délai avant d'afficher
   dock_side: Position
@@ -305,10 +311,12 @@ wall:
   coverage_pause_threshold: Seuil de pause (couverture de la fenêtre)
   create: Créer
   create_collection: Créer une collection
-  default_collection: Collection par défaut
+  default_collection: Fond d'écran ou collection par défaut
+  default_collection_description: >-
+    Appliqué à tous les moniteurs et espaces de travail qui n’ont pas de jeu de
+    remplacement spécifique.
   delete_collection: Supprimer la collection
   edit_collection: Modifier la collection
-  enable: Activer le gestionnaire de fonds d'écran
   extend: Étendre le primaire
   fit:
     contain: Contenir
@@ -332,6 +340,7 @@ wall:
   overlayColor: Couleur de la superposition
   overlayMixBlendMode: Mode de mélange de la superposition
   per_monitor: Par moniteur
+  per_monitor_config: Configuration par moniteur
   playback: Vitesse de lecture
   position:
     bottom: Le fond
@@ -349,15 +358,18 @@ wall:
   use_accent_color: Utiliser la couleur d’accent du papier peint
   wallpaper_collection: Collection de papiers peints
   wallpaper_settings: Paramètres du papier peint
+  wallpapers: Fonds d'écran
   wallpapers_and_collections: Fonds d'écran et collections
   withOverlay: Avec recouvrement
   workspace_collections: Collections d'espaces de travail
 weg:
   auto_hide: Masquage automatique
+  auto_hide_touch_disabled: >-
+    Le masquage automatique n'est pas disponible sur les appareils à écran
+    tactile
   delay_to_hide: Délai avant masquage
   delay_to_show: Délai avant affichage
   dock_side: Position
-  enable: Activer le Dock/Barre des tâches
   filtering: Filtrage des applications
   gap: Écart
   hide_mode:
@@ -428,7 +440,6 @@ wm:
   drag_behavior_options:
     sort: Trier (réorganiser les fenêtres en les faisant glisser)
     swap: Swap (échanger les fenêtres à la fin du glissement)
-  enable: Activer le gestionnaire de fenêtres en mosaïque
   layout: Disposition
   resize_delta: Delta de redimensionnement (%)
   space_between_containers: Espacement entre les conteneurs

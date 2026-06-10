@@ -80,6 +80,9 @@ devtools:
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
   shared_components: SLU ਸਟੈਂਡਰਡ ਕੰਪੋਨੈਂਟਸ
+  simulate_dialog:
+    label: ਸਿਮੂਲੇਟ ਡਾਇਲਾਗ
+    trigger: ਟਰਿੱਗਰ
   simulate_perm:
     label: ਵਿਜੇਟ ਅਨੁਮਤੀ ਬੇਨਤੀ ਦੀ ਨਕਲ ਕਰੋ
     result_allowed: ✓ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ
@@ -268,6 +271,7 @@ sides:
   top: ਸਿਖਰ
 toolbar:
   auto_hide: ਆਟੋ ਓਹਲੇ
+  auto_hide_touch_disabled: ਟੱਚ ਸਕ੍ਰੀਨ ਡਿਵਾਈਸਾਂ 'ਤੇ ਆਟੋ ਹਾਈਡ ਉਪਲਬਧ ਨਹੀਂ ਹੈ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
   dock_side: ਸਥਿਤੀ
@@ -296,10 +300,12 @@ wall:
   coverage_pause_threshold: ਥ੍ਰੈਸ਼ਹੋਲਡ ਨੂੰ ਰੋਕੋ (ਵਿੰਡੋ ਕਵਰੇਜ)
   create: ਬਣਾਓ
   create_collection: ਸੰਗ੍ਰਹਿ ਬਣਾਓ
-  default_collection: ਪੂਰਵ-ਨਿਰਧਾਰਤ ਸੰਗ੍ਰਹਿ
+  default_collection: ਡਿਫੌਲਟ ਵਾਲਪੇਪਰ ਜਾਂ ਸੰਗ੍ਰਹਿ
+  default_collection_description: >-
+    ਉਹਨਾਂ ਸਾਰੇ ਮਾਨੀਟਰਾਂ ਅਤੇ ਵਰਕਸਪੇਸਾਂ 'ਤੇ ਲਾਗੂ ਕੀਤਾ ਜਾਂਦਾ ਹੈ ਜਿਨ੍ਹਾਂ ਦਾ ਕੋਈ ਖਾਸ
+    ਓਵਰਰਾਈਡ ਸੈੱਟ ਨਹੀਂ ਹੁੰਦਾ ਹੈ।
   delete_collection: ਸੰਗ੍ਰਹਿ ਮਿਟਾਓ
   edit_collection: ਸੰਗ੍ਰਹਿ ਦਾ ਸੰਪਾਦਨ ਕਰੋ
-  enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
   extend: ਪ੍ਰਾਇਮਰੀ ਵਧਾਓ
   fit:
     contain: ਸ਼ਾਮਲ
@@ -321,6 +327,7 @@ wall:
   overlayColor: ਓਵਰਲੇ ਰੰਗ
   overlayMixBlendMode: ਓਵਰਲੇਅ ਮਿਕਸ ਬਰੇਂਡ ਮੋਡ
   per_monitor: ਪ੍ਰਤੀ ਮਾਨੀਟਰ
+  per_monitor_config: ਪ੍ਰਤੀ-ਮਾਨੀਟਰ ਸੰਰਚਨਾ
   playback: ਪਲੇਬੈਕ ਸਪੀਡ
   position:
     bottom: ਤਲ
@@ -338,15 +345,16 @@ wall:
   use_accent_color: ਵਾਲਪੇਪਰ ਲਹਿਜ਼ੇ ਦੇ ਰੰਗ ਦੀ ਵਰਤੋਂ ਕਰੋ
   wallpaper_collection: ਵਾਲਪੇਪਰ ਸੰਗ੍ਰਹਿ
   wallpaper_settings: ਵਾਲਪੇਪਰ ਸੈਟਿੰਗਾਂ
+  wallpapers: ਵਾਲਪੇਪਰ
   wallpapers_and_collections: ਵਾਲਪੇਪਰ ਅਤੇ ਸੰਗ੍ਰਹਿ
   withOverlay: ਓਵਰਲੇਅ ਦੇ ਨਾਲ
   workspace_collections: ਵਰਕਸਪੇਸ ਸੰਗ੍ਰਹਿ
 weg:
   auto_hide: ਆਟੋ ਓਹਲੇ
+  auto_hide_touch_disabled: ਟੱਚ ਸਕ੍ਰੀਨ ਡਿਵਾਈਸਾਂ 'ਤੇ ਆਟੋ ਹਾਈਡ ਉਪਲਬਧ ਨਹੀਂ ਹੈ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
   dock_side: ਸਥਿਤੀ
-  enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   filtering: ਆਈਟਮ ਫਿਲਟਰਿੰਗ
   gap: ਪਾੜਾ
   hide_mode:
@@ -417,7 +425,6 @@ wm:
   drag_behavior_options:
     sort: ਕ੍ਰਮਬੱਧ (ਖਿੱਚਣ ਵੇਲੇ ਵਿੰਡੋਜ਼ ਨੂੰ ਮੁੜ ਕ੍ਰਮਬੱਧ ਕਰੋ)
     swap: ਸਵੈਪ (ਡਰੈਗ ਐਂਡ 'ਤੇ ਵਿੰਡੋਜ਼ ਨੂੰ ਸਵੈਪ ਕਰੋ)
-  enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਟਾਇਲਿੰਗ ਯੋਗ ਕਰੋ
   layout: ਖਾਕਾ
   resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)
   space_between_containers: ਕੰਟੇਨਰਾਂ ਵਿਚਕਾਰ ਸਪੇਸ

@@ -82,6 +82,9 @@ devtools:
   load: تحميل
   settings_file: ملف الإعدادات
   shared_components: المكونات القياسية SLU
+  simulate_dialog:
+    label: محاكاة الحوار
+    trigger: مشغل
   simulate_perm:
     label: محاكاة طلب إذن القطعة
     result_allowed: ✓ تم منح الإذن
@@ -263,6 +266,7 @@ sides:
   top: فوق
 toolbar:
   auto_hide: الأخفاء التلقائي
+  auto_hide_touch_disabled: الإخفاء التلقائي غير متاح على الأجهزة التي تعمل باللمس
   delay_to_hide: تأخير الأخفاء
   delay_to_show: تأخير الظهور
   dock_side: المنصب
@@ -291,10 +295,12 @@ wall:
   coverage_pause_threshold: عتبة الإيقاف المؤقت (تغطية النافذة)
   create: يخلق
   create_collection: إنشاء مجموعة
-  default_collection: المجموعة الافتراضية
+  default_collection: الخلفية الافتراضية أو المجموعة
+  default_collection_description: >-
+    يتم تطبيقه على كافة الشاشات ومساحات العمل التي لا تحتوي على مجموعة تجاوز
+    محددة.
   delete_collection: حذف المجموعة
   edit_collection: تحرير المجموعة
-  enable: تمكين مدير الخلفيات
   extend: تمديد الابتدائية
   fit:
     contain: احتواء
@@ -316,6 +322,7 @@ wall:
   overlayColor: لون التراكب
   overlayMixBlendMode: وضع مزج مزيج التراكب
   per_monitor: لكل شاشة
+  per_monitor_config: التكوين لكل شاشة
   playback: سرعة التشغيل
   position:
     bottom: القاع
@@ -333,15 +340,16 @@ wall:
   use_accent_color: استخدام لون لهجة ورق الحائط
   wallpaper_collection: مجموعة خلفيات
   wallpaper_settings: إعدادات ورق الحائط
+  wallpapers: خلفيات
   wallpapers_and_collections: خلفيات ومجموعات
   withOverlay: مع تراكب
   workspace_collections: مجموعات مساحة العمل
 weg:
   auto_hide: الأخفاء التلقائي
+  auto_hide_touch_disabled: الإخفاء التلقائي غير متاح على الأجهزة التي تعمل باللمس
   delay_to_hide: تأخير الأخفاء
   delay_to_show: تأخير الظهور
   dock_side: المكان
-  enable: تفعيل قفص الاتهام/شريط المهام
   filtering: تصفية العناصر
   gap: الفراغ
   hide_mode:
@@ -411,7 +419,6 @@ wm:
   drag_behavior_options:
     sort: فرز (إعادة ترتيب النوافذ أثناء السحب)
     swap: مبادلة (تبديل النوافذ عند نهاية السحب)
-  enable: تفعيل مدير نافذة البلاط
   layout: التخطيط
   resize_delta: غير حجم دلتا (%)
   space_between_containers: المساحه بين الحاويات

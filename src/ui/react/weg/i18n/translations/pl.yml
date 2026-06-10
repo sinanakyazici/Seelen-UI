@@ -2,6 +2,7 @@ app_menu:
   close: Zamknij
   close_multiple: Zamknij wszystko
   copy_handles: Kopiuj
+  edit_app_icon: Edytuj ikonę aplikacji
   kill: Wymuś zamknięcie
   kill_multiple: Wymuś zamknięcie wszystkich procesów
   open_file_location: Otwórz lokalizację pliku
@@ -12,6 +13,7 @@ app_menu:
   run_as: Uruchom jako administrator
   unpin: Odepnij
 context_menu:
+  edit_icon: Edytuj ikonę
   remove_module: Usuń moduł
   reorder_disable: Zablokuj pasek zadań
   reorder_enable: Odblokuj pasek zadań
@@ -31,6 +33,8 @@ taskbar_menu:
   task_manager: Menedżer zadań
   trash_bin: Dodaj moduł Kosza
 trash_bin:
+  edit_icon_empty: Ikona edycji (pusta)
+  edit_icon_full: Ikona edycji (pełna)
   empty_bin: Opróżnij Kosz
   label: Kosz
 weg:

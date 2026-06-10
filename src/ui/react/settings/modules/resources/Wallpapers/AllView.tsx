@@ -14,8 +14,8 @@ import {
   deleteWallpaperCollection,
   getWallpaperCollections,
   updateWallpaperCollection,
-} from "../../Wall/application.ts";
-import { WallpaperList } from "../../Wall/WallpaperList.tsx";
+} from "../Widget/Wall/application.ts";
+import { WallpaperList } from "../Widget/Wall/WallpaperList.tsx";
 
 import { resolveDisplayName, ResourceCard, ResourceListHeader } from "../ResourceCard.tsx";
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../components/SettingsBox/index.tsx";
@@ -23,7 +23,7 @@ import { SettingsGroup, SettingsOption, SettingsSubGroup } from "../../../compon
 export function AllWallpapersView() {
   const { t, i18n } = useTranslation();
   const [search, setSearch] = useState("");
-  const wallpaperCollections = getWallpaperCollections();
+  const wallpaperCollections = getWallpaperCollections().filter((c) => !c.hidden);
 
   const [editingCollectionId, setEditingCollectionId] = useState<string | null>(null);
   const [editingCollectionName, setEditingCollectionName] = useState("");
@@ -57,6 +57,7 @@ export function AllWallpapersView() {
       id: crypto.randomUUID(),
       name: newCollectionName.trim(),
       wallpapers: [],
+      hidden: false,
     });
     setIsCreatingCollection(false);
     setNewCollectionName("");

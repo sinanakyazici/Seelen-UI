@@ -85,6 +85,9 @@ devtools:
   load: Yuklamoq
   settings_file: Sozlamalar fayli
   shared_components: SLU standart komponentlari
+  simulate_dialog:
+    label: Simulyatsiya dialogi
+    trigger: Trigger
   simulate_perm:
     label: Vidjetga ruxsat so‘rovini simulyatsiya qilish
     result_allowed: ✓ Ruxsat berilgan
@@ -279,6 +282,7 @@ sides:
   top: Eng yuqori
 toolbar:
   auto_hide: Avtomatik yashirish
+  auto_hide_touch_disabled: Avtomatik yashirish sensorli ekranli qurilmalarda mavjud emas
   delay_to_hide: Yashirish uchun kechikish
   delay_to_show: Ko'rsatish uchun kechikish
   dock_side: Pozitsiya
@@ -307,10 +311,12 @@ wall:
   coverage_pause_threshold: Pauza chegarasi (deraza qoplami)
   create: Yaratish
   create_collection: To'plam yaratish
-  default_collection: Birlamchi toʻplam
+  default_collection: Birlamchi fon rasmi yoki kolleksiyasi
+  default_collection_description: >-
+    Muayyan bekor qilish to'plamiga ega bo'lmagan barcha monitorlar va ish
+    joylari uchun qo'llaniladi.
   delete_collection: To'plamni o'chirish
   edit_collection: To'plamni tahrirlash
-  enable: Fon rasmi menejerini yoqing
   extend: Birlamchini kengaytiring
   fit:
     contain: O'z ichiga olgan
@@ -334,6 +340,7 @@ wall:
   overlayColor: Overlay rang
   overlayMixBlendMode: Ortiqcha aralashtirish rejimini aralashtiring
   per_monitor: Monitor uchun
+  per_monitor_config: Monitor uchun konfiguratsiya
   playback: Qayta tinglash tezligi
   position:
     bottom: Pastki
@@ -351,15 +358,16 @@ wall:
   use_accent_color: Fon rasmi aksent rangidan foydalaning
   wallpaper_collection: Fon rasmi to'plami
   wallpaper_settings: Fon rasmi sozlamalari
+  wallpapers: Fon rasmi
   wallpapers_and_collections: Fon rasmi va kollektsiyalar
   withOverlay: Qopqoq bilan
   workspace_collections: Ish maydoni to'plamlari
 weg:
   auto_hide: Avtomatik yashirish
+  auto_hide_touch_disabled: Avtomatik yashirish sensorli ekranli qurilmalarda mavjud emas
   delay_to_hide: Yashirish uchun kechikish
   delay_to_show: Ko'rsatish uchun kechikish
   dock_side: Pozitsiya
-  enable: Dock / vazifalar panelini yoqing
   filtering: Mahsulotni filtrlash
   gap: Bo'shliq
   hide_mode:
@@ -431,7 +439,6 @@ wm:
   drag_behavior_options:
     sort: Saralash (tortish paytida oynalarni qayta tartiblash)
     swap: Almashtirish (drag oxirida oynalarni almashtirish)
-  enable: Tiling oyna boshqaruvchisini yoqing
   layout: Tartib
   resize_delta: Delta (%) ni o'zgartiring
   space_between_containers: Idishlar orasidagi bo'shliq

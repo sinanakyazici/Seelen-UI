@@ -85,6 +85,9 @@ devtools:
   load: Оптоварување
   settings_file: Датотека за поставки
   shared_components: Стандардни компоненти на SLU
+  simulate_dialog:
+    label: Симулирај дијалог
+    trigger: Активирање
   simulate_perm:
     label: Симулирајте барање за дозвола за виџети
     result_allowed: ✓ Дадена е дозвола
@@ -278,6 +281,7 @@ sides:
   top: Врв
 toolbar:
   auto_hide: Автоматско скриј
+  auto_hide_touch_disabled: Автоматското криење не е достапно на уредите со екран на допир
   delay_to_hide: Одложување за сокривање
   delay_to_show: Одложување за прикажување
   dock_side: Позиција
@@ -306,10 +310,12 @@ wall:
   coverage_pause_threshold: Праг на пауза (покриеност на прозорецот)
   create: Креирај
   create_collection: Креирај колекција
-  default_collection: Стандардна колекција
+  default_collection: Стандардна позадина или колекција
+  default_collection_description: >-
+    Применето на сите монитори и работни простори кои немаат специфичен сет за
+    прескокнување.
   delete_collection: Избришете ја колекцијата
   edit_collection: Уреди колекција
-  enable: Овозможете менаџер на тапети
   extend: Прошири основно
   fit:
     contain: Содржат
@@ -331,6 +337,7 @@ wall:
   overlayColor: Боја на преклопување
   overlayMixBlendMode: Режим на мешавина од мешавина од преклопување
   per_monitor: По монитор
+  per_monitor_config: Конфигурација по монитор
   playback: Брзина на репродукција
   position:
     bottom: Дно
@@ -348,15 +355,16 @@ wall:
   use_accent_color: Користете боја на акцент на позадина
   wallpaper_collection: Колекција на тапети
   wallpaper_settings: Поставки за позадина
+  wallpapers: Позадини
   wallpapers_and_collections: Позадини и колекции
   withOverlay: Со преклоп
   workspace_collections: Колекции на работниот простор
 weg:
   auto_hide: Автоматско скриј
+  auto_hide_touch_disabled: Автоматското криење не е достапно на уредите со екран на допир
   delay_to_hide: Одложување за сокривање
   delay_to_show: Одложување за прикажување
   dock_side: Позиција
-  enable: Овозможете пристаниште/лента со задачи
   filtering: Филтрирање на артикли
   gap: Јаз
   hide_mode:
@@ -428,7 +436,6 @@ wm:
   drag_behavior_options:
     sort: Подреди (прередете ги прозорците додека се влечете)
     swap: Заменете (заменете ги прозорците на крајот на влечење)
-  enable: Овозможете менаџер на прозорецот за плочки
   layout: Распоред
   resize_delta: Променете ја големината на Делта (%)
   space_between_containers: Простор помеѓу контејнери

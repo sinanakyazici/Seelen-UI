@@ -85,6 +85,9 @@ devtools:
   load: Beban
   settings_file: Fail tetapan
   shared_components: Komponen Standard SLU
+  simulate_dialog:
+    label: Simulasi Dialog
+    trigger: Pencetus
   simulate_perm:
     label: Simulasikan Permintaan Kebenaran Widget
     result_allowed: ✓ Kebenaran diberikan
@@ -275,6 +278,7 @@ sides:
   top: Atas
 toolbar:
   auto_hide: Menyembunyikan auto
+  auto_hide_touch_disabled: Auto sorok tidak tersedia pada peranti skrin sentuh
   delay_to_hide: Bertangguh untuk bersembunyi
   delay_to_show: Kelewatan untuk menunjukkan
   dock_side: Kedudukan
@@ -303,10 +307,12 @@ wall:
   coverage_pause_threshold: Jeda ambang (liputan tetingkap)
   create: Buat
   create_collection: Buat Koleksi
-  default_collection: Koleksi Lalai
+  default_collection: Kertas dinding atau koleksi lalai
+  default_collection_description: >-
+    Digunakan pada semua monitor dan ruang kerja yang tidak mempunyai set
+    penggantian khusus.
   delete_collection: Padamkan Koleksi
   edit_collection: Edit Koleksi
-  enable: Dayakan Pengurus Wallpaper
   extend: Lanjutkan utama
   fit:
     contain: Mengandungi
@@ -328,6 +334,7 @@ wall:
   overlayColor: Warna overlay
   overlayMixBlendMode: Mod campuran campuran overlay
   per_monitor: Setiap monitor
+  per_monitor_config: Konfigurasi Per-Monitor
   playback: Kelajuan main balik
   position:
     bottom: Bawah
@@ -345,15 +352,16 @@ wall:
   use_accent_color: Gunakan warna aksen kertas dinding
   wallpaper_collection: Koleksi Kertas Dinding
   wallpaper_settings: Tetapan Kertas Dinding
+  wallpapers: Kertas dinding
   wallpapers_and_collections: Kertas dinding & Koleksi
   withOverlay: Dengan overlay
   workspace_collections: Koleksi Ruang Kerja
 weg:
   auto_hide: Menyembunyikan auto
+  auto_hide_touch_disabled: Auto sorok tidak tersedia pada peranti skrin sentuh
   delay_to_hide: Bertangguh untuk bersembunyi
   delay_to_show: Kelewatan untuk menunjukkan
   dock_side: Kedudukan
-  enable: Dayakan Dock/Taskbar
   filtering: Penapisan item
   gap: Jurang
   hide_mode:
@@ -425,7 +433,6 @@ wm:
   drag_behavior_options:
     sort: Isih (susun semula tetingkap semasa menyeret)
     swap: Tukar (tukar tetingkap pada hujung seret)
-  enable: Dayakan pengurus tetingkap jubin
   layout: Susun atur
   resize_delta: Saiz semula delta (%)
   space_between_containers: Ruang antara bekas

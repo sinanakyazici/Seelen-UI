@@ -85,6 +85,9 @@ devtools:
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
   shared_components: SLU სტანდარტული კომპონენტები
+  simulate_dialog:
+    label: დიალოგის სიმულაცია
+    trigger: გამომწვევი
   simulate_perm:
     label: ვიჯეტის ნებართვის მოთხოვნის სიმულაცია
     result_allowed: ✓ გაცემულია ნებართვა
@@ -274,6 +277,7 @@ sides:
   top: თავი
 toolbar:
   auto_hide: ავტო დამალვა
+  auto_hide_touch_disabled: ავტომატური დამალვა მიუწვდომელია სენსორული ეკრანის მოწყობილობებზე
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია
@@ -302,10 +306,12 @@ wall:
   coverage_pause_threshold: პაუზის ზღვარი (ფანჯრის დაფარვა)
   create: შექმნა
   create_collection: შექმენით კოლექცია
-  default_collection: ნაგულისხმევი კოლექცია
+  default_collection: ნაგულისხმევი ფონი ან კოლექცია
+  default_collection_description: >-
+    გამოიყენება ყველა მონიტორზე და სამუშაო სივრცეზე, რომელსაც არ გააჩნია
+    კონკრეტული გადაფარვის ნაკრები.
   delete_collection: კოლექციის წაშლა
   edit_collection: კოლექციის რედაქტირება
-  enable: ჩართეთ ფონი მენეჯერი
   extend: გააფართოვეთ პირველადი
   fit:
     contain: დატევა
@@ -327,6 +333,7 @@ wall:
   overlayColor: გადახურული ფერი
   overlayMixBlendMode: Overlay Mix Blend Mode
   per_monitor: თითო მონიტორზე
+  per_monitor_config: თითო მონიტორის კონფიგურაცია
   playback: აღწარმოების სიჩქარე
   position:
     bottom: ძირი
@@ -344,15 +351,16 @@ wall:
   use_accent_color: გამოიყენეთ ფონის აქცენტის ფერი
   wallpaper_collection: ფონების კოლექცია
   wallpaper_settings: ფონი პარამეტრები
+  wallpapers: ფონები
   wallpapers_and_collections: ფონები და კოლექციები
   withOverlay: გადახურვით
   workspace_collections: სამუშაო სივრცის კოლექციები
 weg:
   auto_hide: Ავტომატური დამალვა
+  auto_hide_touch_disabled: ავტომატური დამალვა მიუწვდომელია სენსორული ეკრანის მოწყობილობებზე
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია
-  enable: ჩართეთ dock/taskbar
   filtering: ნივთის ფილტრაცია
   gap: ხარპი
   hide_mode:
@@ -423,7 +431,6 @@ wm:
   drag_behavior_options:
     sort: სორტირება (გადააწყვეთ ფანჯრები გადატანისას)
     swap: შეცვალეთ (გაცვალეთ ფანჯრები ჩავლებით)
-  enable: ჩართეთ ფილების ფანჯრის მენეჯერი
   layout: გამოფენა
   resize_delta: დელტას ზომის შეცვლა (%)
   space_between_containers: სივრცე კონტეინერებს შორის

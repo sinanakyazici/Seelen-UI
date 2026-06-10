@@ -1,9 +1,7 @@
-import { computed, effect, signal } from "@preact/signals";
+import { computed, effect } from "@preact/signals";
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
-import { FancyToolbarSide, HideMode, type UserAppWindowColors } from "@seelen-ui/lib/types";
-import { $settings, $widget_rect } from "./mod";
-import { $mouse_at_edge } from "./system";
-import { $is_this_webview_focused } from "libs/ui/react/utils/signals";
+import { FancyToolbarSide, type UserAppWindowColors } from "@seelen-ui/lib/types";
+import { $settings, $widget_rect } from "./settings";
 import { lazySignal } from "libs/ui/react/utils/LazySignal";
 
 const widget = Widget.getCurrent();
@@ -12,15 +10,15 @@ export const $interactables = lazySignal(() => invoke(SeelenCommand.GetUserAppWi
 subscribe(SeelenEvent.UserAppWindowsChanged, $interactables.setByPayload);
 await $interactables.init();
 
+export const $top_interactable_window = computed(() =>
+  $interactables.value
+    .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
+    .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic)
+);
+
 export const $thereIsMaximizedOnBg = computed(() => {
   return $interactables.value.some(
     (w) => !w.isIconic && w.isZoomed && w.monitor === widget.decoded.monitorId,
-  );
-});
-
-export const $isSomeFullscreenOnMonitor = computed(() => {
-  return $interactables.value.some(
-    (w) => !w.isIconic && w.isFullscreen && w.monitor === widget.decoded.monitorId,
   );
 });
 
@@ -42,6 +40,10 @@ export const $currentMonitorMaximizedColors = computed<UserAppWindowColors | nul
 export const $focused = lazySignal(() => invoke(SeelenCommand.GetFocusedApp));
 subscribe(SeelenEvent.GlobalFocusChanged, $focused.setByPayload);
 await $focused.init();
+
+export const $widget_statuses = lazySignal(() => invoke(SeelenCommand.DebugGetWidgetsStatuses));
+subscribe(SeelenEvent.WidgetDebugInfoChanged, $widget_statuses.setByPayload);
+await $widget_statuses.init();
 
 export const $is_tb_overlapped = computed(() => {
   const focused = $focused.value;
@@ -66,51 +68,6 @@ export const $is_tb_overlapped = computed(() => {
   }
 
   return true;
-});
-
-export const $hidden_by_autohide = signal(false);
-
-effect(() => {
-  Widget.self.window.setIgnoreCursorEvents($hidden_by_autohide.value);
-});
-
-effect(() => {
-  const { delayToHide, delayToShow, hideMode, position } = $settings.value;
-
-  let hidden = false;
-  let flush = false;
-
-  const isMouseOverEdge = $mouse_at_edge.value === position;
-
-  switch (hideMode) {
-    case HideMode.Never:
-      hidden = false;
-      flush = true;
-      break;
-    case HideMode.Always:
-      hidden = !$is_this_webview_focused.value && !isMouseOverEdge;
-      break;
-    case HideMode.OnOverlap:
-      hidden = $is_tb_overlapped.value && !$is_this_webview_focused.value && !isMouseOverEdge;
-      break;
-  }
-
-  let timeout: ReturnType<typeof setTimeout> | null = null;
-  if (hidden) {
-    timeout = setTimeout(() => ($hidden_by_autohide.value = true), delayToHide);
-  } else {
-    if (flush) {
-      $hidden_by_autohide.value = false;
-    } else {
-      timeout = setTimeout(() => ($hidden_by_autohide.value = false), delayToShow);
-    }
-  }
-
-  return () => {
-    if (timeout) {
-      clearTimeout(timeout);
-    }
-  };
 });
 
 effect(() => {

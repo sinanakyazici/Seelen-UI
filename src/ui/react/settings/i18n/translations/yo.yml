@@ -82,6 +82,9 @@ devtools:
   load: Ẹru
   settings_file: Faili eto
   shared_components: SLU Standard irinše
+  simulate_dialog:
+    label: Afarawe ajọṣọ
+    trigger: Nfa
   simulate_perm:
     label: Ṣe afiwe Ibeere Gbigbanilaaye ẹrọ ailorukọ
     result_allowed: ✓ Gbigbanilaaye
@@ -266,6 +269,7 @@ sides:
   top: Oke
 toolbar:
   auto_hide: Ibi ipamọ aifọwọyi
+  auto_hide_touch_disabled: Ipamọ aifọwọyi ko si lori awọn ẹrọ iboju ifọwọkan
   delay_to_hide: Idaduro lati tọju
   delay_to_show: Idaduro lati ṣafihan
   dock_side: Ipo
@@ -294,10 +298,12 @@ wall:
   coverage_pause_threshold: Duro ẹnu-ọna (agbegbe ferese)
   create: Ṣẹda
   create_collection: Ṣẹda Gbigba
-  default_collection: Gbigba aiyipada
+  default_collection: Iṣẹṣọ ogiri aiyipada tabi gbigba
+  default_collection_description: >-
+    Ti a lo si gbogbo awọn diigi ati awọn aaye iṣẹ ti ko ni eto ifasilẹ kan
+    pato.
   delete_collection: Pa Gbigba
   edit_collection: Ṣatunkọ Gbigba
-  enable: Mu oluṣakoso ogiri ṣiṣẹ
   extend: Fa akọkọ
   fit:
     contain: Ni ninu
@@ -319,6 +325,7 @@ wall:
   overlayColor: Awọ botay
   overlayMixBlendMode: Igbẹpọ dapọ Ipo Ipa
   per_monitor: Fun atẹle
+  per_monitor_config: Fun-Atẹle iṣeto ni
   playback: Iyara ṣiṣiṣẹsẹhin
   position:
     bottom: Isalẹ
@@ -336,15 +343,16 @@ wall:
   use_accent_color: Lo awọ asẹnti iṣẹṣọ ogiri
   wallpaper_collection: Gbigba ogiri
   wallpaper_settings: Eto Iṣẹṣọ ogiri
+  wallpapers: Iṣẹṣọ ogiri
   wallpapers_and_collections: Iṣẹṣọ ogiri & Awọn akojọpọ
   withOverlay: Pẹlu apọju
   workspace_collections: Awọn akojọpọ aaye iṣẹ
 weg:
   auto_hide: Ibi ipamọ aifọwọyi
+  auto_hide_touch_disabled: Ipamọ aifọwọyi ko si lori awọn ẹrọ iboju ifọwọkan
   delay_to_hide: Idaduro lati tọju
   delay_to_show: Idaduro lati ṣafihan
   dock_side: Ipo
-  enable: Muu dock / forkbar
   filtering: Sisẹ Nkan
   gap: Alafo
   hide_mode:
@@ -414,7 +422,6 @@ wm:
   drag_behavior_options:
     sort: Too (tunto awọn window lakoko ti o nfa)
     swap: Paṣipaa (paṣipaa awọn window ni ipari fifa)
-  enable: Jeki oludari window
   layout: Agbekalẹ
   resize_delta: Tun ṣe Delta (%)
   space_between_containers: Aaye laarin awọn apoti

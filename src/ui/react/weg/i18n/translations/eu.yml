@@ -2,6 +2,7 @@ app_menu:
   close: Hurbileko
   close_multiple: Itxi guztiak
   copy_handles: Kopiatu heldulekuak
+  edit_app_icon: Editatu aplikazioaren ikonoa
   kill: Hiltzeko prozesua
   kill_multiple: Kill Prozesu guztiak
   open_file_location: Ireki fitxategiaren kokapena
@@ -12,6 +13,7 @@ app_menu:
   run_as: Exekutatu administratzaile gisa
   unpin: Desjendu
 context_menu:
+  edit_icon: Editatu ikonoa
   remove_module: Kendu modulua
   reorder_disable: Blokeatu ataza barra
   reorder_enable: Desblokeatu ataza barra
@@ -31,6 +33,8 @@ taskbar_menu:
   task_manager: Zereginen kudeatzailea
   trash_bin: Gehitu Zaborrontzia Modulua
 trash_bin:
+  edit_icon_empty: Editatu ikonoa (hutsik)
+  edit_icon_full: Editatu ikonoa (osoa)
   empty_bin: Hustu zakarrontzira
   label: Birziklatzeko paperontzia
 weg:

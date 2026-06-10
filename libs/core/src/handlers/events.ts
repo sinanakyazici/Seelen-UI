@@ -29,7 +29,6 @@ export enum SeelenEvent {
   WMSetReservation = "wm::set-reservation",
   WMForceRetiling = "wm::force-retiling",
   WMTreeChanged = "wm::tree-changed",
-  PopupContentChanged = "popup-content-changed",
   StateSettingsChanged = "settings-changed",
   StateThemesChanged = "themes",
   StateIconPacksChanged = "icon-packs",
@@ -56,4 +55,5 @@ export enum SeelenEvent {
   Notifications = "notifications",
   PluginEnabled = "plugin::enabled",
   ShortcutsPaused = "shortcuts::paused",
+  WidgetDebugInfoChanged = "widget::debug-info-changed",
 }

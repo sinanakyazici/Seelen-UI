@@ -85,6 +85,9 @@ devtools:
   load: Carga
   settings_file: Arquivo de configurações
   shared_components: Componentes standard SLU
+  simulate_dialog:
+    label: Simular caixa de diálogo
+    trigger: Gatilho
   simulate_perm:
     label: Simular pedido de permissão de widget
     result_allowed: ✓ Permissão concedida
@@ -279,6 +282,7 @@ sides:
   top: Topo
 toolbar:
   auto_hide: Esconda automática
+  auto_hide_touch_disabled: A ocultação automática não está disponível em dispositivos com ecrã táctil
   delay_to_hide: Atraso para se esconder
   delay_to_show: Atraso para mostrar
   dock_side: Posição
@@ -307,10 +311,12 @@ wall:
   coverage_pause_threshold: Limite de pausa (cobertura da janela)
   create: Criar
   create_collection: Criar coleção
-  default_collection: Coleção padrão
+  default_collection: Papel de parede ou coleção padrão
+  default_collection_description: >-
+    Aplicado a todos os monitores e áreas de trabalho que não possuam um
+    conjunto de substituição específico.
   delete_collection: Excluir coleção
   edit_collection: Editar coleção
-  enable: Ativar gerente de papel de parede
   extend: Estender primário
   fit:
     contain: Conter
@@ -332,6 +338,7 @@ wall:
   overlayColor: Cor de sobreposição
   overlayMixBlendMode: Modo de mistura de sobreposição
   per_monitor: Por monitor
+  per_monitor_config: Configuração por monitor
   playback: Velocidade de reprodução
   position:
     bottom: Fundo
@@ -349,15 +356,16 @@ wall:
   use_accent_color: Utilize a cor de destaque do papel de parede
   wallpaper_collection: Coleção de papéis de parede
   wallpaper_settings: Configurações de papel de parede
+  wallpapers: Papéis de parede
   wallpapers_and_collections: Papéis de parede e coleções
   withOverlay: Com sobreposição
   workspace_collections: Coleções de espaço de trabalho
 weg:
   auto_hide: Esconda automática
+  auto_hide_touch_disabled: A ocultação automática não está disponível em dispositivos com ecrã táctil
   delay_to_hide: Atraso para se esconder
   delay_to_show: Atraso para mostrar
   dock_side: Posição
-  enable: Habilitar dock/barra de tarefas
   filtering: Filtragem de itens
   gap: Lacuna
   hide_mode:
@@ -428,7 +436,6 @@ wm:
   drag_behavior_options:
     sort: Classificar (reordenar janelas enquanto arrasta)
     swap: Trocar (trocar janelas ao arrastar)
-  enable: Habilitar gerente de janela de ladrilhos
   layout: Esquema
   resize_delta: Redimensionar delta (%)
   space_between_containers: Espaço entre recipientes

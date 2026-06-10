@@ -1,4 +1,5 @@
 import { invoke, SeelenCommand, SeelenEvent, subscribe, Widget } from "@seelen-ui/lib";
+import { ZOrder } from "@seelen-ui/lib/types";
 import { lazyRune } from "libs/ui/svelte/utils";
 import { ConfigState } from "./config.svelte";
 import { PhysicalPosition } from "@tauri-apps/api/window";
@@ -64,19 +65,14 @@ $effect.root(() => {
 
     Widget.self.window.setPosition(new PhysicalPosition(Math.round(x), Math.round(y)));
   });
-});
 
-export function setShowing(show: boolean) {
-  if (showing != show) {
-    Widget.self.window.setIgnoreCursorEvents(!show);
-
-    if (show) {
-      invoke(SeelenCommand.BringSelfToTop);
+  $effect(() => {
+    Widget.self.window.setIgnoreCursorEvents(!showing);
+    if (showing) {
+      invoke(SeelenCommand.SetSelfZOrder, { zOrder: ZOrder.Top });
     }
-  }
-
-  showing = show;
-}
+  });
+});
 
 export const RendererState = {
   get all() {
@@ -87,5 +83,8 @@ export const RendererState = {
   },
   get showing() {
     return showing;
+  },
+  set showing(value: boolean) {
+    showing = value;
   },
 };

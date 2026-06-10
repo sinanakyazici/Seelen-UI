@@ -85,6 +85,9 @@ devtools:
   load: Carica
   settings_file: File delle Impostazioni
   shared_components: Componenti standard SLU
+  simulate_dialog:
+    label: Simula dialogo
+    trigger: Grilletto
   simulate_perm:
     label: Simulare la richiesta di autorizzazione del widget
     result_allowed: ✓ Autorizzazione concessa
@@ -281,6 +284,9 @@ sides:
   top: Alto
 toolbar:
   auto_hide: Nascondi automaticamente
+  auto_hide_touch_disabled: >-
+    La funzione Nascondi automaticamente non è disponibile sui dispositivi touch
+    screen
   delay_to_hide: Ritardo per nascondere
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione
@@ -309,10 +315,12 @@ wall:
   coverage_pause_threshold: Soglia di pausa (copertura finestra)
   create: Creare
   create_collection: Crea raccolta
-  default_collection: Raccolta predefinita
+  default_collection: Sfondo o raccolta predefinita
+  default_collection_description: >-
+    Applicato a tutti i monitor e le aree di lavoro che non dispongono di un set
+    di override specifico.
   delete_collection: Elimina raccolta
   edit_collection: Modifica raccolta
-  enable: Abilita Gestore degli Sfondi
   extend: Estendi primario
   fit:
     contain: Contenere
@@ -334,6 +342,7 @@ wall:
   overlayColor: Colore di sovrapposizione
   overlayMixBlendMode: Modalità di miscelazione della sovrapposizione
   per_monitor: Per monitor
+  per_monitor_config: Configurazione per monitor
   playback: Velocità di riproduzione
   position:
     bottom: Fondo
@@ -351,15 +360,18 @@ wall:
   use_accent_color: Usa il colore in risalto della carta da parati
   wallpaper_collection: Collezione di sfondi
   wallpaper_settings: Impostazioni dello sfondo
+  wallpapers: Sfondi
   wallpapers_and_collections: Sfondi e collezioni
   withOverlay: Con sovrapposizione
   workspace_collections: Raccolte di aree di lavoro
 weg:
   auto_hide: Nascondi automaticamente
+  auto_hide_touch_disabled: >-
+    La funzione Nascondi automaticamente non è disponibile sui dispositivi touch
+    screen
   delay_to_hide: Ritardo per nascondere
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione
-  enable: Abilita Dock/Barra delle Attività
   filtering: Filtraggio degli articoli
   gap: Spazio
   hide_mode:
@@ -431,7 +443,6 @@ wm:
   drag_behavior_options:
     sort: Ordina (riordina le finestre durante il trascinamento)
     swap: Scambia (scambia le finestre alla fine del trascinamento)
-  enable: Abilita Gestore delle Finestre a Tiling
   layout: Layout
   resize_delta: Delta Ridimensionamento (percento)
   space_between_containers: Spazio tra i Contenitori

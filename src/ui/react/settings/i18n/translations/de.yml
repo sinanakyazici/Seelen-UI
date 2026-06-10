@@ -85,6 +85,9 @@ devtools:
   load: Laden
   settings_file: Einstellungsdatei
   shared_components: SLU-Standardkomponenten
+  simulate_dialog:
+    label: Dialog simulieren
+    trigger: Auslösen
   simulate_perm:
     label: Widget-Berechtigungsanfrage simulieren
     result_allowed: ✓ Erlaubnis erteilt
@@ -283,6 +286,7 @@ sides:
   top: Oben
 toolbar:
   auto_hide: Automatisch ausblenden
+  auto_hide_touch_disabled: Das automatische Ausblenden ist auf Touchscreen-Geräten nicht verfügbar
   delay_to_hide: Verzögerung zum Verstecken
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position
@@ -311,10 +315,12 @@ wall:
   coverage_pause_threshold: Pausenschwelle (Fensterabdeckung)
   create: Erstellen
   create_collection: Sammlung erstellen
-  default_collection: Standardsammlung
+  default_collection: Standardhintergrund oder -sammlung
+  default_collection_description: >-
+    Wird auf alle Monitore und Arbeitsbereiche angewendet, für die kein
+    bestimmter Überschreibungssatz festgelegt ist.
   delete_collection: Sammlung löschen
   edit_collection: Sammlung bearbeiten
-  enable: Tapetenmanager aktivieren
   extend: Grundschule verlängern
   fit:
     contain: Enthält
@@ -338,6 +344,7 @@ wall:
   overlayColor: Überlagerungsfarbe
   overlayMixBlendMode: Mischmodus Überlagerung
   per_monitor: Pro Monitor
+  per_monitor_config: Konfiguration pro Monitor
   playback: Wiedergabegeschwindigkeit
   position:
     bottom: Unten
@@ -355,15 +362,16 @@ wall:
   use_accent_color: Verwenden Sie eine Akzentfarbe für die Tapete
   wallpaper_collection: Tapetensammlung
   wallpaper_settings: Hintergrundeinstellungen
+  wallpapers: Hintergrundbilder
   wallpapers_and_collections: Hintergrundbilder und Sammlungen
   withOverlay: Mit Overlay
   workspace_collections: Arbeitsbereichssammlungen
 weg:
   auto_hide: Automatisch ausblenden
+  auto_hide_touch_disabled: Das automatische Ausblenden ist auf Touchscreen-Geräten nicht verfügbar
   delay_to_hide: Verzögerung zum Verstecken
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position
-  enable: Dock/Taskleiste aktivieren
   filtering: Element-Filterung
   gap: Abstand
   hide_mode:
@@ -434,7 +442,6 @@ wm:
   drag_behavior_options:
     sort: Sortieren (Fenster beim Ziehen neu anordnen)
     swap: Tauschen (Fenster am Ende des Ziehens tauschen)
-  enable: Aktivieren Sie den Tiling Window Manager
   layout: Layout
   resize_delta: Relative Größenänderung (%)
   space_between_containers: Abstand zwischen Containern

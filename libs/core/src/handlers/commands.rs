@@ -176,6 +176,8 @@ slu_commands_declaration! {
     StateGetWallpapers = state_get_wallpapers() -> Vec<Wallpaper>,
     StateSetCustomIconPack = state_add_icon_to_custom_icon_pack(icon: IconPackEntry),
     StateDeleteCachedIcons = state_delete_cached_icons(),
+    RegisterUserCustomAppIcon = register_user_custom_app_icon(icon_base64: String, entry: IconPackEntry),
+    DeleteUserCustomAppIcon = delete_user_custom_app_icon(entry: IconPackEntry),
     StateRequestWallpaperAddition = state_request_wallpaper_addition(),
     StateGetPerformanceMode = state_get_performance_mode() -> PerformanceMode,
 
@@ -184,10 +186,11 @@ slu_commands_declaration! {
     DebugOpenDevTools = debug_open_dev_tools(label: String),
     TriggerWidget = trigger_widget(payload: WidgetTriggerPayload),
     TriggerContextMenu = trigger_context_menu(menu: ContextMenu, forward_to: Option<String>),
+    TriggerDialog = trigger_dialog(dialog: Dialog),
     SetCurrentWidgetStatus = set_current_widget_status(status: WidgetStatus),
     GetSelfWindowId = get_self_window_handle() -> isize,
     SetSelfPosition = set_self_position(rect: Rect),
-    BringSelfToTop = bring_self_to_top(),
+    SetSelfZOrder = set_self_z_order(z_order: ZOrder),
     WriteFile = write_data_file(filename: String, content: String),
     ReadFile = read_data_file(filename: String) -> String,
 
@@ -239,12 +242,6 @@ slu_commands_declaration! {
     SetAppWindowsPositions = set_app_windows_positions(positions: HashMap<isize, Rect>),
     RequestFocus = request_focus(hwnd: isize),
     WmSetStackActiveWindow = wm_set_stack_active_window(hwnd: isize),
-
-    // Slu Popups
-    CreatePopup = create_popup(config: SluPopupConfig) -> uuid::Uuid,
-    UpdatePopup = update_popup(instance_id: uuid::Uuid, config: SluPopupConfig),
-    ClosePopup = close_popup(instance_id: uuid::Uuid),
-    GetPopupConfig = get_popup_config(instance_id: uuid::Uuid) -> SluPopupConfig,
 
     // Network
     WlanScan = wlan_scan(),

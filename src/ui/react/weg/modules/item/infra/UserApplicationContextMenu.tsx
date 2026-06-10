@@ -1,11 +1,12 @@
 import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
-import type { ContextMenu, ContextMenuItem, UserAppWindow } from "@seelen-ui/lib/types";
+import type { ContextMenu, ContextMenuItem, UserAppWindow, WidgetId } from "@seelen-ui/lib/types";
 import type { TFunction } from "i18next";
 
 import type { AppOrFileWegItem } from "../../shared/types.ts";
 
 import { $dock_state_actions } from "../../shared/state/items.ts";
 import { $full_settings, $settings } from "../../shared/state/settings.ts";
+import { darkMode, iconPackManager } from "libs/ui/react/components/Icon/common.ts";
 
 const identifier = crypto.randomUUID();
 const onAppMenuClick = "weg::app_menu_click";
@@ -44,6 +45,16 @@ Widget.self.webview.listen(onAppMenuClick, ({ payload }) => {
   } else if (key === "kill") {
     windows.forEach((w) => {
       invoke(SeelenCommand.WegKillApp, { hwnd: w.hwnd });
+    });
+  } else if (key === "edit_app_icon") {
+    let entry = iconPackManager.value.value.getIconEntry({ path: item.path, umid: item.umid });
+    invoke(SeelenCommand.TriggerWidget, {
+      payload: {
+        id: "@seelen/icon-editor" as WidgetId,
+        customArgs: {
+          entry,
+        },
+      },
     });
   }
 });
@@ -90,11 +101,14 @@ export function getUserApplicationContextMenu(
     items.push({ type: "Separator" });
   }
 
+  const foundIcon = iconPackManager.value.value.getIcon({ path: item.path, umid: item.umid });
+  const iconSrc = (darkMode.value ? foundIcon?.dark : foundIcon?.light) || foundIcon?.base;
+
   items.push(
     {
       type: "Item",
       key: "run",
-      icon: "IoOpenOutline",
+      icon: iconSrc ?? "IoOpenOutline",
       label: item.displayName,
       callbackEvent: onAppMenuClick,
     },
@@ -112,9 +126,18 @@ export function getUserApplicationContextMenu(
       label: t("app_menu.run_as"),
       callbackEvent: onAppMenuClick,
     },
+    {
+      type: "Item",
+      key: "edit_app_icon",
+      icon: "RiEditBoxLine",
+      label: t("app_menu.edit_app_icon"),
+      callbackEvent: onAppMenuClick,
+    },
   );
 
   if (windows.length) {
+    items.push({ type: "Separator" });
+
     if ($full_settings.value.devTools) {
       items.push({
         type: "Item",
@@ -131,6 +154,7 @@ export function getUserApplicationContextMenu(
       icon: "BiWindowClose",
       label: windows.length > 1 ? t("app_menu.close_multiple") : t("app_menu.close"),
       callbackEvent: onAppMenuClick,
+      danger: true,
     });
 
     if ($settings.value.showEndTask) {
@@ -140,6 +164,7 @@ export function getUserApplicationContextMenu(
         icon: "MdOutlineDangerous",
         label: windows.length > 1 ? t("app_menu.kill_multiple") : t("app_menu.kill"),
         callbackEvent: onAppMenuClick,
+        danger: true,
       });
     }
   }

@@ -2,6 +2,7 @@ app_menu:
   close: Bezárás
   close_multiple: Zárja be az összeset
   copy_handles: Másolás fogantyúk
+  edit_app_icon: Alkalmazásikon szerkesztése
   kill: Kill Process
   kill_multiple: Öld meg az összes folyamatot
   open_file_location: Nyissa meg a fájl helyét
@@ -12,6 +13,7 @@ app_menu:
   run_as: Futtatás rendszergazdaként
   unpin: Kibont
 context_menu:
+  edit_icon: Szerkesztés ikon
   remove_module: Modul eltávolítása
   reorder_disable: Feladatsáv zárolása
   reorder_enable: Feloldja a tálcát
@@ -31,6 +33,8 @@ taskbar_menu:
   task_manager: Feladatkezelő
   trash_bin: Adja hozzá a Lomtár modult
 trash_bin:
+  edit_icon_empty: Szerkesztési ikon (üres)
+  edit_icon_full: Szerkesztési ikon (teljes)
   empty_bin: Ürítse ki a Lomtárat
   label: Lomtár
 weg:

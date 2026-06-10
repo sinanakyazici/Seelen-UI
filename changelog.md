@@ -1,15 +1,40 @@
 # Changelog
 
-## [2.7.0-dev]
+## [2.7.1-dev]
+
+### fix
+
+- apps menu crashing on search when too many items.
+
+## [2.7.0]
+
+### feature
+
+- Allow users easily create icon packs via an Icon Editor widget.
 
 ### enhancements
 
+- add min/max limits to all number inputs in Settings GUI to prevent users from entering values that break the desktop
+  layout.
 - keyboard/language selector fixes and improvements (now shows active IME).
+- wallpaper selector allow select single wallpapers.
+- disable autohide of dock and toolbar on touch screen devices.\
+- show apps icon on dock item's context menu.
 
 ### fix
 
 - discord rich presence not inmediately updated after settings change.
 - inconsistency on styles of dock and quick settings widgets.
+- toolbar and dock autohide weird behaviour on hitboxes.
+- twm not reflecting changes inmediately on settings change.
+- dock/toolbar/twm behaviours while using fullscreen apps.
+- not showing toolbar and dock when Apps Menu open.
+- drag being triggered on touchpads with electrical noise or touchpad sensitivity issues.
+- dock and toolbar not being always on top, after exiting from fullscreen app.
+- task switcher not exiting on escape key.
+- inconsistent windows order on dock.
+- errors on elevated windows.
+- fix invisible hitbox caused by flyouts at start.
 
 ## [2.6.10]
 

@@ -85,6 +85,9 @@ devtools:
   load: Lueden
   settings_file: Settytout-Datei
   shared_components: SLU Standard Komponente
+  simulate_dialog:
+    label: Simuléieren Dialog
+    trigger: Ausléiser
   simulate_perm:
     label: Simulatioun Widget Erlaabnis Ufro
     result_allowed: ✓ Erlaabnis gëtt
@@ -273,6 +276,7 @@ sides:
   top: Uewen
 toolbar:
   auto_hide: Automatesch
+  auto_hide_touch_disabled: Auto verstoppen ass net op Touchscreen Geräter verfügbar
   delay_to_hide: Verspéidung ze verstoppen
   delay_to_show: Verspéidung fir ze weisen
   dock_side: Positioun un
@@ -301,10 +305,12 @@ wall:
   coverage_pause_threshold: Pause-Schwell (Fënsterofdeckung)
   create: Schafen
   create_collection: Schafen Kollektioun
-  default_collection: Standard Kollektioun
+  default_collection: Standard Tapeten oder Sammlung
+  default_collection_description: >-
+    Applizéiert op all Monitore an Aarbechtsberäicher déi net e spezifeschen
+    Iwwerschreiden Set hunn.
   delete_collection: Läschen Kollektioun
   edit_collection: Kollektioun änneren
-  enable: Aktivéiert Wallpaper Manager
   extend: Primär verlängeren
   fit:
     contain: Enthalen
@@ -328,6 +334,7 @@ wall:
   overlayColor: Iwwerlauschteren Faarf
   overlayMixBlendMode: Overlay Mix vermëschen Modus
   per_monitor: Pro Monitor
+  per_monitor_config: Per-Monitor Configuratioun
   playback: Spillversuch
   position:
     bottom: Siwenn
@@ -345,15 +352,16 @@ wall:
   use_accent_color: Benotzt Tapeten Akzentfaarf
   wallpaper_collection: Wallpaper Kollektioun
   wallpaper_settings: Wallpaper Astellunge
+  wallpapers: Tapeten
   wallpapers_and_collections: Tapeten & Sammlungen
   withOverlay: Mat Overlay
   workspace_collections: Aarbechtsberäich Kollektiounen
 weg:
   auto_hide: Automatesch
+  auto_hide_touch_disabled: Auto verstoppen ass net op Touchscreen Geräter verfügbar
   delay_to_hide: Verspéidung ze verstoppen
   delay_to_show: Verspéidung fir ze weisen
   dock_side: Positioun un
-  enable: Aktivéiert Dock / Taskbar
   filtering: Item Filter
   gap: Knënn
   hide_mode:
@@ -424,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: Sortéieren (Fënstere nei bestellen beim zéien)
     swap: Tauschen (Swap Fënsteren um Drag End)
-  enable: Aktivéiert Fenster-Manager
   layout: Lueden
   resize_delta: Resize Delta (%)
   space_between_containers: Raum tëscht Behälter

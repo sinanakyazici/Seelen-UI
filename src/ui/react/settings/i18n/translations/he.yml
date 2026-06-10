@@ -82,6 +82,9 @@ devtools:
   load: טען
   settings_file: קובץ הגדרות
   shared_components: רכיבים סטנדרטיים של SLU
+  simulate_dialog:
+    label: הדמיית דיאלוג
+    trigger: לְהַפְעִיל
   simulate_perm:
     label: הדמיית בקשת הרשאת יישומון
     result_allowed: ✓ הרשאה ניתנה
@@ -260,6 +263,7 @@ sides:
   top: למעלה
 toolbar:
   auto_hide: הסתר אוטומטי
+  auto_hide_touch_disabled: הסתרה אוטומטית אינה זמינה במכשירי מסך מגע
   delay_to_hide: השהה הסתרה
   delay_to_show: השהה הצגה
   dock_side: מצב
@@ -288,10 +292,10 @@ wall:
   coverage_pause_threshold: סף השהייה (כיסוי חלון)
   create: לִיצוֹר
   create_collection: צור אוסף
-  default_collection: אוסף ברירת מחדל
+  default_collection: טפט או אוסף ברירת מחדל
+  default_collection_description: מיושם על כל המסכים ומרחבי העבודה שאין להם ערכת עקיפה ספציפית.
   delete_collection: מחק אוסף
   edit_collection: ערוך אוסף
-  enable: אפשר מנהל טפטים
   extend: הארך את היסוד
   fit:
     contain: לְהַכִיל
@@ -313,6 +317,7 @@ wall:
   overlayColor: צבע שכבה
   overlayMixBlendMode: מצב תערובת תערובת שכבה
   per_monitor: לכל מוניטור
+  per_monitor_config: תצורת פר-מוניטור
   playback: מהירות ההפעלה
   position:
     bottom: תַחתִית
@@ -330,15 +335,16 @@ wall:
   use_accent_color: השתמש בצבע מבטא טפט
   wallpaper_collection: אוסף טפטים
   wallpaper_settings: הגדרות טפט
+  wallpapers: טפטים
   wallpapers_and_collections: טפטים ואוספים
   withOverlay: עם שכבת -על
   workspace_collections: אוספי סביבת עבודה
 weg:
   auto_hide: הסתר אוטומטי
+  auto_hide_touch_disabled: הסתרה אוטומטית אינה זמינה במכשירי מסך מגע
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
   dock_side: מַצָב
-  enable: הפעל את המזח/שורת המשימות
   filtering: סינון פריטים
   gap: פער
   hide_mode:
@@ -408,7 +414,6 @@ wm:
   drag_behavior_options:
     sort: מיון (סדר מחדש את החלונות תוך כדי גרירה)
     swap: החלפה (החלפה של חלונות בקצה הגרירה)
-  enable: אפשר מנהל חלונות אריחים
   layout: מערך
   resize_delta: שינוי גודל דלתא (%)
   space_between_containers: רווח בין מיכלים

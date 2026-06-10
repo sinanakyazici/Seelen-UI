@@ -84,6 +84,9 @@ devtools:
   load: Tagħbija
   settings_file: Settings Fajl
   shared_components: Komponenti Standard SLU
+  simulate_dialog:
+    label: Issimula Djalogu
+    trigger: Trigger
   simulate_perm:
     label: Issimula Talba ta' Permess għal Widget
     result_allowed: ✓ Permess mogħti
@@ -278,6 +281,7 @@ sides:
   top: Quċċata
 toolbar:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Auto hide mhix disponibbli fuq apparati touch screen
   delay_to_hide: Dewmien biex jinħbew
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni
@@ -306,10 +310,12 @@ wall:
   coverage_pause_threshold: Pawża limitu (kopertura tat-tieqa)
   create: Oħloq
   create_collection: Oħloq Ġbir
-  default_collection: Ġbir Default
+  default_collection: Wallpaper default jew ġbir
+  default_collection_description: >-
+    Applikata għall-monitors u l-ispazji tax-xogħol kollha li m'għandhomx sett
+    ta' override speċifiku.
   delete_collection: Ħassar Ġbir
   edit_collection: Edit Ġbir
-  enable: Enable Wallpaper Manager
   extend: Estendi primarja
   fit:
     contain: Fihom
@@ -331,6 +337,7 @@ wall:
   overlayColor: Kulur overlay
   overlayMixBlendMode: Modalità ta 'taħlita ta' taħlita overlay
   per_monitor: Għal kull monitor
+  per_monitor_config: Konfigurazzjoni Per-Monitor
   playback: Veloċità tad-daqq
   position:
     bottom: Qiegħ
@@ -348,15 +355,16 @@ wall:
   use_accent_color: Uża l-kulur tal-aċċent tal-wallpaper
   wallpaper_collection: Ġbir tal-wallpaper
   wallpaper_settings: Settings tal-wallpaper
+  wallpapers: Wallpapers
   wallpapers_and_collections: Wallpapers u Kollezzjonijiet
   withOverlay: Bil-overlay
   workspace_collections: Kollezzjonijiet tal-Ispazji tax-Xogħol
 weg:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Auto hide mhix disponibbli fuq apparati touch screen
   delay_to_hide: Dewmien biex jinħbew
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni
-  enable: Enable Dock / Taskbar
   filtering: Iffiltrar tal-Oġġett
   gap: Vojt
   hide_mode:
@@ -427,7 +435,6 @@ wm:
   drag_behavior_options:
     sort: Issortja (ordna mill-ġdid it-twieqi waqt li tkaxkar)
     swap: Ibdel (tbiddel it-twieqi fit-tarf tat-tkaxkir)
-  enable: Ippermetti maniġer tat-tieqa tal-madum
   layout: Tqassim
   resize_delta: Daqs mill-ġdid Delta (%)
   space_between_containers: Spazju bejn il-kontenituri

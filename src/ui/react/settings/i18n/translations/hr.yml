@@ -85,6 +85,9 @@ devtools:
   load: Opterećenje
   settings_file: Datoteka postavki
   shared_components: SLU standardne komponente
+  simulate_dialog:
+    label: Simulacija dijaloga
+    trigger: Okidač
   simulate_perm:
     label: Zahtjev za dopuštenje za simulaciju widgeta
     result_allowed: ✓ Dopuštenje dano
@@ -277,6 +280,7 @@ sides:
   top: Vrh
 toolbar:
   auto_hide: Auto sakrij
+  auto_hide_touch_disabled: Automatsko skrivanje nije dostupno na uređajima s dodirnim zaslonom
   delay_to_hide: Odgoda za skrivanje
   delay_to_show: Odgoditi prikaz
   dock_side: Položaj
@@ -305,10 +309,12 @@ wall:
   coverage_pause_threshold: Prag pauze (pokrivenost prozora)
   create: Stvoriti
   create_collection: Stvori zbirku
-  default_collection: Zadana zbirka
+  default_collection: Zadana pozadina ili zbirka
+  default_collection_description: >-
+    Primjenjuje se na sve monitore i radne prostore koji nemaju određeni skup
+    nadjačavanja.
   delete_collection: Izbriši zbirku
   edit_collection: Uredi zbirku
-  enable: Omogući upravitelja pozadina
   extend: Proširi primarni
   fit:
     contain: Obuzdati
@@ -330,6 +336,7 @@ wall:
   overlayColor: Boja prekrivanja
   overlayMixBlendMode: Način miješanja preklapanja mješavine
   per_monitor: Po monitoru
+  per_monitor_config: Konfiguracija po monitoru
   playback: Brzina reprodukcije
   position:
     bottom: Dno
@@ -347,15 +354,16 @@ wall:
   use_accent_color: Koristite boju tapeta
   wallpaper_collection: Zbirka tapeta
   wallpaper_settings: Postavke pozadine
+  wallpapers: Pozadine
   wallpapers_and_collections: Pozadine i kolekcije
   withOverlay: S prekrivanjem
   workspace_collections: Zbirke radnog prostora
 weg:
   auto_hide: Auto sakrij
+  auto_hide_touch_disabled: Automatsko skrivanje nije dostupno na uređajima s dodirnim zaslonom
   delay_to_hide: Odgoda za skrivanje
   delay_to_show: Odgoditi prikaz
   dock_side: Položaj
-  enable: Omogućite pristanište/zadaću
   filtering: Filtriranje predmeta
   gap: Jaz
   hide_mode:
@@ -426,7 +434,6 @@ wm:
   drag_behavior_options:
     sort: Poredaj (promjena redoslijeda prozora tijekom povlačenja)
     swap: Zamjena (zamjena prozora na kraju povlačenja)
-  enable: Omogući upravitelj prozora za plod
   layout: Raspored
   resize_delta: Promijenite veličinu delta (%)
   space_between_containers: Prostor između spremnika

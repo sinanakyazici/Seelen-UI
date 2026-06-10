@@ -84,6 +84,9 @@ devtools:
   load: Lwythet
   settings_file: Ffeil Gosodiadau
   shared_components: Cydrannau Safonol SLU
+  simulate_dialog:
+    label: Efelychu Dialog
+    trigger: Sbardun
   simulate_perm:
     label: Efelychu Cais Caniatâd Widget
     result_allowed: ✓ Rhoddwyd caniatâd
@@ -273,6 +276,7 @@ sides:
   top: Brigant
 toolbar:
   auto_hide: Cuddio awto
+  auto_hide_touch_disabled: Nid yw cuddfan ceir ar gael ar ddyfeisiau sgrin gyffwrdd
   delay_to_hide: Oedi i guddio
   delay_to_show: Oedi i ddangos
   dock_side: Safle
@@ -301,10 +305,12 @@ wall:
   coverage_pause_threshold: Trothwy seibio (gorchudd ffenestr)
   create: Creu
   create_collection: Creu Casgliad
-  default_collection: Casgliad Diofyn
+  default_collection: Papur wal neu gasgliad diofyn
+  default_collection_description: >-
+    Wedi'i gymhwyso i bob monitor a man gwaith nad oes ganddynt set gwrthwneud
+    penodol.
   delete_collection: Dileu Casgliad
   edit_collection: Casgliad Golygu
-  enable: Galluogi Rheolwr Papur Wal
   extend: Ymestyn cynradd
   fit:
     contain: Gynhwysaf
@@ -326,6 +332,7 @@ wall:
   overlayColor: Lliw Troshaen
   overlayMixBlendMode: Modd cyfuniad cymysgedd troshaen
   per_monitor: Fesul monitor
+  per_monitor_config: Cyfluniad Per-Monitor
   playback: Cyflymder chwarae
   position:
     bottom: Waelod
@@ -343,15 +350,16 @@ wall:
   use_accent_color: Defnyddiwch liw acen papur wal
   wallpaper_collection: Casgliad Papur Wal
   wallpaper_settings: Gosodiadau Papur Wal
+  wallpapers: Papur wal
   wallpapers_and_collections: Papur Wal a Chasgliadau
   withOverlay: Gyda throshaen
   workspace_collections: Casgliadau Gweithle
 weg:
   auto_hide: Cuddio awto
+  auto_hide_touch_disabled: Nid yw cuddfan ceir ar gael ar ddyfeisiau sgrin gyffwrdd
   delay_to_hide: Oedi i guddio
   delay_to_show: Oedi i ddangos
   dock_side: Safle
-  enable: Galluogi doc/bar tasg
   filtering: Hidlo Eitem
   gap: Bwlch
   hide_mode:
@@ -422,7 +430,6 @@ wm:
   drag_behavior_options:
     sort: Trefnu (ail-archebu ffenestri wrth lusgo)
     swap: Cyfnewid (cyfnewid ffenestri ar y pen llusgo)
-  enable: Galluogi Rheolwr Ffenestr Teils
   layout: Gynllun
   resize_delta: Newid maint Delta (%)
   space_between_containers: Lle rhwng cynwysyddion

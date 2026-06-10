@@ -52,10 +52,21 @@
   }
 </script>
 
-<button class="menu-item" disabled={item.disabled} data-skin="transparent" onclick={handleClick} onmouseenter={closeOpenSubmenu}>
+<button
+  class="menu-item"
+  class:danger={item.danger}
+  disabled={item.disabled}
+  data-skin="transparent"
+  onclick={handleClick}
+  onmouseenter={closeOpenSubmenu}
+>
   {#if item.checked !== null}
     <input type="checkbox" checked={internalChecked} />
   {/if}
-  <Icon iconName={item.icon as any} color={item.iconColor ?? undefined} />
+  {#if item.icon?.startsWith("http://asset.localhost")}
+    <img class="menu-item-img-icon" src={item.icon} alt="" />
+  {:else}
+    <Icon iconName={item.icon as any} color={item.iconColor ?? undefined} />
+  {/if}
   <span class="menu-item-label">{item.label}</span>
 </button>

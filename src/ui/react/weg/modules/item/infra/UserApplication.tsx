@@ -7,12 +7,13 @@ import { useTranslation } from "react-i18next";
 
 import type { AppOrFileWegItem } from "../../shared/types.ts";
 
-import { $delayedFocused, $focused, $interactables, $notifications, $settings } from "../../shared/state/mod.ts";
-import { $isTouchPrimary, getDockContextMenuAlignment } from "../../shared/state/settings.ts";
+import { $delayedFocused, $focused, $interactables, $notifications, $settings } from "../../shared/state/index.ts";
+import { getDockContextMenuAlignment } from "../../shared/state/settings.ts";
 import { getWindowsForItem } from "../../shared/state/windows.ts";
 import { getUserApplicationContextMenu, launchItem } from "./UserApplicationContextMenu.tsx";
 import { UserApplicationPreview } from "./UserApplicationPreview.tsx";
 import { Flex, Popover } from "antd";
+import { $is_touch_primary } from "libs/ui/react/utils/signals.ts";
 
 interface Props {
   item: AppOrFileWegItem;
@@ -61,42 +62,47 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
   const itemLabel = $settings.value.showWindowTitle && windows.length ? windows[0]!.title : null;
 
   const itemNode = (
-    <div
-      className="weg-item"
-      onClick={() => {
-        const window = windows[0];
-        if (!window) {
-          launchItem(item, false);
-        } else {
-          invoke(SeelenCommand.WegToggleWindowState, {
-            hwnd: window.hwnd,
-            wasFocused: $delayedFocused.value?.hwnd === window.hwnd,
-          });
-        }
-      }}
-      onAuxClick={(e) => {
-        if (e.button !== 1) return;
-        if ($settings.value.middleClickAction === WegMiddleClickAction.OpenNewInstance) {
-          launchItem(item, false);
-        } else {
+    <div className="weg-item-overlay">
+      <div
+        className="weg-item"
+        onClick={() => {
           const window = windows[0];
-          if (window) {
-            invoke(SeelenCommand.WegCloseApp, { hwnd: window.hwnd });
+          if (!window) {
+            launchItem(item, false);
+          } else {
+            invoke(SeelenCommand.WegToggleWindowState, {
+              hwnd: window.hwnd,
+              wasFocused: $delayedFocused.value?.hwnd === window.hwnd,
+            });
           }
-        }
-      }}
-      onContextMenu={onContextMenu}
-    >
-      <FileIcon
-        className="weg-item-icon"
-        path={item.relaunch?.icon || item.path}
-        umid={item.umid}
-      />
-      {itemLabel && <div className="weg-item-title">{itemLabel}</div>}
+        }}
+        onAuxClick={(e) => {
+          if (e.button !== 1) return;
+          if ($settings.value.middleClickAction === WegMiddleClickAction.OpenNewInstance) {
+            launchItem(item, false);
+          } else {
+            const window = windows[0];
+            if (window) {
+              invoke(SeelenCommand.WegCloseApp, { hwnd: window.hwnd });
+            }
+          }
+        }}
+        onContextMenu={onContextMenu}
+      >
+        <FileIcon
+          className="weg-item-icon"
+          path={item.relaunch?.icon || item.path}
+          umid={item.umid}
+        />
+        {itemLabel && <div className="weg-item-title">{itemLabel}</div>}
+      </div>
+
       {notificationsCount > 0 && <div className="weg-item-notification-badge">{notificationsCount}</div>}
+
       {$settings.value.showInstanceCounter && windows.length > 1 && (
         <div className="weg-item-instance-counter-badge">{windows.length}</div>
       )}
+
       {!$settings.value.showWindowTitle && (
         <div
           className={cx("weg-item-open-sign", {
@@ -108,7 +114,7 @@ function UserApplicationItem({ item, isOverlay, windows }: InnerProps) {
     </div>
   );
 
-  if (isOverlay || windows.length === 0 || $isTouchPrimary.value) {
+  if (isOverlay || windows.length === 0 || $is_touch_primary.value) {
     return itemNode;
   }
 
@@ -145,7 +151,9 @@ export function UserApplication({ item, isOverlay }: Props) {
   const windows = getWindowsForItem(item, $interactables.value);
 
   const { splitWindows, spaceBetweenItems } = $settings.value;
-  if (splitWindows && windows.length > 1) {
+
+  const showAsSeparatedItems = splitWindows || $is_touch_primary.value;
+  if (showAsSeparatedItems && windows.length > 1) {
     return (
       <Flex align="center" gap={spaceBetweenItems}>
         {windows.map((window) => (

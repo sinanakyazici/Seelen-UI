@@ -13,6 +13,7 @@ use crate::{
     modules::apps::application::{UserAppWinEvent, UserAppsManager, USER_APPS_MANAGER},
     utils::lock_free::SyncHashMap,
     windows_api::{
+        event_window::IS_INTERACTIVE_SESSION,
         window::{event::WinEvent, Window},
         WindowsApi,
     },
@@ -31,8 +32,14 @@ static CAPTURE_TX: LazyLock<crossbeam_channel::Sender<isize>> = LazyLock::new(||
         .name("win-capture-queue".into())
         .spawn(move || {
             for addr in rx {
+                if !IS_INTERACTIVE_SESSION.load(std::sync::atomic::Ordering::Acquire) {
+                    continue;
+                }
+
                 let window = Window::from(addr);
-                WINDOWS_PREVIEWS.do_capture(&window).log_error();
+                if window.is_manageable_from_unelevated() {
+                    WINDOWS_PREVIEWS.do_capture(&window).log_error();
+                }
             }
         })
         .log_error();

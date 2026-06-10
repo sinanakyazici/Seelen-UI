@@ -6,35 +6,17 @@ import { computed, signal } from "@preact/signals";
 import { debounce } from "lodash";
 import type { AppOrFileWegItem } from "../types";
 
-// on change of this function update src\background\widgets\weg\cli.rs too.
-//
-// Grouping rules:
-//   1. Window has a umid  → matched only by exact umid equality. Path is not used.
-//      If no item has that umid, a new item will be created for it.
-//   2. Window has no umid → matched by exact path (item.relaunch.command or item.path).
-export function getWindowsForItem(
-  item: AppOrFileWegItem,
-  interactables: UserAppWindow[],
-): UserAppWindow[] {
-  const itemCommand = item.relaunch?.command.toLowerCase();
-  const itemPath = item.path.toLowerCase();
-
-  return interactables.filter((w) => {
-    if (w.umid) {
-      // Rule 1: window carries a umid — only an item with the exact same umid may claim it.
-      return item.umid === w.umid;
-    }
-    // Rule 2: window has no umid — match by path.
-    const winPath = w.process.path?.toLowerCase() ?? "";
-    return winPath !== "" && (itemCommand === winPath || itemPath === winPath);
-  });
-}
-
 const widget = Widget.getCurrent();
 const selfWinId = await invoke(SeelenCommand.GetSelfWindowId);
 
 export const $interactables = lazySignal(() => invoke(SeelenCommand.GetUserAppWindows));
 subscribe(SeelenEvent.UserAppWindowsChanged, $interactables.setByPayload);
+
+export const $top_interactable_window = computed(() =>
+  $interactables.value
+    .toSorted((a, b) => b.lastForegroundAt - a.lastForegroundAt)
+    .find((w) => w.monitor === widget.decoded.monitorId && !w.isIconic)
+);
 
 export const $previews = lazySignal(() => invoke(SeelenCommand.GetUserAppWindowsPreviews));
 subscribe(SeelenEvent.UserAppWindowsPreviewsChanged, $previews.setByPayload);
@@ -56,17 +38,15 @@ subscribe(SeelenEvent.GlobalFocusChanged, (e) => {
   }
 });
 
+export const $widget_statuses = lazySignal(() => invoke(SeelenCommand.DebugGetWidgetsStatuses));
+subscribe(SeelenEvent.WidgetDebugInfoChanged, $widget_statuses.setByPayload);
+
 await Promise.all([
   $interactables.init(),
   $previews.init(),
   $focused.init(),
+  $widget_statuses.init(),
 ]);
-
-export const $isSomeFullscreenOnMonitor = computed(() => {
-  return $interactables.value.some(
-    (w) => !w.isIconic && w.isFullscreen && w.monitor === widget.decoded.monitorId,
-  );
-});
 
 export const $is_dock_overlapped = computed(() => {
   const focused = $focused.value;
@@ -92,3 +72,27 @@ export const $is_dock_overlapped = computed(() => {
 
   return true;
 });
+
+// on change of this function update src\background\widgets\weg\cli.rs too.
+//
+// Grouping rules:
+//   1. Window has a umid  → matched only by exact umid equality. Path is not used.
+//      If no item has that umid, a new item will be created for it.
+//   2. Window has no umid → matched by exact path (item.relaunch.command or item.path).
+export function getWindowsForItem(
+  item: AppOrFileWegItem,
+  interactables: UserAppWindow[],
+): UserAppWindow[] {
+  const itemCommand = item.relaunch?.command.toLowerCase();
+  const itemPath = item.path.toLowerCase();
+
+  return interactables.filter((w) => {
+    if (w.umid) {
+      // Rule 1: window carries a umid — only an item with the exact same umid may claim it.
+      return item.umid === w.umid;
+    }
+    // Rule 2: window has no umid — match by path.
+    const winPath = w.process.path?.toLowerCase() ?? "";
+    return winPath !== "" && (itemCommand === winPath || itemPath === winPath);
+  });
+}

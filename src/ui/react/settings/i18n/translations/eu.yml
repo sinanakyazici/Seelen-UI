@@ -84,6 +84,9 @@ devtools:
   load: Zamatu
   settings_file: Ezarpenak fitxategia
   shared_components: SLUren osagai estandarrak
+  simulate_dialog:
+    label: Simulatu elkarrizketa
+    trigger: Trigger
   simulate_perm:
     label: Simulatu widget-aren baimen-eskaera
     result_allowed: ✓ Emandako baimena
@@ -275,6 +278,7 @@ sides:
   top: Tontor
 toolbar:
   auto_hide: Ezkutatu automatikoa
+  auto_hide_touch_disabled: Ezkutatze automatikoa ez dago erabilgarri ukipen-pantailako gailuetan
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku
@@ -303,10 +307,12 @@ wall:
   coverage_pause_threshold: Pausatu atalasea (leihoaren estaldura)
   create: Sortu
   create_collection: Sortu bilduma
-  default_collection: Bilduma lehenetsia
+  default_collection: Horma-paper edo bilduma lehenetsia
+  default_collection_description: >-
+    Gainbatze-multzo zehatzik ez duten monitore eta lan-eremu guztietan
+    aplikatzen da.
   delete_collection: Ezabatu bilduma
   edit_collection: Editatu bilduma
-  enable: Gaitu horma-kudeatzailea
   extend: Lehen mailakoa luzatzea
   fit:
     contain: Eduki
@@ -328,6 +334,7 @@ wall:
   overlayColor: Overlay kolorea
   overlayMixBlendMode: Overlay nahastu nahasketa modua
   per_monitor: Monitore bakoitzeko
+  per_monitor_config: Monitore bakoitzeko konfigurazioa
   playback: Erreproduzitzeko abiadura
   position:
     bottom: Azpi
@@ -345,15 +352,16 @@ wall:
   use_accent_color: Erabili horma-paperaren azentu kolorea
   wallpaper_collection: Horma-irudi bilduma
   wallpaper_settings: Horma-paperaren ezarpenak
+  wallpapers: Horma-irudiak
   wallpapers_and_collections: Horma-irudiak eta bildumak
   withOverlay: Gainjartzearekin
   workspace_collections: Lan-esparruko bildumak
 weg:
   auto_hide: Ezkutatu automatikoa
+  auto_hide_touch_disabled: Ezkutatze automatikoa ez dago erabilgarri ukipen-pantailako gailuetan
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku
-  enable: Gaitu kaia / ataza barra
   filtering: Elementua iragaztea
   gap: Tarte
   hide_mode:
@@ -424,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: Ordenatu (berrantolatu leihoak arrastatu bitartean)
     swap: Trukatu (trukatu leihoak arrastatu amaieran)
-  enable: Gaitu fitxa leiho kudeatzailea
   layout: Diseinu
   resize_delta: RETIZE DELTA (%)
   space_between_containers: Edukiontzien arteko espazioa

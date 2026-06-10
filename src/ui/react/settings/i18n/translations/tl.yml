@@ -87,6 +87,9 @@ devtools:
   load: Mag -load
   settings_file: File ng mga setting
   shared_components: Mga Pamantayang Bahagi ng SLU
+  simulate_dialog:
+    label: Gayahin ang Dialog
+    trigger: Trigger
   simulate_perm:
     label: Gayahin ang Kahilingan ng Pahintulot sa Widget
     result_allowed: ✓ Ipinagkaloob ang pahintulot
@@ -285,6 +288,7 @@ sides:
   top: Tuktok
 toolbar:
   auto_hide: Auto itago
+  auto_hide_touch_disabled: Hindi available ang auto hide sa mga touch screen device
   delay_to_hide: Delay sa pagtatago
   delay_to_show: Pagkaantala sa pagpapakita
   dock_side: Posisyon
@@ -313,10 +317,12 @@ wall:
   coverage_pause_threshold: I-pause ang threshold (saklaw sa bintana)
   create: Lumikha
   create_collection: Lumikha ng Koleksyon
-  default_collection: Default na Koleksyon
+  default_collection: Default na wallpaper o koleksyon
+  default_collection_description: >-
+    Inilapat sa lahat ng monitor at workspace na walang partikular na set ng
+    override.
   delete_collection: Tanggalin ang Koleksyon
   edit_collection: I-edit ang Koleksyon
-  enable: Paganahin ang manager ng wallpaper
   extend: Palawakin ang pangunahin
   fit:
     contain: Naglalaman
@@ -338,6 +344,7 @@ wall:
   overlayColor: Kulay ng overlay
   overlayMixBlendMode: Overlay Mix Blend Mode
   per_monitor: Bawat monitor
+  per_monitor_config: Bawat-Monitor Configuration
   playback: Bilis ng pag -playback
   position:
     bottom: Ilalim
@@ -355,15 +362,16 @@ wall:
   use_accent_color: Gumamit ng kulay ng accent ng wallpaper
   wallpaper_collection: Koleksyon ng Wallpaper
   wallpaper_settings: Mga Setting ng Wallpaper
+  wallpapers: Mga Wallpaper
   wallpapers_and_collections: Mga Wallpaper at Koleksyon
   withOverlay: Na may overlay
   workspace_collections: Mga Koleksyon ng Workspace
 weg:
   auto_hide: Auto itago
+  auto_hide_touch_disabled: Hindi available ang auto hide sa mga touch screen device
   delay_to_hide: Delay sa pagtatago
   delay_to_show: Pagkaantala sa pagpapakita
   dock_side: Posisyon
-  enable: Paganahin ang pantalan/taskbar
   filtering: Pag -filter ng item
   gap: Gap
   hide_mode:
@@ -435,7 +443,6 @@ wm:
   drag_behavior_options:
     sort: Pagbukud-bukurin (muling ayusin ang mga bintana habang nagda-drag)
     swap: Magpalit (magpalit ng mga bintana sa dulo ng pag-drag)
-  enable: Paganahin ang manager ng window window
   layout: Layout
   resize_delta: Baguhin ang laki ng Delta (%)
   space_between_containers: Puwang sa pagitan ng mga lalagyan

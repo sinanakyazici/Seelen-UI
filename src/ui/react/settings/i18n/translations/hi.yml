@@ -85,6 +85,9 @@ devtools:
   load: भार
   settings_file: सेटिंग संचिका
   shared_components: एसएलयू मानक घटक
+  simulate_dialog:
+    label: संवाद का अनुकरण करें
+    trigger: चालू कर देना
   simulate_perm:
     label: विजेट अनुमति अनुरोध का अनुकरण करें
     result_allowed: ✓ अनुमति दी गई
@@ -279,6 +282,7 @@ sides:
   top: शीर्ष
 toolbar:
   auto_hide: खुद से छिपना
+  auto_hide_touch_disabled: टच स्क्रीन डिवाइस पर ऑटो हाइड उपलब्ध नहीं है
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
   dock_side: पद
@@ -307,10 +311,12 @@ wall:
   coverage_pause_threshold: सीमा रोकें (विंडो कवरेज)
   create: बनाएं
   create_collection: संग्रह बनाएँ
-  default_collection: डिफ़ॉल्ट संग्रह
+  default_collection: डिफ़ॉल्ट वॉलपेपर या संग्रह
+  default_collection_description: >-
+    यह उन सभी मॉनिटरों और कार्यस्थानों पर लागू होता है जिनमें कोई विशिष्ट
+    ओवरराइड सेट नहीं होता है।
   delete_collection: संग्रह हटाएँ
   edit_collection: संग्रह संपादित करें
-  enable: वॉलपेपर प्रबंधक सक्षम करें
   extend: प्राथमिक बढ़ाएँ
   fit:
     contain: रोकना
@@ -332,6 +338,7 @@ wall:
   overlayColor: ओवरले रंग
   overlayMixBlendMode: ओवरले मिश्रण मिश्रण मोड
   per_monitor: प्रति मॉनिटर
+  per_monitor_config: प्रति-मॉनिटर कॉन्फ़िगरेशन
   playback: प्लेबैक गति
   position:
     bottom: तल
@@ -349,15 +356,16 @@ wall:
   use_accent_color: वॉलपेपर एक्सेंट रंग का प्रयोग करें
   wallpaper_collection: वॉलपेपर संग्रह
   wallpaper_settings: वॉलपेपर सेटिंग्स
+  wallpapers: वॉलपेपर
   wallpapers_and_collections: वॉलपेपर और संग्रह
   withOverlay: ओवरले के साथ
   workspace_collections: कार्यक्षेत्र संग्रह
 weg:
   auto_hide: खुद से छिपना
+  auto_hide_touch_disabled: टच स्क्रीन डिवाइस पर ऑटो हाइड उपलब्ध नहीं है
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
   dock_side: पद
-  enable: डॉक/टास्कबार सक्षम करें
   filtering: आइटम फ़िल्टरिंग
   gap: अंतर
   hide_mode:
@@ -429,7 +437,6 @@ wm:
   drag_behavior_options:
     sort: क्रमबद्ध करें (खींचते समय विंडोज़ को पुनः व्यवस्थित करें)
     swap: स्वैप (ड्रैग एंड पर विंडोज़ स्वैप करें)
-  enable: टाइलिंग विंडो मैनेजर सक्षम करें
   layout: लेआउट
   resize_delta: डेल्टा का आकार बदलें (%)
   space_between_containers: कंटेनरों के बीच की जगह

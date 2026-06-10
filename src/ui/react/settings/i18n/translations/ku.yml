@@ -82,6 +82,9 @@ devtools:
   load: Dawetkirin
   settings_file: Pelê Mîhengan
   shared_components: Pêkhateyên Standard SLU
+  simulate_dialog:
+    label: Simulate Dialog
+    trigger: Kişok
   simulate_perm:
     label: Daxwaza Destûra Widgetê simule bikin
     result_allowed: ✓ Destûr hat dayîn
@@ -275,6 +278,7 @@ sides:
   top: Kop
 toolbar:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Veşartina otomatîkî li ser cîhazên ekrana destikê peyda nabe
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş
@@ -303,10 +307,12 @@ wall:
   coverage_pause_threshold: Bendavê rawestanê (vegirtina pencereyê)
   create: Xûliqandin
   create_collection: Koleksiyonê çêbikin
-  default_collection: Berhevoka Bingehîn
+  default_collection: Dîwar an berhevoka xwerû
+  default_collection_description: >-
+    Ji bo hemî çavdêr û cîhên xebatê yên ku xwedan sazûmanek berbiçav a taybetî
+    ne têne sepandin.
   delete_collection: Koleksiyonê jêbirin
   edit_collection: Edit Collection
-  enable: Gerînendeyê Wallpaper çalak bike
   extend: Seretayî dirêj bikin
   fit:
     contain: Bêdengman
@@ -328,6 +334,7 @@ wall:
   overlayColor: Rengê dorpêçkirî
   overlayMixBlendMode: Overlay Mode Blend
   per_monitor: Per monitor
+  per_monitor_config: Veavakirina Per-Monitor
   playback: Leza Playback
   position:
     bottom: Erd
@@ -345,15 +352,16 @@ wall:
   use_accent_color: Rengê devoka dîwarê dîwar bikar bînin
   wallpaper_collection: Collection Wallpaper
   wallpaper_settings: Mîhengên Wallpaper
+  wallpapers: Wallpapers
   wallpapers_and_collections: Wallpaper & Collections
   withOverlay: Bi sernav
   workspace_collections: Koleksiyonên Cihê Xebatê
 weg:
   auto_hide: Auto Hide
+  auto_hide_touch_disabled: Veşartina otomatîkî li ser cîhazên ekrana destikê peyda nabe
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş
-  enable: Dock / Taskbar çalak bikin
   filtering: Filterkirina tiştê
   gap: Qelîştok
   hide_mode:
@@ -425,7 +433,6 @@ wm:
   drag_behavior_options:
     sort: Rêzkirin (dema dikişîne paceyan ji nû ve rêz bike)
     swap: Swap (paceyên li ser dawiya kaşkirinê biguherînin)
-  enable: Gerînendeyê Windowê ya Tilî bikar bînin
   layout: Rêz
   resize_delta: Delta Resize (%)
   space_between_containers: Cîhê di navbera konteyneran de

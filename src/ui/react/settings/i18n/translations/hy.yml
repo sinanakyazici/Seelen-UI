@@ -85,6 +85,9 @@ devtools:
   load: Բեռ
   settings_file: Կարգավորումներ ֆայլ
   shared_components: SLU ստանդարտ բաղադրիչներ
+  simulate_dialog:
+    label: Երկխոսության մոդելավորում
+    trigger: ձգան
   simulate_perm:
     label: Վիդջեթի թույլտվության հայտի նմանակում
     result_allowed: ✓ Տրված է թույլտվություն
@@ -276,6 +279,7 @@ sides:
   top: Գագաթ
 toolbar:
   auto_hide: Ավտոմատ թաքցնել
+  auto_hide_touch_disabled: Ավտոմատ թաքցնելը հասանելի չէ սենսորային էկրանով սարքերում
   delay_to_hide: Հետաձգել թաքցնելը
   delay_to_show: Ցուցադրման ուշացում
   dock_side: Դիրք
@@ -304,10 +308,12 @@ wall:
   coverage_pause_threshold: Դադարի շեմ (պատուհանի ծածկույթ)
   create: Ստեղծել
   create_collection: Ստեղծել Հավաքածու
-  default_collection: Կանխադրված հավաքածու
+  default_collection: Կանխադրված պաստառ կամ հավաքածու
+  default_collection_description: >-
+    Կիրառվում է բոլոր մոնիտորների և աշխատատեղերի վրա, որոնք չունեն հատուկ
+    անտեսման հավաքածու:
   delete_collection: Ջնջել հավաքածուն
   edit_collection: Խմբագրել հավաքածուն
-  enable: Միացրեք Պաստառների կառավարիչը
   extend: Ընդլայնել առաջնային
   fit:
     contain: Պարունակել
@@ -329,6 +335,7 @@ wall:
   overlayColor: Ծածկույթի գույն
   overlayMixBlendMode: Ծածկույթի խառնուրդի խառնուրդի ռեժիմ
   per_monitor: Մեկ մոնիտորի համար
+  per_monitor_config: Մեկ մոնիտորի կոնֆիգուրացիա
   playback: Նվագարկման արագություն
   position:
     bottom: Հատակից
@@ -346,15 +353,16 @@ wall:
   use_accent_color: Օգտագործեք պաստառի շեշտադրման գույնը
   wallpaper_collection: Պաստառների հավաքածու
   wallpaper_settings: Պաստառի կարգավորումներ
+  wallpapers: Պաստառներ
   wallpapers_and_collections: Պաստառներ և հավաքածուներ
   withOverlay: Ծածկով
   workspace_collections: Աշխատանքային տարածքների հավաքածուներ
 weg:
   auto_hide: Ավտոմատ թաքցնել
+  auto_hide_touch_disabled: Ավտոմատ թաքցնելը հասանելի չէ սենսորային էկրանով սարքերում
   delay_to_hide: Հետաձգել թաքցնելը
   delay_to_show: Ցուցադրման ուշացում
   dock_side: Դիրք
-  enable: Միացնել Dock / Taskbar
   filtering: Նյութի զտիչ
   gap: Բացվածք
   hide_mode:
@@ -425,7 +433,6 @@ wm:
   drag_behavior_options:
     sort: Տեսակավորել (վերադասավորել պատուհանները քաշելիս)
     swap: Փոխանակում (փոխանակեք պատուհանները՝ քաշելու վերջում)
-  enable: Միացնել սալիկապատման պատուհանի կառավարիչը
   layout: Դասավորություն
   resize_delta: Չափափոխել դելտան (%)
   space_between_containers: Տիեզերք բեռնարկղերի միջեւ

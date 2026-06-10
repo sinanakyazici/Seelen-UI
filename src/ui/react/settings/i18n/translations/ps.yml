@@ -83,6 +83,9 @@ devtools:
   load: بار
   settings_file: د امستنې دوتنه
   shared_components: د SLU معیاري اجزا
+  simulate_dialog:
+    label: سمولیټ ډیالوګ
+    trigger: محرک
   simulate_perm:
     label: د ویجټ اجازې غوښتنه سمول
     result_allowed: ✓ اجازه ورکړل شوه
@@ -267,6 +270,7 @@ sides:
   top: سر
 toolbar:
   auto_hide: آٹو پټول
+  auto_hide_touch_disabled: د ټچ سکرین وسیلو کې اتومات پټول شتون نلري
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت
@@ -295,10 +299,10 @@ wall:
   coverage_pause_threshold: د وقفې حد (د کړکۍ پوښښ)
   create: جوړ کړئ
   create_collection: ټولګه جوړه کړئ
-  default_collection: ډیفالټ ټولګه
+  default_collection: ډیفالټ وال پیپر یا ټولګه
+  default_collection_description: په ټولو څارونکو او کاري ځایونو کې پلي کیږي چې ځانګړي اوورایډ سیټ نلري.
   delete_collection: ټولګه ړنګه کړئ
   edit_collection: ټولګه ترمیم کړئ
-  enable: د وال پیپر مدیر فعال کړئ
   extend: لومړني پراخ کړئ
   fit:
     contain: پکې شامل دي
@@ -320,6 +324,7 @@ wall:
   overlayColor: ډیر رنګ رنګ
   overlayMixBlendMode: د انکشکې مخلوط حالت
   per_monitor: د څارنې لپاره
+  per_monitor_config: د څارنې ترتیب
   playback: د بیا غږولو سرعت
   position:
     bottom: ښکته
@@ -337,15 +342,16 @@ wall:
   use_accent_color: د وال پیپر تلفظ رنګ وکاروئ
   wallpaper_collection: د وال پیپر ټولګه
   wallpaper_settings: د وال پیپر ترتیبات
+  wallpapers: وال پیپرونه
   wallpapers_and_collections: وال پیپرونه او ټولګه
   withOverlay: د
   workspace_collections: د کار ځای ټولګه
 weg:
   auto_hide: آٹو پټول
+  auto_hide_touch_disabled: د ټچ سکرین وسیلو کې اتومات پټول شتون نلري
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت
-  enable: دوک / ټاسک بار فعال کړئ
   filtering: توکی فلټر کول
   gap: تشې
   hide_mode:
@@ -415,7 +421,6 @@ wm:
   drag_behavior_options:
     sort: ترتیب کړئ (د ځړولو پرمهال کړکۍ بیا تنظیم کړئ)
     swap: تبادله (د ډریګ په پای کې کړکۍ بدلول)
-  enable: د ټی بایټس کړکۍ مدیر فعال کړئ
   layout: ترتیب
   resize_delta: د ډیلټا (٪) ریموټ کړئ
   space_between_containers: د کانتینرونو ترمینځ ځای

@@ -2,8 +2,7 @@ import { listen } from "@tauri-apps/api/event";
 import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
 import type { SysTrayIcon, SysTrayIconId, ToolbarItem, ToolbarItem2 } from "@seelen-ui/lib/types";
 import { useEffect, useState } from "preact/hooks";
-import { baseItem } from "../shared/state/default.ts";
-import { $toolbar_dragging, $toolbar_state } from "../shared/state/items.ts";
+import { $toolbar_dragging, $toolbar_state, baseItem } from "../shared/state/items.ts";
 
 const PINNED_TRAY_CHANGED_EVENT = "seelen:pinned-tray-icons-changed";
 const GET_PINNED_TRAY_ICONS_COMMAND = "get_pinned_tray_icons";

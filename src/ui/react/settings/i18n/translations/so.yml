@@ -86,6 +86,9 @@ devtools:
   load: Xammuul
   settings_file: Faylka Dejinta
   shared_components: Qaybaha caadiga ah ee SLU
+  simulate_dialog:
+    label: Isku day wada hadal
+    trigger: Kicin
   simulate_perm:
     label: Isku day Codsiga Ogolaanshaha Widget
     result_allowed: Ogolaanshaha waa la bixiyay
@@ -282,6 +285,7 @@ sides:
   top: Dusha kore
 toolbar:
   auto_hide: Auto qaraha
+  auto_hide_touch_disabled: Qarinta tooska ah lagama heli karo aaladaha shaashadda taabashada
   delay_to_hide: Dib u dhig si loo qariyo
   delay_to_show: Dib u dhig si loo muujiyo
   dock_side: Meel
@@ -310,10 +314,12 @@ wall:
   coverage_pause_threshold: Jooji xadka (daaqadda daboolida)
   create: Abuur
   create_collection: Abuur Ururinta
-  default_collection: Ururinta asalka ah
+  default_collection: Warqadda gidaarka ah ama ururinta asalka ah
+  default_collection_description: >-
+    Lagu dabaqay dhammaan kormeerayaasha iyo goobaha shaqada ee aan lahayn meel
+    gaar ah oo burinta.
   delete_collection: Tirtir Ururinta
   edit_collection: Wax ka beddel Ururinta
-  enable: Awood u yeelo maamulaha derbiga
   extend: Kordhi aasaasiga
   fit:
     contain: Ka koobasho
@@ -335,6 +341,7 @@ wall:
   overlayColor: Midab ka sarreeya
   overlayMixBlendMode: Isku-darka iskudarka isku-darka
   per_monitor: Kormeere kasta
+  per_monitor_config: Kor-ku-habaynta
   playback: Xawaaraha ciyaarta
   position:
     bottom: Hoos
@@ -352,15 +359,16 @@ wall:
   use_accent_color: Isticmaal midabka lahjadda gidaarka
   wallpaper_collection: Ururinta Warqadaha
   wallpaper_settings: Dejinta Warqadaha
+  wallpapers: Wallpapers
   wallpapers_and_collections: Warqadaha & Ururinta
   withOverlay: Iyadoo lagu daboolay
   workspace_collections: Ururinta Goobta Shaqada
 weg:
   auto_hide: Auto qaraha
+  auto_hide_touch_disabled: Qarinta tooska ah lagama heli karo aaladaha shaashadda taabashada
   delay_to_hide: Dib u dhig si loo qariyo
   delay_to_show: Dib u dhig si loo muujiyo
   dock_side: Meel
-  enable: Kartida DOCK / Turniinka
   filtering: Shaandhaynta sheyga
   gap: Dalool
   hide_mode:
@@ -432,7 +440,6 @@ wm:
   drag_behavior_options:
     sort: Kala sooc (dib u hagaaji daaqadaha markaad jiidanayso)
     swap: Isku beddel (ku beddel daaqadaha dhamaadka jiida)
-  enable: U oggolow maamulaha daaqadda daaqadda
   layout: Khariidad
   resize_delta: Dib u dhig Delta (%)
   space_between_containers: Meel bannaan oo u dhexeeya weelka

@@ -85,6 +85,9 @@ devtools:
   load: Obciążenie
   settings_file: Plik ustawień
   shared_components: Standardowe komponenty SLU
+  simulate_dialog:
+    label: Symuluj okno dialogowe
+    trigger: Spust
   simulate_perm:
     label: Symuluj żądanie pozwolenia na widget
     result_allowed: ✓ Zezwolenie udzielone
@@ -280,6 +283,9 @@ sides:
   top: Góra
 toolbar:
   auto_hide: Automatyczne ukrywanie
+  auto_hide_touch_disabled: >-
+    Funkcja automatycznego ukrywania nie jest dostępna na urządzeniach z ekranem
+    dotykowym
   delay_to_hide: Opóźnienie ukrycia
   delay_to_show: Opóźnienie wysunięcia
   dock_side: Pozycja
@@ -308,10 +314,12 @@ wall:
   coverage_pause_threshold: Próg pauzy (zasłonięcie okna)
   create: Tworzyć
   create_collection: Utwórz kolekcję
-  default_collection: Kolekcja domyślna
+  default_collection: Domyślna tapeta lub kolekcja
+  default_collection_description: >-
+    Stosowane do wszystkich monitorów i obszarów roboczych, które nie mają
+    określonego zestawu zastąpień.
   delete_collection: Usuń kolekcję
   edit_collection: Edytuj kolekcję
-  enable: Włącz menedżer tapet
   extend: Rozszerz podstawowy
   fit:
     contain: Zawierać
@@ -333,6 +341,7 @@ wall:
   overlayColor: Kolor nakładki
   overlayMixBlendMode: Tryb mieszania nakładki
   per_monitor: Na monitor
+  per_monitor_config: Konfiguracja na monitor
   playback: Prędkość odtwarzania
   position:
     bottom: Dół
@@ -350,15 +359,18 @@ wall:
   use_accent_color: Użyj koloru akcentującego tapetę
   wallpaper_collection: Kolekcja tapet
   wallpaper_settings: Ustawienia tapety
+  wallpapers: Tapety
   wallpapers_and_collections: Tapety i kolekcje
   withOverlay: Z nakładką
   workspace_collections: Kolekcje obszaru roboczego
 weg:
   auto_hide: Automatyczne ukrywanie
+  auto_hide_touch_disabled: >-
+    Funkcja automatycznego ukrywania nie jest dostępna na urządzeniach z ekranem
+    dotykowym
   delay_to_hide: Opóźnienie ukrycia
   delay_to_show: Opóźnienie wysunięcia
   dock_side: Pozycja
-  enable: Włącz dok/pasek zadań
   filtering: Filtrowanie pozycji
   gap: Przerwa
   hide_mode:
@@ -428,7 +440,6 @@ wm:
   drag_behavior_options:
     sort: Sortuj (zmieniaj kolejność okien podczas przeciągania)
     swap: Zamień (zamień okna po przeciągnięciu)
-  enable: Włącz menedżer rozmieszczenia okien
   layout: Układ
   resize_delta: Delta rozmiaru (%)
   space_between_containers: Przestrzeń między oknami

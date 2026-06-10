@@ -84,6 +84,9 @@ devtools:
   load: belastning
   settings_file: Indstillinger fil
   shared_components: SLU standardkomponenter
+  simulate_dialog:
+    label: Simuler dialog
+    trigger: Udløser
   simulate_perm:
     label: Simuler anmodning om widgettilladelse
     result_allowed: ✓ Tilladelse givet
@@ -272,6 +275,7 @@ sides:
   top: Top
 toolbar:
   auto_hide: Auto skjul
+  auto_hide_touch_disabled: Automatisk skjul er ikke tilgængelig på enheder med berøringsskærm
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
   dock_side: Position
@@ -300,10 +304,12 @@ wall:
   coverage_pause_threshold: Pausegrænse (vinduesdækning)
   create: Skabe
   create_collection: Opret samling
-  default_collection: Standard samling
+  default_collection: Standard tapet eller samling
+  default_collection_description: >-
+    Anvendes på alle skærme og arbejdsområder, der ikke har et specifikt
+    tilsidesættelsessæt.
   delete_collection: Slet samling
   edit_collection: Rediger samling
-  enable: Aktivér tapet manager
   extend: Forlæng primær
   fit:
     contain: Indeholder
@@ -325,6 +331,7 @@ wall:
   overlayColor: Overlay-farve
   overlayMixBlendMode: Overlay Mix Blend Mode
   per_monitor: Per skærm
+  per_monitor_config: Konfiguration pr. skærm
   playback: Afspilningshastighed
   position:
     bottom: I bunden
@@ -342,15 +349,16 @@ wall:
   use_accent_color: Brug tapet accentfarve
   wallpaper_collection: Tapet samling
   wallpaper_settings: Baggrundsindstillinger
+  wallpapers: Baggrunde
   wallpapers_and_collections: Baggrunde og samlinger
   withOverlay: Med overlay
   workspace_collections: Arbejdsrumssamlinger
 weg:
   auto_hide: Auto skjul
+  auto_hide_touch_disabled: Automatisk skjul er ikke tilgængelig på enheder med berøringsskærm
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
   dock_side: Position
-  enable: Aktivér dock/proceslinje
   filtering: Filtrering af varer
   gap: Gap
   hide_mode:
@@ -420,7 +428,6 @@ wm:
   drag_behavior_options:
     sort: Sorter (omarranger vinduer, mens du trækker)
     swap: Swap (byt vinduer ved træk-enden)
-  enable: Aktivér flisevindue manager
   layout: Layout
   resize_delta: Ændre størrelse på Delta (%)
   space_between_containers: Rum mellem containere

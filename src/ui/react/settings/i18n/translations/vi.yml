@@ -83,6 +83,9 @@ devtools:
   load: Trọng tải
   settings_file: Cài đặt tập tin
   shared_components: Thành phần tiêu chuẩn SLU
+  simulate_dialog:
+    label: Hộp thoại mô phỏng
+    trigger: Cò súng
   simulate_perm:
     label: Mô phỏng yêu cầu cấp phép widget
     result_allowed: ✓ Đã được cấp phép
@@ -273,6 +276,7 @@ sides:
   top: Đứng đầu
 toolbar:
   auto_hide: Tự động ẩn
+  auto_hide_touch_disabled: Tự động ẩn không khả dụng trên các thiết bị màn hình cảm ứng
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ
@@ -301,10 +305,12 @@ wall:
   coverage_pause_threshold: Ngưỡng tạm dừng (phạm vi bao phủ cửa sổ)
   create: Tạo nên
   create_collection: Tạo bộ sưu tập
-  default_collection: Bộ sưu tập mặc định
+  default_collection: Hình nền hoặc bộ sưu tập mặc định
+  default_collection_description: >-
+    Áp dụng cho tất cả màn hình và không gian làm việc không có bộ ghi đè cụ
+    thể.
   delete_collection: Xóa bộ sưu tập
   edit_collection: Chỉnh sửa bộ sưu tập
-  enable: Bật trình quản lý hình nền
   extend: Mở rộng chính
   fit:
     contain: Bao gồm
@@ -326,6 +332,7 @@ wall:
   overlayColor: Màu lớp phủ
   overlayMixBlendMode: Chế độ trộn trộn lớp phủ
   per_monitor: Mỗi màn hình
+  per_monitor_config: Cấu hình trên mỗi màn hình
   playback: Tốc độ phát lại
   position:
     bottom: Đáy
@@ -343,15 +350,16 @@ wall:
   use_accent_color: Sử dụng màu nhấn của giấy dán tường
   wallpaper_collection: Bộ sưu tập hình nền
   wallpaper_settings: Cài đặt hình nền
+  wallpapers: Hình nền
   wallpapers_and_collections: Hình nền & Bộ sưu tập
   withOverlay: Với lớp phủ
   workspace_collections: Bộ sưu tập không gian làm việc
 weg:
   auto_hide: Tự động ẩn
+  auto_hide_touch_disabled: Tự động ẩn không khả dụng trên các thiết bị màn hình cảm ứng
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ
-  enable: Bật Dock/Thanh tác vụ
   filtering: Lọc vật phẩm
   gap: Khoảng cách
   hide_mode:
@@ -422,7 +430,6 @@ wm:
   drag_behavior_options:
     sort: Sắp xếp (sắp xếp lại các cửa sổ trong khi kéo)
     swap: Hoán đổi (hoán đổi cửa sổ ở đầu kéo)
-  enable: Bật trình quản lý cửa sổ ốp lát
   layout: Cách trình bày
   resize_delta: Thay đổi kích thước delta (%)
   space_between_containers: Không gian giữa các container

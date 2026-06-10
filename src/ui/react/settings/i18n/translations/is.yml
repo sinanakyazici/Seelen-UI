@@ -84,6 +84,9 @@ devtools:
   load: Hlaða
   settings_file: Stillingarskrá
   shared_components: SLU staðalbúnaður
+  simulate_dialog:
+    label: Herma Dialog
+    trigger: Kveikja
   simulate_perm:
     label: Líktu eftir beiðni um leyfi fyrir græju
     result_allowed: ✓ Leyfi veitt
@@ -270,6 +273,7 @@ sides:
   top: Efst
 toolbar:
   auto_hide: Sjálfvirk fela
+  auto_hide_touch_disabled: Sjálfvirk fela er ekki í boði á snertiskjátækjum
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
   dock_side: Staða
@@ -298,10 +302,10 @@ wall:
   coverage_pause_threshold: Þröskuldur fyrir hlé (gluggaþekju)
   create: Búa til
   create_collection: Búðu til safn
-  default_collection: Sjálfgefið safn
+  default_collection: Sjálfgefið veggfóður eða safn
+  default_collection_description: Notað á alla skjái og vinnusvæði sem eru ekki með sérstakt yfirskriftarsett.
   delete_collection: Eyða safni
   edit_collection: Breyta safni
-  enable: Virkja veggfóðursstjóra
   extend: Framlengja prófkjör
   fit:
     contain: Inniheldur
@@ -323,6 +327,7 @@ wall:
   overlayColor: Yfirlag litur
   overlayMixBlendMode: Yfirlagsblöndublöndunarstilling
   per_monitor: Á hvern skjá
+  per_monitor_config: Stillingar á skjá
   playback: Spilunarhraði
   position:
     bottom: Botn
@@ -340,15 +345,16 @@ wall:
   use_accent_color: Notaðu veggfóður hreim lit
   wallpaper_collection: Veggfóður safn
   wallpaper_settings: Veggfóðurstillingar
+  wallpapers: Veggfóður
   wallpapers_and_collections: Veggfóður og söfn
   withOverlay: Með yfirlagi
   workspace_collections: Vinnusöfn
 weg:
   auto_hide: Sjálfvirk fela
+  auto_hide_touch_disabled: Sjálfvirk fela er ekki í boði á snertiskjátækjum
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
   dock_side: Staða
-  enable: Virkja bryggju/verkefnastiku
   filtering: Hlut síun
   gap: Bil
   hide_mode:
@@ -419,7 +425,6 @@ wm:
   drag_behavior_options:
     sort: Raða (endurraða gluggum á meðan þú dregur)
     swap: Skipta (skipta um glugga á dragenda)
-  enable: Virkja flísagluggastjóra
   layout: Skipulag
   resize_delta: Breyta stærð delta (%)
   space_between_containers: Rými milli gáma

@@ -84,6 +84,9 @@ devtools:
   load: લોડ
   settings_file: સેટિંગ્સ ફાઇલ
   shared_components: SLU પ્રમાણભૂત ઘટકો
+  simulate_dialog:
+    label: ડાયલોગનું અનુકરણ કરો
+    trigger: ટ્રિગર
   simulate_perm:
     label: વિજેટ પરવાનગી વિનંતીનું અનુકરણ કરો
     result_allowed: ✓ પરવાનગી આપવામાં આવી
@@ -271,6 +274,7 @@ sides:
   top: ટોચ
 toolbar:
   auto_hide: સ્વત hideપ
+  auto_hide_touch_disabled: ટચ સ્ક્રીન ઉપકરણો પર સ્વતઃ છુપાવો ઉપલબ્ધ નથી
   delay_to_hide: છુપાવવામાં વિલંબ
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ
@@ -299,10 +303,10 @@ wall:
   coverage_pause_threshold: થોભો થ્રેશોલ્ડ (વિન્ડો કવરેજ)
   create: બનાવો
   create_collection: સંગ્રહ બનાવો
-  default_collection: ડિફૉલ્ટ કલેક્શન
+  default_collection: ડિફૉલ્ટ વૉલપેપર અથવા સંગ્રહ
+  default_collection_description: બધા મોનિટર અને વર્કસ્પેસ પર લાગુ કે જેમાં ચોક્કસ ઓવરરાઇડ સેટ નથી.
   delete_collection: સંગ્રહ કાઢી નાખો
   edit_collection: સંગ્રહ સંપાદિત કરો
-  enable: વ wallp લપેપર મેનેજરને સક્ષમ કરો
   extend: પ્રાથમિક વિસ્તારો
   fit:
     contain: સમાવવું
@@ -324,6 +328,7 @@ wall:
   overlayColor: Overંચો રંગ
   overlayMixBlendMode: ઓવરલે મિક્સ બ્લેન્ડ મોડ
   per_monitor: મોનિટર દીઠ
+  per_monitor_config: પ્રતિ-મોનિટર રૂપરેખાંકન
   playback: પ્લેબેક ગતિ
   position:
     bottom: તળિયે
@@ -341,15 +346,16 @@ wall:
   use_accent_color: વૉલપેપર ઉચ્ચાર રંગનો ઉપયોગ કરો
   wallpaper_collection: વૉલપેપર કલેક્શન
   wallpaper_settings: વૉલપેપર સેટિંગ્સ
+  wallpapers: વૉલપેપર્સ
   wallpapers_and_collections: વૉલપેપર્સ અને સંગ્રહો
   withOverlay: ઓવરલે સાથે
   workspace_collections: વર્કસ્પેસ સંગ્રહો
 weg:
   auto_hide: સ્વતઃ છુપાવો
+  auto_hide_touch_disabled: ટચ સ્ક્રીન ઉપકરણો પર સ્વતઃ છુપાવો ઉપલબ્ધ નથી
   delay_to_hide: છુપાવવામાં વિલંબ
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ
-  enable: ડોક/ટાસ્કબારને સક્ષમ કરો
   filtering: બાબત
   gap: ગેપ
   hide_mode:
@@ -420,7 +426,6 @@ wm:
   drag_behavior_options:
     sort: સૉર્ટ કરો (ડ્રેગ કરતી વખતે વિંડોઝને ફરીથી ગોઠવો)
     swap: સ્વેપ (ડ્રેગ એન્ડ પર વિન્ડોઝ સ્વેપ)
-  enable: ટાઇલિંગ વિંડો મેનેજરને સક્ષમ કરો
   layout: લેઆઉટ
   resize_delta: ડેલ્ટાનું કદ બદલો (%)
   space_between_containers: કન્ટેનર વચ્ચે જગ્યા

@@ -1,5 +1,4 @@
 import { DragDropProvider, DragOverlay } from "@dnd-kit/react";
-import { KeyboardSensor, PointerSensor } from "@dnd-kit/dom";
 import { move } from "@dnd-kit/helpers";
 import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import { cx } from "libs/ui/react/utils/styling.ts";
@@ -14,22 +13,17 @@ import {
   HARDCODED_SEPARATOR_LEFT,
   HARDCODED_SEPARATOR_RIGHT,
 } from "../shared/state/items.ts";
-import { $settings } from "../shared/state/mod.ts";
+import { $settings } from "../shared/state/settings.ts";
 import { Alignment, FancyToolbarSide } from "@seelen-ui/lib/types";
 import { Group } from "./ItemsContainer.tsx";
 import { Item } from "../item/infra/infra.tsx";
-import { $hidden_by_autohide, $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
+import { $thereIsMaximizedOnBg } from "../shared/state/windows.ts";
+import { $hidden_by_autohide } from "../shared/state/hidden.ts";
 import { ShowDesktopButton } from "./CornerAction.tsx";
 import { useMainContextMenu } from "./ContextMenu.tsx";
 import { matchIds } from "../shared/utils.ts";
 import { useComputed } from "@preact/signals";
-
-// Allow dragging from buttons and other interactive elements inside items.
-// The distance activation constraint (5px) still prevents unintentional drags on click.
-const dndSensors = [
-  PointerSensor.configure({ preventActivation: () => false }),
-  KeyboardSensor,
-];
+import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd.ts";
 
 export function FancyToolbar() {
   const splittedItems = useComputed(() => {
@@ -79,7 +73,8 @@ export function FancyToolbar() {
       <BackgroundByLayersV2 />
 
       <DragDropProvider
-        sensors={dndSensors}
+        plugins={DND_PLUGINS}
+        sensors={DND_SENSORS}
         onDragStart={() => {
           $toolbar_dragging.value = true;
         }}

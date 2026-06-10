@@ -84,6 +84,9 @@ devtools:
   load: Slodze
   settings_file: Iestatīšanas fails
   shared_components: SLU standarta komponenti
+  simulate_dialog:
+    label: Simulēt dialogu
+    trigger: Sprūda
   simulate_perm:
     label: Simulēt logrīka atļaujas pieprasījumu
     result_allowed: ✓ Atļauja piešķirta
@@ -273,6 +276,7 @@ sides:
   top: Tops
 toolbar:
   auto_hide: Auto paslēpt
+  auto_hide_touch_disabled: Automātiskā slēpšana nav pieejama skārienekrāna ierīcēs
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija
@@ -301,10 +305,12 @@ wall:
   coverage_pause_threshold: Pauzes slieksnis (loga pārklājums)
   create: Izveidot
   create_collection: Izveidot kolekciju
-  default_collection: Noklusējuma kolekcija
+  default_collection: Noklusējuma fona tapete vai kolekcija
+  default_collection_description: >-
+    Attiecas uz visiem monitoriem un darbvietām, kurām nav noteiktas ignorēšanas
+    kopas.
   delete_collection: Dzēst kolekciju
   edit_collection: Rediģēt kolekciju
-  enable: Iespējot fona attēlu pārvaldnieku
   extend: Pagarināt primāro
   fit:
     contain: Satur
@@ -328,6 +334,7 @@ wall:
   overlayColor: Pārklājuma krāsa
   overlayMixBlendMode: Pārklājuma sajaukšanas režīms
   per_monitor: Uz monitoru
+  per_monitor_config: Viena monitora konfigurācija
   playback: Atskaņošanas ātrums
   position:
     bottom: Apakšējā daļa
@@ -345,15 +352,16 @@ wall:
   use_accent_color: Izmantojiet tapetes akcenta krāsu
   wallpaper_collection: Tapešu kolekcija
   wallpaper_settings: Tapetes iestatījumi
+  wallpapers: Tapetes
   wallpapers_and_collections: Tapetes un kolekcijas
   withOverlay: Ar pārklājumu
   workspace_collections: Darbvietu kolekcijas
 weg:
   auto_hide: Auto paslēpt
+  auto_hide_touch_disabled: Automātiskā slēpšana nav pieejama skārienekrāna ierīcēs
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija
-  enable: Iespējot doku/uzdevumjoslu
   filtering: Vienumu filtrēšana
   gap: Plaisa
   hide_mode:
@@ -422,7 +430,6 @@ wm:
   drag_behavior_options:
     sort: Kārtot (pārkārtot logus, velkot)
     swap: Apmainīt (apmainīt logus vilkšanas beigās)
-  enable: Iespējot flīzēšanas logu pārvaldnieku
   layout: Izkārtojums
   resize_delta: Delta izmēra maiņa (%)
   space_between_containers: Telpa starp konteineriem

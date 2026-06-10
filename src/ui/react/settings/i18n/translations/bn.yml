@@ -84,6 +84,9 @@ devtools:
   load: বোঝা
   settings_file: সেটিংস ফাইল
   shared_components: SLU স্ট্যান্ডার্ড উপাদান
+  simulate_dialog:
+    label: ডায়ালগ অনুকরণ করুন
+    trigger: ট্রিগার
   simulate_perm:
     label: উইজেট অনুমতি অনুরোধ অনুকরণ
     result_allowed: ✓ অনুমতি দেওয়া হয়েছে
@@ -276,6 +279,7 @@ sides:
   top: শীর্ষ
 toolbar:
   auto_hide: অটো আড়াল
+  auto_hide_touch_disabled: টাচ স্ক্রীন ডিভাইসে স্বয়ংক্রিয় লুকান উপলব্ধ নয়
   delay_to_hide: আড়াল করতে বিলম্ব
   delay_to_show: দেখাতে বিলম্ব
   dock_side: অবস্থান
@@ -304,10 +308,10 @@ wall:
   coverage_pause_threshold: পজ থ্রেশহোল্ড (উইন্ডো কভারেজ)
   create: তৈরি করুন
   create_collection: সংগ্রহ তৈরি করুন
-  default_collection: ডিফল্ট সংগ্রহ
+  default_collection: ডিফল্ট ওয়ালপেপার বা সংগ্রহ
+  default_collection_description: নির্দিষ্ট ওভাররাইড সেট নেই এমন সমস্ত মনিটর এবং ওয়ার্কস্পেসগুলিতে প্রযোজ্য৷
   delete_collection: সংগ্রহ মুছুন
   edit_collection: সংগ্রহ সম্পাদনা করুন
-  enable: ওয়ালপেপার ম্যানেজার সক্ষম করুন
   extend: প্রাথমিক প্রসারিত
   fit:
     contain: ধারণ করে
@@ -329,6 +333,7 @@ wall:
   overlayColor: ওভারলে রঙ
   overlayMixBlendMode: ওভারলে মিক্স মিশ্রণ মোড
   per_monitor: মনিটর প্রতি
+  per_monitor_config: প্রতি-মনিটর কনফিগারেশন
   playback: প্লেব্যাক গতি
   position:
     bottom: নীচে
@@ -346,15 +351,16 @@ wall:
   use_accent_color: ওয়ালপেপার অ্যাকসেন্ট রঙ ব্যবহার করুন
   wallpaper_collection: ওয়ালপেপার সংগ্রহ
   wallpaper_settings: ওয়ালপেপার সেটিংস
+  wallpapers: ওয়ালপেপার
   wallpapers_and_collections: ওয়ালপেপার এবং সংগ্রহ
   withOverlay: ওভারলে সহ
   workspace_collections: ওয়ার্কস্পেস সংগ্রহ
 weg:
   auto_hide: স্বয়ং চামড়া
+  auto_hide_touch_disabled: টাচ স্ক্রীন ডিভাইসে স্বয়ংক্রিয় লুকান উপলব্ধ নয়
   delay_to_hide: আড়াল করতে বিলম্ব
   delay_to_show: দেখাতে বিলম্ব
   dock_side: অবস্থান
-  enable: ডক/টাস্কবার সক্ষম করুন
   filtering: আইটেম ফিল্টারিং
   gap: ফাঁক
   hide_mode:
@@ -426,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: সাজান (ড্র্যাগ করার সময় উইন্ডোজ পুনরায় সাজান)
     swap: অদলবদল (ড্র্যাগ এন্ডে সোয়াপ উইন্ডো)
-  enable: টাইলিং উইন্ডো ম্যানেজার সক্ষম করুন
   layout: বিন্যাস
   resize_delta: পুনরায় আকার ডেল্টা (%)
   space_between_containers: পাত্রে স্থান

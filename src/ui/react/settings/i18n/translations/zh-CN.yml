@@ -74,6 +74,9 @@ devtools:
   load: 加载
   settings_file: 设置文件
   shared_components: SLU 标准组件
+  simulate_dialog:
+    label: 模拟对话
+    trigger: 扳机
   simulate_perm:
     label: 模拟Widget权限请求
     result_allowed: ✓ 已获得许可
@@ -236,6 +239,7 @@ sides:
   top: 顶部
 toolbar:
   auto_hide: 自动隐藏
+  auto_hide_touch_disabled: 自动隐藏在触摸屏设备上不可用
   delay_to_hide: 延迟隐藏
   delay_to_show: 延迟显示
   dock_side: 职位
@@ -264,10 +268,10 @@ wall:
   coverage_pause_threshold: 暂停阈值（窗口覆盖率）
   create: 创建
   create_collection: 创建集合
-  default_collection: 默认集合
+  default_collection: 默认壁纸或集合
+  default_collection_description: 应用于没有特定覆盖集的所有监视器和工作区。
   delete_collection: 删除集合
   edit_collection: 编辑集合
-  enable: 启用壁纸管理器
   extend: 扩展主屏幕
   fit:
     contain: 适应
@@ -289,6 +293,7 @@ wall:
   overlayColor: 叠加颜色
   overlayMixBlendMode: 叠加混合混合模式
   per_monitor: 每台显示器
+  per_monitor_config: 每个显示器的配置
   playback: 播放速度
   position:
     bottom: 底部
@@ -306,15 +311,16 @@ wall:
   use_accent_color: 使用壁纸强调色
   wallpaper_collection: 壁纸集合
   wallpaper_settings: 壁纸设置
+  wallpapers: 壁纸
   wallpapers_and_collections: 壁纸和收藏
   withOverlay: 启用叠加层
   workspace_collections: 工作区集合
 weg:
   auto_hide: 自动隐藏
+  auto_hide_touch_disabled: 自动隐藏在触摸屏设备上不可用
   delay_to_hide: 隐藏延迟
   delay_to_show: 显示延迟
   dock_side: 位置
-  enable: 启用 Dock / 任务栏
   filtering: 项目过滤
   gap: 间距
   hide_mode:
@@ -381,7 +387,6 @@ wm:
   drag_behavior_options:
     sort: 排序（拖动时重新排序窗口）
     swap: 交换（在拖动端交换窗口）
-  enable: 启用平铺窗口管理器
   layout: 布局
   resize_delta: 调整大小增量（%）
   space_between_containers: 容器间间距

@@ -83,6 +83,9 @@ devtools:
   load: Laadima
   settings_file: Seadete fail
   shared_components: SLU standardkomponendid
+  simulate_dialog:
+    label: Simuleeri dialoogi
+    trigger: Päästik
   simulate_perm:
     label: Simuleeri vidina loa taotlust
     result_allowed: ✓ Luba antud
@@ -271,6 +274,7 @@ sides:
   top: Tipus
 toolbar:
   auto_hide: Automaatne peida
+  auto_hide_touch_disabled: Automaatne peitmine pole puuteekraaniga seadmetes saadaval
   delay_to_hide: Viivitage peitmine
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon
@@ -299,10 +303,12 @@ wall:
   coverage_pause_threshold: Peatamise lävi (akna katvus)
   create: Loo
   create_collection: Loo kollektsioon
-  default_collection: Vaikekogu
+  default_collection: Vaike taustpilt või kogu
+  default_collection_description: >-
+    Rakendatakse kõikidele monitoridele ja tööruumidele, millel pole konkreetset
+    alistamise komplekti.
   delete_collection: Kustuta kogu
   edit_collection: Redigeeri kogu
-  enable: Luba tapeedihaldur
   extend: Laiendage esmast
   fit:
     contain: Sisaldab
@@ -324,6 +330,7 @@ wall:
   overlayColor: Kattekihi värv
   overlayMixBlendMode: Overlay Mix segamisrežiim
   per_monitor: Monitori kohta
+  per_monitor_config: Monitoripõhine konfiguratsioon
   playback: Taasesituse kiirus
   position:
     bottom: Alumine
@@ -341,15 +348,16 @@ wall:
   use_accent_color: Kasutage tapeedi aktsentvärvi
   wallpaper_collection: Tapeedikogu
   wallpaper_settings: Taustapildi seaded
+  wallpapers: Taustapildid
   wallpapers_and_collections: Taustapildid ja kollektsioonid
   withOverlay: Koos kattekihiga
   workspace_collections: Tööruumi kogud
 weg:
   auto_hide: Automaatne peida
+  auto_hide_touch_disabled: Automaatne peitmine pole puuteekraaniga seadmetes saadaval
   delay_to_hide: Viivitage peitmine
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon
-  enable: Luba dokk/ülesanderiba
   filtering: Objektide filtreerimine
   gap: Lüngad
   hide_mode:
@@ -420,7 +428,6 @@ wm:
   drag_behavior_options:
     sort: Sorteeri (akende järjestamine lohistamise ajal ümber)
     swap: Vaheta (vahetage aknad lohistamise lõpus)
-  enable: Luba plaatide aknahaldur
   layout: Paigutus
   resize_delta: Suuruse muutmine delta (%)
   space_between_containers: Konteinerite vaheline ruum

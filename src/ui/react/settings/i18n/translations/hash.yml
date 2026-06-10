@@ -66,6 +66,8 @@ devtools.install_folder: 5e374a60
 devtools.load: 2e9dda8
 devtools.settings_file: fc5b0750
 devtools.shared_components: a0dabb6c
+devtools.simulate_dialog.label: 4f1ad940
+devtools.simulate_dialog.trigger: ff8dbe0e
 devtools.simulate_perm.label: d666e044
 devtools.simulate_perm.result_allowed: 67a2d9d8
 devtools.simulate_perm.result_denied: 6dab574d
@@ -206,6 +208,7 @@ sides.left: 6f4fbe5c
 sides.right: '7e763538'
 sides.top: 2992a40
 toolbar.auto_hide: 976be4fc
+toolbar.auto_hide_touch_disabled: fe4479c4
 toolbar.delay_to_hide: 5cd7cf8c
 toolbar.delay_to_show: 3931b6bc
 toolbar.dock_side: d0fb99
@@ -230,10 +233,10 @@ wall.corrupted_wallpapers_message: ff8a246
 wall.coverage_pause_threshold: 6f256adc
 wall.create: e2112a8
 wall.create_collection: 656a66f0
-wall.default_collection: 22a069d0
+wall.default_collection: 16b8e576
+wall.default_collection_description: eaad2528
 wall.delete_collection: ee564982
 wall.edit_collection: 9854bd88
-wall.enable: 1658ea1e
 wall.extend: fe9d218b
 wall.fit.contain: 9a1bf496
 wall.fit.cover: e22fc628
@@ -254,6 +257,7 @@ wall.objectPosition: 2a0a8ff6
 wall.overlayColor: 16bde7a8
 wall.overlayMixBlendMode: a868d8b8
 wall.per_monitor: f223f13c
+wall.per_monitor_config: a0311054
 wall.playback: 293b43a0
 wall.position.bottom: fabbdb8c
 wall.position.center: 8cee2094
@@ -270,14 +274,15 @@ wall.thumbnail_generation_finished: c0572627
 wall.use_accent_color: 97fa88a8
 wall.wallpaper_collection: 276aadb8
 wall.wallpaper_settings: ef077e2d
+wall.wallpapers: '60830054'
 wall.wallpapers_and_collections: aaceb628
 wall.withOverlay: e6e749f8
 wall.workspace_collections: cd1ad7b4
 weg.auto_hide: 976be4fc
+weg.auto_hide_touch_disabled: fe4479c4
 weg.delay_to_hide: 5cd7cf8c
 weg.delay_to_show: 3931b6bc
 weg.dock_side: d0fb99
-weg.enable: 5b80a3b2
 weg.filtering: 64a103a5
 weg.gap: b7a64b14
 weg.hide_mode.always: 18be346d
@@ -330,7 +335,6 @@ wm.description: e6f1d938
 wm.drag_behavior: 17ff438
 wm.drag_behavior_options.sort: 8a162e30
 wm.drag_behavior_options.swap: 39cf55f8
-wm.enable: 363c73fc
 wm.layout: 5e6c76c
 wm.resize_delta: 5c46372a
 wm.space_between_containers: 55cac7f8

@@ -84,6 +84,9 @@ devtools:
   load: Оптеретити
   settings_file: Подешавања
   shared_components: СЛУ стандардне компоненте
+  simulate_dialog:
+    label: Симулирај дијалог
+    trigger: Триггер
   simulate_perm:
     label: Симулирајте захтев за дозволу за виџет
     result_allowed: ✓ Дозвола је дата
@@ -273,6 +276,9 @@ sides:
   top: На врху
 toolbar:
   auto_hide: Аутоматска кожа
+  auto_hide_touch_disabled: >-
+    Аутоматско сакривање није доступно на уређајима са екраном осетљивим на
+    додир
   delay_to_hide: Одложите да се сакријете
   delay_to_show: Одлагање приказивања
   dock_side: Положај
@@ -301,10 +307,12 @@ wall:
   coverage_pause_threshold: Праг за паузу (покривање прозора)
   create: Креирај
   create_collection: Направите колекцију
-  default_collection: Подразумевана колекција
+  default_collection: Подразумевана позадина или колекција
+  default_collection_description: >-
+    Примењује се на све мониторе и радне просторе који немају одређени сет за
+    замена.
   delete_collection: Избриши колекцију
   edit_collection: Уреди колекцију
-  enable: Омогућите менаџера позадина
   extend: Продужите примарни
   fit:
     contain: Садрзати
@@ -328,6 +336,7 @@ wall:
   overlayColor: Прекривање боје
   overlayMixBlendMode: Режим прекривене мешавине помешања
   per_monitor: По монитору
+  per_monitor_config: Конфигурација по монитору
   playback: Брзина репродукције
   position:
     bottom: Дно
@@ -345,15 +354,18 @@ wall:
   use_accent_color: Користите акцентну боју позадине
   wallpaper_collection: Колекција тапета
   wallpaper_settings: Подешавања позадине
+  wallpapers: Позадине
   wallpapers_and_collections: Позадине и колекције
   withOverlay: Са прекривањем
   workspace_collections: Збирке радног простора
 weg:
   auto_hide: Аутоматска кожа
+  auto_hide_touch_disabled: >-
+    Аутоматско сакривање није доступно на уређајима са екраном осетљивим на
+    додир
   delay_to_hide: Одложите да бисте се сакрили
   delay_to_show: Одлагање приказивања
   dock_side: Положај
-  enable: Омогући прикључак / траку задатака
   filtering: Филтрирање предмета
   gap: Празнина
   hide_mode:
@@ -425,7 +437,6 @@ wm:
   drag_behavior_options:
     sort: Сортирај (промени редослед прозора током превлачења)
     swap: Замени (замени прозоре на крају превлачења)
-  enable: Омогућите менаџера прозора
   layout: Изглед
   resize_delta: Промените величину Делта (%)
   space_between_containers: Простор између контејнера

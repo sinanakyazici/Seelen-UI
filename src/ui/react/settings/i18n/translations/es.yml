@@ -85,6 +85,9 @@ devtools:
   load: Carga
   settings_file: Archivo de configuración
   shared_components: Componentes estándar de SLU
+  simulate_dialog:
+    label: Simular diálogo
+    trigger: Desencadenar
   simulate_perm:
     label: Simular solicitud de permiso de widget
     result_allowed: ✓ Permiso concedido
@@ -281,6 +284,9 @@ sides:
   top: Top
 toolbar:
   auto_hide: Auto Ocultar
+  auto_hide_touch_disabled: >-
+    La ocultación automática no está disponible en dispositivos con pantalla
+    táctil
   delay_to_hide: Retrasar para ocultar
   delay_to_show: Retraso para mostrar
   dock_side: Posición
@@ -309,10 +315,12 @@ wall:
   coverage_pause_threshold: Umbral de pausa (cobertura de ventana)
   create: Crear
   create_collection: Crear colección
-  default_collection: Colección predeterminada
+  default_collection: Fondo de pantalla o colección predeterminados
+  default_collection_description: >-
+    Se aplica a todos los monitores y espacios de trabajo que no tienen un
+    conjunto de anulación específico.
   delete_collection: Eliminar colección
   edit_collection: Editar colección
-  enable: Activar el gestor de fondos de pantalla
   extend: Ampliar primaria
   fit:
     contain: Contiene
@@ -334,6 +342,7 @@ wall:
   overlayColor: Color de superposición
   overlayMixBlendMode: Superposición Mezcla Modo de fusión
   per_monitor: Por monitor
+  per_monitor_config: Configuración por monitor
   playback: Velocidad de reproducción
   position:
     bottom: Fondo
@@ -351,15 +360,18 @@ wall:
   use_accent_color: Utilice un color de acento en el papel tapiz
   wallpaper_collection: Colección de papel tapiz
   wallpaper_settings: Configuración del fondo de pantalla
+  wallpapers: Fondos de pantalla
   wallpapers_and_collections: Fondos de pantalla y colecciones
   withOverlay: Con superposición
   workspace_collections: Colecciones de espacios de trabajo
 weg:
   auto_hide: Auto Ocultar
+  auto_hide_touch_disabled: >-
+    La ocultación automática no está disponible en dispositivos con pantalla
+    táctil
   delay_to_hide: Retrasar para ocultar
   delay_to_show: Retraso para mostrar
   dock_side: Posición
-  enable: Activar Dock/Barra de tareas
   filtering: Filtrado de artículos
   gap: Brecha
   hide_mode:
@@ -430,7 +442,6 @@ wm:
   drag_behavior_options:
     sort: Ordenar (reordenar ventanas mientras arrastra)
     swap: Intercambiar (intercambiar ventanas al final del arrastre)
-  enable: Activar el gestor de ventanas en mosaico
   layout: Diseño
   resize_delta: Redimensionar Delta (%)
   space_between_containers: Espacio entre contenedores

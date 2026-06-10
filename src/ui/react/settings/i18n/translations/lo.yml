@@ -82,6 +82,9 @@ devtools:
   load: ໂຫຼດ
   settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
   shared_components: ອົງປະກອບມາດຕະຖານ SLU
+  simulate_dialog:
+    label: ຈຳລອງກ່ອງໂຕ້ຕອບ
+    trigger: ກະຕຸ້ນ
   simulate_perm:
     label: ຈໍາລອງການຮ້ອງຂໍການອະນຸຍາດ Widget
     result_allowed: ✓​ການ​ອະ​ນຸ​ຍາດ​ໃຫ້​
@@ -266,6 +269,7 @@ sides:
   top: ເທິງ
 toolbar:
   auto_hide: ຊ່ອນອັດຕະໂນມັດ
+  auto_hide_touch_disabled: ການເຊື່ອງອັດຕະໂນມັດບໍ່ສາມາດໃຊ້ໄດ້ໃນອຸປະກອນໜ້າຈໍສໍາຜັດ
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ
@@ -294,10 +298,10 @@ wall:
   coverage_pause_threshold: ຢຸດເກນຊົ່ວຄາວ (ການປົກຫຸ້ມຂອງປ່ອງຢ້ຽມ)
   create: ສ້າງ
   create_collection: ສ້າງຄໍເລັກຊັນ
-  default_collection: ການເກັບຄ່າເລີ່ມຕົ້ນ
+  default_collection: ຮູບພື້ນຫຼັງ ຫຼືຄໍເລັກຊັນເລີ່ມຕົ້ນ
+  default_collection_description: ນຳໃຊ້ກັບຈໍພາບ ແລະພື້ນທີ່ເຮັດວຽກທັງໝົດທີ່ບໍ່ມີຊຸດການລົບລ້າງສະເພາະ.
   delete_collection: ລຶບຄໍເລັກຊັນ
   edit_collection: ແກ້ໄຂຄໍເລັກຊັນ
-  enable: ເປີດໃຊ້ Wallpaper Manager
   extend: ຂະຫຍາຍຂັ້ນຕົ້ນ
   fit:
     contain: ບັນຈຸ
@@ -319,6 +323,7 @@ wall:
   overlayColor: ສີ Overlay
   overlayMixBlendMode: ຮູບແບບການຜະສົມຜະສານແບບປະສົມ
   per_monitor: ຕໍ່ຈໍພາບ
+  per_monitor_config: ການຕັ້ງຄ່າຕໍ່ Monitor
   playback: ຄວາມໄວ PlaySback
   position:
     bottom: ດ້ານລຸ່ມ
@@ -336,15 +341,16 @@ wall:
   use_accent_color: ໃຊ້ສີທີ່ເນັ້ນໃສ່ຮູບພື້ນຫຼັງ
   wallpaper_collection: ການເກັບພາບພື້ນຫຼັງ
   wallpaper_settings: ການຕັ້ງຄ່າຮູບວໍເປເປີ
+  wallpapers: ພາບພື້ນຫຼັງ
   wallpapers_and_collections: ພາບພື້ນຫຼັງ & ຄໍເລັກຊັນ
   withOverlay: ດ້ວຍການຊ້ອນກັນ
   workspace_collections: ການເກັບພື້ນທີ່ເຮັດວຽກ
 weg:
   auto_hide: ເຊື່ອງອັດຕະໂນມັດ
+  auto_hide_touch_disabled: ການເຊື່ອງອັດຕະໂນມັດບໍ່ສາມາດໃຊ້ໄດ້ໃນອຸປະກອນໜ້າຈໍສໍາຜັດ
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ
-  enable: ເປີດໃຊ້ Dock/Taskbar
   filtering: ການກັ່ນຕອງລາຍການ
   gap: ຊ່ອງຫວ່າງ
   hide_mode:
@@ -415,7 +421,6 @@ wm:
   drag_behavior_options:
     sort: ຈັດຮຽງ (ຈັດຮຽງໜ້າຕ່າງໃໝ່ໃນຂະນະທີ່ລາກ)
     swap: Swap (ສະຫຼັບປ່ອງຢ້ຽມຢູ່ປາຍລາກ)
-  enable: ເປີດໃຊ້ຜູ້ຈັດການປ່ອງຢ້ຽມກະເບື້ອງ
   layout: ແຜນຜັງ
   resize_delta: ປັບຂະໜາດ Delta (%)
   space_between_containers: ຊ່ອງຫວ່າງລະຫວ່າງບັນຈຸ

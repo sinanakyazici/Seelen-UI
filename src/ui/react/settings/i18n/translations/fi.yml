@@ -84,6 +84,9 @@ devtools:
   load: Ladata
   settings_file: Asetustiedosto
   shared_components: SLU:n vakiokomponentit
+  simulate_dialog:
+    label: Simuloi valintaikkuna
+    trigger: Laukaista
   simulate_perm:
     label: Simuloi widgetin lupapyyntö
     result_allowed: ✓ Lupa myönnetty
@@ -277,6 +280,7 @@ sides:
   top: Ylhäältä
 toolbar:
   auto_hide: Automaattinen piilo
+  auto_hide_touch_disabled: Automaattinen piilotus ei ole käytettävissä kosketusnäytöllisissä laitteissa
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
   dock_side: Asema
@@ -305,10 +309,10 @@ wall:
   coverage_pause_threshold: Taukokynnys (ikkunan peitto)
   create: Luoda
   create_collection: Luo kokoelma
-  default_collection: Oletuskokoelma
+  default_collection: Oletus taustakuva tai kokoelma
+  default_collection_description: Koskee kaikkia näyttöjä ja työtiloja, joilla ei ole tiettyä ohitusasetusta.
   delete_collection: Poista kokoelma
   edit_collection: Muokkaa kokoelmaa
-  enable: Ota taustakuvan johtaja käyttöön
   extend: Laajenna ensisijaista
   fit:
     contain: Sisältää
@@ -330,6 +334,7 @@ wall:
   overlayColor: Päällekkäisväri
   overlayMixBlendMode: Päällekkäinen sekoitus sekoitustila
   per_monitor: per monitori
+  per_monitor_config: Monitorikohtainen kokoonpano
   playback: Toistonopeus
   position:
     bottom: Pohja
@@ -347,15 +352,16 @@ wall:
   use_accent_color: Käytä taustakuvan korostusväriä
   wallpaper_collection: Taustakuva kokoelma
   wallpaper_settings: Taustakuvan asetukset
+  wallpapers: Taustakuvat
   wallpapers_and_collections: Taustakuvat & Kokoelmat
   withOverlay: Päällysteen kanssa
   workspace_collections: Työtilakokoelmat
 weg:
   auto_hide: Automaattinen piilo
+  auto_hide_touch_disabled: Automaattinen piilotus ei ole käytettävissä kosketusnäytöllisissä laitteissa
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
   dock_side: Sijainti
-  enable: Ota Dock/tehtäväpalkki käyttöön
   filtering: Kohteen suodatus
   gap: Kuilu
   hide_mode:
@@ -426,7 +432,6 @@ wm:
   drag_behavior_options:
     sort: Lajittele (järjestä ikkunat uudelleen vetäessäsi)
     swap: Vaihda (vaihda ikkunoita vetämällä)
-  enable: Ota laatta -ikkunanhallinta käyttöön
   layout: Layout
   resize_delta: Muuttaa Delta (%)
   space_between_containers: Konttien välinen tila

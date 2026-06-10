@@ -85,6 +85,9 @@ devtools:
   load: Thwala
   settings_file: Ifayela lezilungiselelo
   shared_components: Izingxenye Ezijwayelekile ze-SLU
+  simulate_dialog:
+    label: Lingisa Ibhokisi
+    trigger: Qalisa
   simulate_perm:
     label: Lingisa Isicelo Semvume Yewijethi
     result_allowed: ✓ Imvume inikiwe
@@ -279,6 +282,7 @@ sides:
   top: Isihloko
 toolbar:
   auto_hide: Fihla okuzenzakalelayo
+  auto_hide_touch_disabled: Ukufihla ngokuzenzakalela akutholakali kumadivayisi wesikrini esithintwayo
   delay_to_hide: Libazise ukucasha
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma
@@ -307,10 +311,12 @@ wall:
   coverage_pause_threshold: Misa isikhashana umkhawulo (ukufakwa kwewindi)
   create: Dala
   create_collection: Dala Iqoqo
-  default_collection: Iqoqo elizenzakalelayo
+  default_collection: Iphephadonga elizenzakalelayo noma iqoqo
+  default_collection_description: >-
+    Kusetshenziswa kuwo wonke amamonitha nezindawo zokusebenza ezingenayo isethi
+    ethile yokukhipha.
   delete_collection: Susa Iqoqo
   edit_collection: Hlela Iqoqo
-  enable: Nika amandla umphathi wangemuva
   extend: Nweba okuyinhloko
   fit:
     contain: Qukethe
@@ -336,6 +342,7 @@ wall:
   overlayColor: Umbala obheke phambili
   overlayMixBlendMode: Hlanganisa imodi ehlanganisiwe
   per_monitor: Ngemonitha ngayinye
+  per_monitor_config: Ukucushwa kwe-Monitor ngayinye
   playback: Ijubane lokudlala
   position:
     bottom: Esinqeni
@@ -353,15 +360,16 @@ wall:
   use_accent_color: Sebenzisa umbala wokugcizelela isithombe sangemuva
   wallpaper_collection: Ukuqoqwa kwamaphephadonga
   wallpaper_settings: Izilungiselelo zangemuva
+  wallpapers: Izithombe zangemuva
   wallpapers_and_collections: Izithombe zangemuva namaqoqo
   withOverlay: Ngokumbondelana
   workspace_collections: Amaqoqo wendawo yokusebenza
 weg:
   auto_hide: Fihla okuzenzakalelayo
+  auto_hide_touch_disabled: Ukufihla ngokuzenzakalela akutholakali kumadivayisi wesikrini esithintwayo
   delay_to_hide: Libazise ukucasha
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma
-  enable: Nika amandla i-Dock / Taskbar
   filtering: Ukuhlunga kwento
   gap: Insungubezi
   hide_mode:
@@ -432,7 +440,6 @@ wm:
   drag_behavior_options:
     sort: Hlunga (hlela kabusha amawindi ngenkathi uhudula)
     swap: Shintsha (shintshanisa amawindi ekugcineni kokuhudula)
-  enable: Nika amandla umphathi wewindi elijabulisayo
   layout: Isakhiwo
   resize_delta: Shintsha usayizi DEDTA (%)
   space_between_containers: Isikhala phakathi kweziqukathi

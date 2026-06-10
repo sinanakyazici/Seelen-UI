@@ -83,6 +83,9 @@ devtools:
   load: Yükləmək
   settings_file: Parametrlər faylı
   shared_components: SLU Standart Komponentləri
+  simulate_dialog:
+    label: Dialoqu Simulyasiya edin
+    trigger: Tətik
   simulate_perm:
     label: Widget İcazə Sorğunu simulyasiya edin
     result_allowed: ✓ İcazə verildi
@@ -273,6 +276,7 @@ sides:
   top: Üst
 toolbar:
   auto_hide: Avtomatik gizlətmək
+  auto_hide_touch_disabled: Avtomatik gizlətmə sensor ekranlı cihazlarda mövcud deyil
   delay_to_hide: Gizlətmək üçün gecikmə
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe
@@ -301,10 +305,12 @@ wall:
   coverage_pause_threshold: Pauza həddi (pəncərə əhatəsi)
   create: Yaradın
   create_collection: Kolleksiya yaradın
-  default_collection: Defolt Kolleksiya
+  default_collection: Defolt divar kağızı və ya kolleksiya
+  default_collection_description: >-
+    Xüsusi ləğvetmə dəsti olmayan bütün monitorlara və iş sahələrinə tətbiq
+    edilir.
   delete_collection: Kolleksiyanı silin
   edit_collection: Kolleksiyaya düzəliş edin
-  enable: Divar kağızı menecerini aktivləşdirin
   extend: Əsası genişləndirin
   fit:
     contain: Ehtiva etmək
@@ -326,6 +332,7 @@ wall:
   overlayColor: Örtük rəngi
   overlayMixBlendMode: Qarışıq qarışığı rejimi
   per_monitor: Monitor başına
+  per_monitor_config: Monitor başına konfiqurasiya
   playback: Sürətini çalın
   position:
     bottom: Dibli
@@ -343,15 +350,16 @@ wall:
   use_accent_color: Divar kağızı vurğu rəngindən istifadə edin
   wallpaper_collection: Divar kağızı Kolleksiyası
   wallpaper_settings: Divar kağızı Parametrləri
+  wallpapers: Divar kağızları
   wallpapers_and_collections: Divar kağızları və kolleksiyalar
   withOverlay: Örtülü ilə
   workspace_collections: İş sahəsi kolleksiyaları
 weg:
   auto_hide: Avtomatik gizlətmək
+  auto_hide_touch_disabled: Avtomatik gizlətmə sensor ekranlı cihazlarda mövcud deyil
   delay_to_hide: Gizlətmək üçün gecikmə
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe
-  enable: Dock / tapşırıq çubuğunu aktivləşdirin
   filtering: Element süzgəci
   gap: Gap
   hide_mode:
@@ -421,7 +429,6 @@ wm:
   drag_behavior_options:
     sort: Sırala (sürükləyərkən pəncərələri yenidən sırala)
     swap: Swap (sürük sonunda pəncərələri dəyişdirin)
-  enable: Tiling pəncərə menecerini aktivləşdirin
   layout: Sxem
   resize_delta: Delta'nın ölçüsünü (%)
   space_between_containers: Konteynerlər arasındakı boşluq

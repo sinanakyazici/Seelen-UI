@@ -2,6 +2,7 @@ app_menu:
   close: Близу
   close_multiple: Затворите све
   copy_handles: Копирајте ручке
+  edit_app_icon: Уреди икону апликације
   kill: Килл Процесс
   kill_multiple: Убијте све процесе
   open_file_location: Отворите локацију датотеке
@@ -12,6 +13,7 @@ app_menu:
   run_as: Покрени као администратор
   unpin: Развелити
 context_menu:
+  edit_icon: Едит Ицон
   remove_module: Уклоните модул
   reorder_disable: Закључајте траку задатака
   reorder_enable: Откључајте траку задатака
@@ -31,6 +33,8 @@ taskbar_menu:
   task_manager: Таск Манагер
   trash_bin: Додајте модул корпе за отпатке
 trash_bin:
+  edit_icon_empty: Икона за уређивање (празно)
+  edit_icon_full: Икона за уређивање (пуна)
   empty_bin: Празна корпа за отпатке
   label: Рецицле Бин
 weg:

@@ -85,6 +85,9 @@ devtools:
   load: Зареждане
   settings_file: Файл за настройки
   shared_components: SLU Стандартни компоненти
+  simulate_dialog:
+    label: Симулиране на диалог
+    trigger: Тригер
   simulate_perm:
     label: Искане за разрешение за симулиране на Widget
     result_allowed: ✓ Предоставено разрешение
@@ -278,6 +281,7 @@ sides:
   top: Връх
 toolbar:
   auto_hide: Автоматично скриване
+  auto_hide_touch_disabled: Автоматичното скриване не е налично на устройства със сензорен екран
   delay_to_hide: Забавяне, за да се скрие
   delay_to_show: Забавяне за показване
   dock_side: Позиция
@@ -306,10 +310,12 @@ wall:
   coverage_pause_threshold: Праг на пауза (покритие на прозорец)
   create: Създавайте
   create_collection: Създаване на колекция
-  default_collection: Колекция по подразбиране
+  default_collection: Тапет или колекция по подразбиране
+  default_collection_description: >-
+    Прилага се към всички монитори и работни пространства, които нямат конкретен
+    набор за отмяна.
   delete_collection: Изтриване на колекция
   edit_collection: Редактиране на колекция
-  enable: Активирайте мениджъра на тапети
   extend: Удължете основното
   fit:
     contain: Съдържат
@@ -333,6 +339,7 @@ wall:
   overlayColor: Цвят на наслагване
   overlayMixBlendMode: Режим на смесване на наслагване
   per_monitor: На монитор
+  per_monitor_config: Конфигурация на монитор
   playback: Скорост на възпроизвеждане
   position:
     bottom: Дъно
@@ -350,15 +357,16 @@ wall:
   use_accent_color: Използвайте акцентен цвят на тапета
   wallpaper_collection: Колекция тапети
   wallpaper_settings: Настройки на тапета
+  wallpapers: Тапети
   wallpapers_and_collections: Тапети и колекции
   withOverlay: С наслагване
   workspace_collections: Колекции на работното пространство
 weg:
   auto_hide: Автоматично скриване
+  auto_hide_touch_disabled: Автоматичното скриване не е налично на устройства със сензорен екран
   delay_to_hide: Забавяне, за да се скрие
   delay_to_show: Забавяне за показване
   dock_side: Позиция
-  enable: Активирайте док/лента на задачите
   filtering: Филтриране на елементи
   gap: Пропаст
   hide_mode:
@@ -430,7 +438,6 @@ wm:
   drag_behavior_options:
     sort: Сортиране (пренареждане на прозорците при плъзгане)
     swap: Размяна (размяна на прозорци при плъзгане)
-  enable: Активирайте мениджъра на прозорци за облицовка
   layout: Оформление
   resize_delta: Оразмерете делтата (%)
   space_between_containers: Пространство между контейнерите

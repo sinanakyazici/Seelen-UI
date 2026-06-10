@@ -84,6 +84,9 @@ devtools:
   load: Carregar
   settings_file: Arquivo de Configurações
   shared_components: Componentes padrão SLU
+  simulate_dialog:
+    label: Simular caixa de diálogo
+    trigger: Acionar
   simulate_perm:
     label: Simular solicitação de permissão de widget
     result_allowed: ✓ Permissão concedida
@@ -274,6 +277,9 @@ sides:
   top: Topo
 toolbar:
   auto_hide: Esconder automaticamente
+  auto_hide_touch_disabled: >-
+    A ocultação automática não está disponível em dispositivos com tela sensível
+    ao toque
   delay_to_hide: Demora para esconder
   delay_to_show: Demora para mostrar
   dock_side: Posição
@@ -302,10 +308,12 @@ wall:
   coverage_pause_threshold: Limite de pausa (cobertura da janela)
   create: Criar
   create_collection: Criar coleção
-  default_collection: Coleção padrão
+  default_collection: Papel de parede ou coleção padrão
+  default_collection_description: >-
+    Aplicado a todos os monitores e áreas de trabalho que não possuem um
+    conjunto de substituição específico.
   delete_collection: Excluir coleção
   edit_collection: Editar coleção
-  enable: Ativar gerente de papel de parede
   extend: Estender primário
   fit:
     contain: Conter
@@ -327,6 +335,7 @@ wall:
   overlayColor: Cor da sobreposição
   overlayMixBlendMode: Overlay Mix Blend Mode (Modo de mistura de sobreposição)
   per_monitor: Por monitor
+  per_monitor_config: Configuração por monitor
   playback: Velocidade de reprodução
   position:
     bottom: Parte inferior
@@ -344,15 +353,18 @@ wall:
   use_accent_color: Use a cor de destaque do papel de parede
   wallpaper_collection: Coleção de papéis de parede
   wallpaper_settings: Configurações de papel de parede
+  wallpapers: Papéis de parede
   wallpapers_and_collections: Papéis de parede e coleções
   withOverlay: Com sobreposição
   workspace_collections: Coleções de espaço de trabalho
 weg:
   auto_hide: Ocultar automaticamente
+  auto_hide_touch_disabled: >-
+    A ocultação automática não está disponível em dispositivos com tela sensível
+    ao toque
   delay_to_hide: Demora para esconder
   delay_to_show: Demora para mostrar
   dock_side: Posição
-  enable: Habilitar Dock/Barra de Tarefas
   filtering: Filtragem de itens
   gap: Espaçamento
   hide_mode:
@@ -423,7 +435,6 @@ wm:
   drag_behavior_options:
     sort: Classificar (reordenar janelas enquanto arrasta)
     swap: Trocar (trocar janelas ao arrastar)
-  enable: Habilitar gerenciador de janela de ladrilhos
   layout: Disposição
   resize_delta: Delta de redimensionamento (%)
   space_between_containers: Espaço entre contêineres
