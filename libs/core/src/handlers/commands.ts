@@ -119,6 +119,7 @@ export enum SeelenCommand {
   SendSystemTrayIconAction = "send_system_tray_icon_action",
   GetPinnedTrayIcons = "get_pinned_tray_icons",
   SetPinnedTrayIcons = "set_pinned_tray_icons",
+  RefreshSystemTrayIcons = "refresh_system_tray_icons",
   GetNotifications = "get_notifications",
   NotificationsClose = "notifications_close",
   NotificationsCloseAll = "notifications_close_all",

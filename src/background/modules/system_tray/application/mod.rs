@@ -1,6 +1,6 @@
 pub mod tray_hook_loader;
 pub mod tray_icon;
-mod util;
+pub mod util;
 
 use std::sync::LazyLock;
 

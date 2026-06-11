@@ -8,7 +8,7 @@ use seelen_core::{
 use crate::{
     app::emit_to_webviews,
     error::Result,
-    modules::system_tray::application::SystemTrayManager,
+    modules::system_tray::application::{util::Util, SystemTrayManager},
     utils::{atomic_write_file, constants::SEELEN_COMMON},
 };
 
@@ -33,6 +33,17 @@ pub fn get_system_tray_icons() -> Vec<SysTrayIcon> {
 #[tauri::command(async)]
 pub fn send_system_tray_icon_action(id: SysTrayIconId, action: SystrayIconAction) -> Result<()> {
     get_system_tray_manager().send_action(&id, &action)?;
+    Ok(())
+}
+
+/// Re-broadcast the `TaskbarCreated` message so apps re-register their tray
+/// icons (the same thing that happens when explorer.exe restarts). Called when
+/// the tray flyout opens to recover icons from apps that hadn't registered yet
+/// (well-behaved apps re-add on this signal; misbehaving ones won't, which is a
+/// bug on their side).
+#[tauri::command(async)]
+pub fn refresh_system_tray_icons() -> Result<()> {
+    Util::refresh_icons()?;
     Ok(())
 }
 
