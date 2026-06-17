@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ
   enable: Միացնել մշակողի գործիքները
+  enable_description: >-
+    Ապակողպում է առաջադեմ գործիքներ Seelen UI-ի ներքին մասերը ստուգելու և
+    վրիպազերծելու համար: Նախատեսված չէ կանոնավոր օգտագործման համար:
   icons: Քեշավորված Սրբապատկերներ
   install_folder: Տեղադրման պանակ
   load: Բեռ
@@ -95,6 +98,10 @@ devtools:
     trigger: Մոդելավորել
     widget_id_placeholder: '@author/widget-name'
   tools: Գործիքներ
+  unlock_shortcuts: Բացել միայն կարդալու դյուրանցումները
+  unlock_shortcuts_description: >-
+    Թույլատրել խմբագրել դյուրանցումները, որոնք սովորաբար միայն կարդալու են
+    (օրինակ՝ համակարգի անտեսումները):
   unstable_optimizations: Անկայուն օպտիմիզացումներ
   unstable_optimizations_description: >-
     Միացնել փորձնական Chromium դրոշները, որոնք նվազեցնում են RAM-ի օգտագործումը:
@@ -126,6 +133,8 @@ extras:
   clear_icons_tooltip: >-
     Վերագործարկումը կարող է պահանջվել բոլոր վիդջեթների վրա լիարժեք ուժի մեջ
     մտնելու համար
+  discord_rpc: Տարաձայնություններ հարուստ ներկայություն
+  discord_rpc_description: 'Ցույց տուր բոլորին, որ ոճ ունես:'
   exit: Հանգստացեք / Ելք
   relaunch: Վերակառուցվել
   streaming_mode: Հոսքային ռեժիմ
@@ -179,6 +188,7 @@ general:
   theme:
     available: Հասանելի թեմաներ
     selected: Ակտիվ թեմաներ
+global: Համաշխարհային
 header:
   labels:
     config: Կազմաձեւեր
@@ -219,6 +229,7 @@ reset_to_default: Վերագործարկեք կանխադրված արժեքը
 resources:
   affected_widgets: Ազդեցված վիդջեթներ
   app_outdated: 'Այս ռեսուրսը պահանջում է Seelen UI- ի նոր տարբերակը `ճիշտ աշխատելու համար:'
+  coming_soon: Շուտով
   corrupted_wallpaper: Չհաջողվեց հանել մանրապատկերը՝ վնասված կամ չաջակցվող տեսանյութի ձևաչափ
   delete: Delete նջել ռեսուրսը
   discover: Բացահայտեք ավելի շատ ռեսուրսներ

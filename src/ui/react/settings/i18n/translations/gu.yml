@@ -79,6 +79,9 @@ devtools:
   custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો
   data_folder: ડેટા ફોલ્ડર
   enable: વિકાસકર્તા સાધનો સક્ષમ કરો
+  enable_description: >-
+    સીલેન UI ઇન્ટરનલ્સને તપાસવા અને ડીબગ કરવા માટે અદ્યતન સાધનોને અનલૉક કરે છે.
+    નિયમિત ઉપયોગ માટે બનાવાયેલ નથી.
   icons: કેશ્ડ ચિહ્નો
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   load: લોડ
@@ -94,6 +97,10 @@ devtools:
     trigger: અનુકરણ કરો
     widget_id_placeholder: '@author/widget-name'
   tools: સાધનો
+  unlock_shortcuts: ફક્ત વાંચવા માટેના શૉર્ટકટ્સ અનલૉક કરો
+  unlock_shortcuts_description: >-
+    સામાન્ય રીતે ફક્ત વાંચવા માટેના શોર્ટકટને સંપાદિત કરવાની મંજૂરી આપો (દા.ત.
+    સિસ્ટમ ઓવરરાઇડ્સ).
   unstable_optimizations: અસ્થિર ઑપ્ટિમાઇઝેશન
   unstable_optimizations_description: >-
     પ્રાયોગિક Chromium ફ્લેગ્સ સક્ષમ કરો જે RAM નો ઉપયોગ ઘટાડે છે.
@@ -123,6 +130,8 @@ extras:
   backup_sync_description: ક્લાઉડ દ્વારા આપમેળે બેકઅપ લો અને તમારી સેટિંગ્સ પુનઃસ્થાપિત કરો.
   clear_icons: સ્પષ્ટ સિસ્ટમ ચિહ્નો કેશ
   clear_icons_tooltip: બધા વિજેટો પર સંપૂર્ણ અસર કરવા માટે ફરીથી પ્રારંભ કરવાની જરૂર પડી શકે છે
+  discord_rpc: અસંખ્ય સમૃદ્ધ હાજરી
+  discord_rpc_description: દરેકને બતાવો કે તમારી પાસે શૈલી છે!
   exit: છોડો/બહાર નીકળો
   relaunch: ફરીથી લોંચ કરો
   streaming_mode: સ્ટ્રીમિંગ મોડ
@@ -174,6 +183,7 @@ general:
   theme:
     available: ઉપલબ્ધ થીમ્સ
     selected: સક્રિય થીમ્સ
+global: વૈશ્વિક
 header:
   labels:
     config: ગોઠવણી
@@ -214,6 +224,7 @@ reset_to_default: ડિફ default લ્ટ મૂલ્ય પર ફરી�
 resources:
   affected_widgets: અસરગ્રસ્ત વિજેટો
   app_outdated: આ સંસાધનને યોગ્ય રીતે કાર્ય કરવા માટે સીલેન યુઆઈનું નવું સંસ્કરણ જરૂરી છે.
+  coming_soon: ટૂંક સમયમાં આવી રહ્યું છે
   corrupted_wallpaper: થંબનેલ કાઢવામાં નિષ્ફળ - દૂષિત અથવા અસમર્થિત વિડિઓ ફોર્મેટ
   delete: સાધન કા delો
   discover: વધુ સંસાધનો શોધો

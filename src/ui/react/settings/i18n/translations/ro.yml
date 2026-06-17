@@ -80,6 +80,10 @@ devtools:
   custom_config_file: Încărcați fișierul de configurare personalizat
   data_folder: Folder de date
   enable: Activați instrumentele pentru dezvoltatori
+  enable_description: >-
+    Deblochează instrumente avansate pentru inspectarea și depanarea elementelor
+    interne ale interfeței de utilizare Seelen. Nu este destinat utilizării
+    regulate.
   icons: Pictograme stocate în cache
   install_folder: Folder de instalare
   load: Sarcină
@@ -95,6 +99,10 @@ devtools:
     trigger: Simula
     widget_id_placeholder: '@autor/nume-widget'
   tools: Instrumente
+  unlock_shortcuts: Deblocați comenzi rapide numai pentru citire
+  unlock_shortcuts_description: >-
+    Permiteți editarea comenzilor rapide care sunt în mod normal numai pentru
+    citire (de exemplu, suprascrieri de sistem).
   unstable_optimizations: Optimizări instabile
   unstable_optimizations_description: >-
     Activați semnalizatoarele Chromium experimentale care reduc utilizarea RAM.
@@ -126,6 +134,8 @@ extras:
   clear_icons_tooltip: >-
     Ar putea fi necesară o repornire pentru ca toate widget-urile să intre în
     vigoare
+  discord_rpc: Prezență bogată în discordia
+  discord_rpc_description: Arată tuturor că ai stil!
   exit: Renunță/ieșire
   relaunch: Relansare
   streaming_mode: Modul de streaming
@@ -179,6 +189,7 @@ general:
   theme:
     available: Teme disponibile
     selected: Teme active
+global: Global
 header:
   labels:
     config: Configurații
@@ -221,6 +232,7 @@ resources:
   app_outdated: >-
     Această resursă necesită o versiune mai recentă a Seelen UI pentru a
     funcționa corect.
+  coming_soon: În curând
   corrupted_wallpaper: Nu s-a extras miniatura - format video corupt sau neacceptat
   delete: Ștergeți resursa
   discover: Descoperiți mai multe resurse

@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Özel Yapılandırma Dosyası Yükle
   data_folder: Veri Klasörü
   enable: Geliştirici Araçlarını Etkinleştir
+  enable_description: >-
+    Seelen UI dahili bileşenlerini incelemek ve hata ayıklamak için gelişmiş
+    araçların kilidini açar. Düzenli kullanım için tasarlanmamıştır.
   icons: Önbelleğe Alınmış Simgeler
   install_folder: Kurulum Klasörü
   load: Yükle
@@ -94,6 +97,10 @@ devtools:
     trigger: Benzetmek
     widget_id_placeholder: '@yazar/widget-adı'
   tools: Aletler
+  unlock_shortcuts: Salt Okunur Kısayolların Kilidini Aç
+  unlock_shortcuts_description: >-
+    Normalde salt okunur olan kısayolların düzenlenmesine izin verin (ör. sistem
+    geçersiz kılmaları).
   unstable_optimizations: Kararsız Optimizasyonlar
   unstable_optimizations_description: >-
     RAM kullanımını azaltan deneysel Chromium işaretlerini etkinleştirin. 
@@ -123,6 +130,8 @@ extras:
   backup_sync_description: Ayarlarınızı bulut aracılığıyla otomatik olarak yedekleyin ve geri yükleyin.
   clear_icons: Sistem Simgeleri Önbelleğini Temizle
   clear_icons_tooltip: Tüm widget'larda tam olarak etkili olması için yeniden başlatma gerekebilir
+  discord_rpc: Discord'un zengin varlığı
+  discord_rpc_description: Herkese tarzınız olduğunu gösterin!
   exit: Çık
   relaunch: Yeniden Başlat
   streaming_mode: Akış Modu
@@ -175,6 +184,7 @@ general:
   theme:
     available: Mevcut Temalar
     selected: Aktif Temalar
+global: Küresel
 header:
   labels:
     config: Konfigürasyonlar
@@ -217,6 +227,7 @@ resources:
   app_outdated: >-
     Bu kaynağın düzgün çalışması için Seelen UI'nin daha yeni bir sürümü
     gerekir.
+  coming_soon: Yakında gelecek
   corrupted_wallpaper: Küçük resim çıkarılamadı - bozuk veya desteklenmeyen video biçimi
   delete: Kaynağı Sil
   discover: Daha fazla kaynak keşfedin

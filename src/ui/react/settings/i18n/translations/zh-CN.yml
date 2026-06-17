@@ -69,6 +69,7 @@ devtools:
   custom_config_file: 加载自定义配置文件
   data_folder: 数据文件夹
   enable: 启用开发者工具
+  enable_description: 解锁用于检查和调试 Seelen UI 内部结构的高级工具。 不适合常规使用。
   icons: 缓存图标
   install_folder: 安装文件夹
   load: 加载
@@ -84,6 +85,8 @@ devtools:
     trigger: 模拟
     widget_id_placeholder: '@作者/小部件名称'
   tools: 工具
+  unlock_shortcuts: 解锁只读快捷方式
+  unlock_shortcuts_description: 允许编辑通常只读的快捷方式（例如系统覆盖）。
   unstable_optimizations: 不稳定的优化
   unstable_optimizations_description: |-
     启用可减少 RAM 使用的实验性 Chromium 标志。 
@@ -109,6 +112,8 @@ extras:
   backup_sync_description: 通过云自动备份和恢复您的设置。
   clear_icons: 清除系统图标缓存
   clear_icons_tooltip: 可能需要重启才能在所有小部件上完全生效
+  discord_rpc: 不和谐丰富的存在
+  discord_rpc_description: 向大家展示您的风格！
   exit: 退出
   relaunch: 重启应用
   streaming_mode: 串流模式
@@ -146,6 +151,7 @@ general:
   theme:
     available: 可用主题
     selected: 当前主题
+global: 全球的
 header:
   labels:
     config: 配置
@@ -186,6 +192,7 @@ reset_to_default: 重置为默认值
 resources:
   affected_widgets: 受影响的小部件
   app_outdated: 该资源需要较新版本的 Seelen UI 才能正常使用。
+  coming_soon: 即将推出
   corrupted_wallpaper: 无法提取缩略图 - 视频格式已损坏或不受支持
   delete: 删除资源
   discover: 发现更多资源

@@ -1,10 +1,17 @@
 # Changelog
 
-## [2.7.1-dev]
+## [2.7.1]
+
+### enhancements
+
+- user flow for resources download.
+- more dev tools.
 
 ### fix
 
 - apps menu crashing on search when too many items.
+- gui settings not persisting internal state.
+- saving raw shortcuts instead normalized ones.
 
 ## [2.7.0]
 

@@ -80,6 +80,10 @@ devtools:
   custom_config_file: Załaduj niestandardowy plik konfiguracyjny
   data_folder: Folder danych
   enable: Włącz narzędzia programistów
+  enable_description: >-
+    Odblokowuje zaawansowane narzędzia do sprawdzania i debugowania wewnętrznych
+    elementów interfejsu użytkownika Seelen. Nie jest przeznaczony do
+    regularnego użytku.
   icons: Ikony w pamięci podręcznej
   install_folder: Folder instalacyjny
   load: Obciążenie
@@ -95,6 +99,10 @@ devtools:
     trigger: Symulować
     widget_id_placeholder: '@autor/nazwa-widgetu'
   tools: Narzędzia
+  unlock_shortcuts: Odblokuj skróty tylko do odczytu
+  unlock_shortcuts_description: >-
+    Zezwalaj na edytowanie skrótów, które zwykle są tylko do odczytu (np.
+    zastąpienia systemowe).
   unstable_optimizations: Niestabilne optymalizacje
   unstable_optimizations_description: >-
     Włącz eksperymentalne flagi Chromium, które zmniejszają użycie pamięci RAM.
@@ -128,6 +136,8 @@ extras:
   clear_icons_tooltip: >-
     Do poprawnego uruchomienia wszystkich widżetów może być wymagane ponowne
     uruchomienie systemu
+  discord_rpc: Bogata obecność w Discord
+  discord_rpc_description: Pokaż wszystkim, że masz styl!
   exit: Wyjdź
   relaunch: Wznów
   streaming_mode: Tryb przesyłania strumieniowego
@@ -181,6 +191,7 @@ general:
   theme:
     available: Dostępne motywy
     selected: Aktywne motywy
+global: Światowy
 header:
   labels:
     config: Konfiguracje
@@ -221,6 +232,7 @@ reset_to_default: Przywróć wartość domyślną
 resources:
   affected_widgets: Dotknięte widżety
   app_outdated: Ten zasób wymaga nowszej wersji Seelen UI do poprawnego działania.
+  coming_soon: Już wkrótce
   corrupted_wallpaper: >-
     Nie udało się wyodrębnić miniatury — uszkodzony lub nieobsługiwany format
     wideo

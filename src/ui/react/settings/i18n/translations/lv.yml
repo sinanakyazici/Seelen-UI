@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Ielādēt pielāgotu konfigurācijas failu
   data_folder: Datu mape
   enable: Iespējot izstrādātāju rīkus
+  enable_description: >-
+    Atbloķē uzlabotus rīkus Seelen UI iekšējo ierīču pārbaudei un atkļūdošanai.
+    Nav paredzēts regulārai lietošanai.
   icons: Kešatmiņā saglabātās ikonas
   install_folder: Instalēšanas mape
   load: Slodze
@@ -94,6 +97,10 @@ devtools:
     trigger: Simulēt
     widget_id_placeholder: '@autors/logrīka nosaukums'
   tools: Rīki
+  unlock_shortcuts: Atbloķējiet tikai lasāmās saīsnes
+  unlock_shortcuts_description: >-
+    Atļaut rediģēt saīsnes, kas parasti ir tikai lasāmas (piemēram, sistēmas
+    ignorēšana).
   unstable_optimizations: Nestabila optimizācija
   unstable_optimizations_description: >-
     Iespējojiet eksperimentālos Chromium karogus, kas samazina RAM lietojumu.
@@ -125,6 +132,8 @@ extras:
   clear_icons_tooltip: >-
     Varētu būt nepieciešams restartēt, lai tas pilnībā stātos spēkā visos
     logrīkos.
+  discord_rpc: Nesaskaņu bagāta klātbūtne
+  discord_rpc_description: Parādiet visiem, ka jums ir stils!
   exit: Atmest/iziet
   relaunch: Atsākšana
   streaming_mode: Straumēšanas režīms
@@ -176,6 +185,7 @@ general:
   theme:
     available: Pieejamie motīvi
     selected: Aktīvās tēmas
+global: Globāli
 header:
   labels:
     config: Konfigurācijas
@@ -216,6 +226,7 @@ reset_to_default: Atiestatīt noklusējuma vērtību
 resources:
   affected_widgets: Ietekmētie logrīki
   app_outdated: Lai šis resurss darbotos pareizi, nepieciešama jaunāka Seelen UI versija.
+  coming_soon: Drīzumā
   corrupted_wallpaper: "Neizdevās izvilkt sīktēlu\_— bojāts vai neatbalstīts video formāts"
   delete: Dzēst resursu
   discover: Atklājiet vairāk resursu

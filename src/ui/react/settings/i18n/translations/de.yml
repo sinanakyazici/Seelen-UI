@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Benutzerdefinierte Konfigurationsdatei laden
   data_folder: Datenordner
   enable: Entwicklerwerkzeuge aktivieren
+  enable_description: >-
+    Schaltet erweiterte Tools zum Überprüfen und Debuggen von Seelen-UI-Interna
+    frei. Nicht für den regelmäßigen Gebrauch bestimmt.
   icons: Zwischengespeicherte Symbole
   install_folder: Installationsordner
   load: Laden
@@ -95,6 +98,10 @@ devtools:
     trigger: Simulieren
     widget_id_placeholder: '@Autor/Widget-Name'
   tools: Werkzeuge
+  unlock_shortcuts: Schalten Sie schreibgeschützte Verknüpfungen frei
+  unlock_shortcuts_description: >-
+    Bearbeitungsverknüpfungen zulassen, die normalerweise schreibgeschützt sind
+    (z. B. Systemüberschreibungen).
   unstable_optimizations: Instabile Optimierungen
   unstable_optimizations_description: >-
     Aktivieren Sie experimentelle Chromium-Flags, die die RAM-Nutzung
@@ -130,6 +137,8 @@ extras:
   clear_icons_tooltip: >-
     Ein Neustart könnte erforderlich sein, um alle Widgets vollständig zu
     aktivieren.
+  discord_rpc: Zwietrachtreiche Präsenz
+  discord_rpc_description: Zeigen Sie allen, dass Sie Stil haben!
   exit: Beenden
   relaunch: Neu starten
   streaming_mode: Streaming-Modus
@@ -182,6 +191,7 @@ general:
   theme:
     available: Verfügbare Themen
     selected: Aktive Themen
+global: Global
 header:
   labels:
     config: Konfigurationen
@@ -224,6 +234,7 @@ resources:
   app_outdated: >-
     Diese Ressource erfordert eine neuere Version von Seelen UI, um richtig zu
     funktionieren.
+  coming_soon: Demnächst erhältlich
   corrupted_wallpaper: >-
     Miniaturansicht konnte nicht extrahiert werden – beschädigtes oder nicht
     unterstütztes Videoformat

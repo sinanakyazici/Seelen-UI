@@ -77,6 +77,9 @@ devtools:
   custom_config_file: تحميل ملف الأعدادات المخصص
   data_folder: مجلد البيانات
   enable: تفعيل أدوات المطور
+  enable_description: >-
+    يفتح الأدوات المتقدمة لفحص وتصحيح الأجزاء الداخلية لـ Seelen UI. غير مخصص
+    للاستخدام المنتظم.
   icons: الرموز المخزنة مؤقتا
   install_folder: مجلد التثبيت
   load: تحميل
@@ -92,6 +95,8 @@ devtools:
     trigger: محاكاة
     widget_id_placeholder: '@author/اسم القطعة'
   tools: أدوات
+  unlock_shortcuts: فتح اختصارات القراءة فقط
+  unlock_shortcuts_description: السماح بتحرير الاختصارات التي تكون عادةً للقراءة فقط (مثل تجاوزات النظام).
   unstable_optimizations: تحسينات غير مستقرة
   unstable_optimizations_description: >-
     تمكين علامات Chromium التجريبية التي تقلل من استخدام ذاكرة الوصول العشوائي.
@@ -121,6 +126,8 @@ extras:
   backup_sync_description: النسخ الاحتياطي واستعادة إعداداتك تلقائيًا عبر السحابة.
   clear_icons: مسح ذاكرة التخزين المؤقت لأيقونات النظام
   clear_icons_tooltip: قد تكون إعادة التشغيل مطلوبة لتدخل جميع الأدوات حيز التنفيذ بالكامل
+  discord_rpc: حضور غني بالخلاف
+  discord_rpc_description: أظهر للجميع أن لديك أسلوبًا!
   exit: إنهاء/خروج
   relaunch: إعادة التشغيل
   streaming_mode: وضع الدفق
@@ -171,6 +178,7 @@ general:
   theme:
     available: السمات المتاحة
     selected: المواضيع النشطة
+global: عالمي
 header:
   labels:
     config: التكوينات
@@ -211,6 +219,7 @@ reset_to_default: إعادة التعيين إلى القيمة الافتراض
 resources:
   affected_widgets: الحاجيات المتضررة
   app_outdated: يتطلب هذا المورد إصدارًا أحدث من Seelen UI ليعمل بشكل صحيح.
+  coming_soon: قريباً
   corrupted_wallpaper: فشل استخراج الصورة المصغرة - تنسيق الفيديو تالف أو غير مدعوم
   delete: حذف المورد
   discover: اكتشف المزيد من الموارد

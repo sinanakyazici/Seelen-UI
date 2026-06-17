@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Carica File di Config Personalizzato
   data_folder: Cartella Dati
   enable: Abilita Strumenti Sviluppatore
+  enable_description: >-
+    Sblocca strumenti avanzati per l'ispezione e il debug dei componenti interni
+    dell'interfaccia utente Seelen. Non destinato all'uso regolare.
   icons: Icone memorizzate nella cache
   install_folder: Cartella di Installazione
   load: Carica
@@ -95,6 +98,10 @@ devtools:
     trigger: Simulare
     widget_id_placeholder: '@autore/nome-widget'
   tools: Utensili
+  unlock_shortcuts: Sblocca scorciatoie di sola lettura
+  unlock_shortcuts_description: >-
+    Consenti la modifica di scorciatoie che normalmente sono di sola lettura (ad
+    esempio, sostituzioni di sistema).
   unstable_optimizations: Ottimizzazioni instabili
   unstable_optimizations_description: >-
     Abilita i flag sperimentali di Chromium che riducono l'utilizzo della RAM.
@@ -126,6 +133,8 @@ extras:
     cloud.
   clear_icons: Cancella la cache delle icone di sistema
   clear_icons_tooltip: Potrebbe essere necessario un riavvio per avere effetto su tutti i widget.
+  discord_rpc: Presenza ricca di discordia
+  discord_rpc_description: Mostra a tutti che hai stile!
   exit: Esci
   relaunch: Riavvia
   streaming_mode: Modalità streaming
@@ -181,6 +190,7 @@ general:
   theme:
     available: Temi disponibili
     selected: Temi attivi
+global: Globale
 header:
   labels:
     config: Configurazioni
@@ -223,6 +233,7 @@ resources:
   app_outdated: >-
     Questa risorsa richiede una versione più recente di Seelen UI per funzionare
     correttamente.
+  coming_soon: Prossimamente
   corrupted_wallpaper: >-
     Impossibile estrarre la miniatura: formato video danneggiato o non
     supportato

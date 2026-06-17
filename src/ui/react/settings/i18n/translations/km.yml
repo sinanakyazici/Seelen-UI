@@ -78,6 +78,9 @@ devtools:
   custom_config_file: ផ្ទុកឯកសារកំណត់រចនាសម្ព័ន្ធផ្ទាល់ខ្លួន
   data_folder: ថតទិន្នន័យ
   enable: បើកឧបករណ៍អ្នកអភិវឌ្ឍន៍
+  enable_description: >-
+    ដោះសោឧបករណ៍កម្រិតខ្ពស់សម្រាប់ត្រួតពិនិត្យ និងបំបាត់កំហុស Seelen UI ខាងក្នុង។
+    មិនមានបំណងសម្រាប់ការប្រើប្រាស់ជាប្រចាំ។
   icons: រូបតំណាងដែលបានរក្សាទុក
   install_folder: ថតឯកសារដំឡើង
   load: ផ្ទុក
@@ -93,6 +96,8 @@ devtools:
     trigger: ក្លែងធ្វើ
     widget_id_placeholder: '@author/widget-name'
   tools: ឧបករណ៍
+  unlock_shortcuts: ដោះសោផ្លូវកាត់បានតែអាន
+  unlock_shortcuts_description: អនុញ្ញាតឱ្យកែសម្រួលផ្លូវកាត់ដែលជាធម្មតាបានតែអាន (ឧ. ការលុបពីលើប្រព័ន្ធ)។
   unstable_optimizations: ការបង្កើនប្រសិទ្ធភាពមិនស្ថិតស្ថេរ
   unstable_optimizations_description: >-
     បើកដំណើរការទង់ជាតិ Chromium ពិសោធន៍ដែលកាត់បន្ថយការប្រើប្រាស់ RAM ។
@@ -123,6 +128,8 @@ extras:
   clear_icons: សម្អាតឃ្លាំងសម្ងាត់ប្រព័ន្ធ
   clear_icons_tooltip: >-
     ការចាប់ផ្តើមឡើងវិញអាចត្រូវបានតម្រូវឱ្យមានប្រសិទ្ធិភាពពេញលេញលើធាតុក្រាហ្វិកទាំងអស់
+  discord_rpc: ភាពមិនស៊ីសង្វាក់គ្នានៃវត្តមានដ៏សម្បូរបែប
+  discord_rpc_description: បង្ហាញអ្នកទាំងអស់គ្នាថាអ្នកមានស្ទីល!
   exit: ចេញ/ចេញ
   relaunch: បើកដំណើរការឡើងវិញ
   streaming_mode: របៀបស្ទ្រីម
@@ -176,6 +183,7 @@ general:
   theme:
     available: ស្បែកដែលអាចប្រើបាន
     selected: ស្បែកសកម្ម
+global: សកល
 header:
   labels:
     config: ការកំណត់រចនាសម្ព័ន្ធ
@@ -216,6 +224,7 @@ reset_to_default: កំណត់ឡើងវិញទៅតម្លៃលំ�
 resources:
   affected_widgets: ធាតុក្រាហ្វិកដែលរងផលប៉ះពាល់
   app_outdated: ធនធាននេះតម្រូវឱ្យមានកំណែថ្មីនៃ Seelen UI ដែលអាចធ្វើការបានត្រឹមត្រូវ។
+  coming_soon: មកដល់ឆាប់ៗនេះ
   corrupted_wallpaper: បរាជ័យក្នុងការទាញយករូបភាពតូច - ទ្រង់ទ្រាយវីដេអូខូច ឬមិនគាំទ្រ
   delete: លុបធនធាន
   discover: ស្វែងយល់ពីធនធានបន្ថែម

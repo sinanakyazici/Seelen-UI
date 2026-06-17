@@ -109,7 +109,7 @@ impl WinPreviewManager {
             }
             let addr = window.address();
             match event {
-                WinEvent::ObjectNameChange | WinEvent::SynDebouncedForegroundRectChange => {
+                WinEvent::ObjectNameChange | WinEvent::SynDebouncedRectChange => {
                     WINDOWS_PREVIEWS.enqueue_capture(addr);
                 }
                 WinEvent::SystemMinimizeEnd => {
@@ -272,14 +272,32 @@ fn sample_edge_colors(image: &RgbaImage) -> UserAppWindowColors {
         }
     };
 
+    let sample_y = |i: usize| -> u32 {
+        if SAMPLING <= 1 {
+            return 0;
+        }
+        ((i as u64 * (h as u64 - 1)) / (SAMPLING as u64 - 1)) as u32
+    };
+
     let top = (0..SAMPLING)
         .map(|i| pixel_to_color(sample_x(i), 0))
         .collect();
     let bottom = (0..SAMPLING)
         .map(|i| pixel_to_color(sample_x(i), h.saturating_sub(1)))
         .collect();
+    let left = (0..SAMPLING)
+        .map(|i| pixel_to_color(0, sample_y(i)))
+        .collect();
+    let right = (0..SAMPLING)
+        .map(|i| pixel_to_color(w.saturating_sub(1), sample_y(i)))
+        .collect();
 
-    UserAppWindowColors { top, bottom }
+    UserAppWindowColors {
+        top,
+        bottom,
+        left,
+        right,
+    }
 }
 
 fn image_to_hash(icon_image: &image::RgbaImage) -> String {

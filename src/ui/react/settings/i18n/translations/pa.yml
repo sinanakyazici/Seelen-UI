@@ -75,6 +75,9 @@ devtools:
   custom_config_file: ਕਸਟਮ ਕੌਂਫਿਗ ਫਾਈਲ ਲੋਡ ਕਰੋ
   data_folder: ਡਾਟਾ ਫੋਲਡਰ
   enable: ਡਿਵੈਲਪਰ ਟੂਲਸ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  enable_description: >-
+    ਸੀਲੇਨ UI ਇੰਟਰਨਲ ਦੀ ਜਾਂਚ ਕਰਨ ਅਤੇ ਡੀਬੱਗ ਕਰਨ ਲਈ ਉੱਨਤ ਟੂਲਸ ਨੂੰ ਅਨਲੌਕ ਕਰਦਾ ਹੈ।
+    ਨਿਯਮਤ ਵਰਤੋਂ ਲਈ ਨਹੀਂ ਹੈ।
   icons: ਕੈਸ਼ ਕੀਤੇ ਆਈਕਾਨ
   install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
   load: ਲੋਡ ਕਰੋ
@@ -90,6 +93,10 @@ devtools:
     trigger: ਸਿਮੂਲੇਟ
     widget_id_placeholder: '@author/widget-name'
   tools: ਸੰਦ
+  unlock_shortcuts: ਸਿਰਫ਼-ਪੜ੍ਹਨ ਲਈ ਸ਼ਾਰਟਕੱਟਾਂ ਨੂੰ ਅਨਲੌਕ ਕਰੋ
+  unlock_shortcuts_description: >-
+    ਉਹਨਾਂ ਸ਼ਾਰਟਕੱਟਾਂ ਨੂੰ ਸੰਪਾਦਿਤ ਕਰਨ ਦਿਓ ਜੋ ਆਮ ਤੌਰ 'ਤੇ ਸਿਰਫ਼-ਪੜ੍ਹਨ ਲਈ ਹੁੰਦੇ ਹਨ
+    (ਜਿਵੇਂ ਕਿ ਸਿਸਟਮ ਓਵਰਰਾਈਡਜ਼)।
   unstable_optimizations: ਅਸਥਿਰ ਓਪਟੀਮਾਈਜੇਸ਼ਨ
   unstable_optimizations_description: >-
     ਪ੍ਰਯੋਗਾਤਮਕ Chromium ਫਲੈਗ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ ਜੋ RAM ਦੀ ਵਰਤੋਂ ਨੂੰ ਘਟਾਉਂਦੇ ਹਨ।
@@ -119,6 +126,8 @@ extras:
   backup_sync_description: ਕਲਾਊਡ ਰਾਹੀਂ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਆਪਣੀਆਂ ਸੈਟਿੰਗਾਂ ਦਾ ਬੈਕਅੱਪ ਲਓ ਅਤੇ ਰੀਸਟੋਰ ਕਰੋ।
   clear_icons: ਸਿਸਟਮ ਆਈਕਾਨ ਕੈਚੇ ਸਾਫ਼ ਕਰੋ
   clear_icons_tooltip: ਸਾਰੇ ਵਿਜੇਟਸ 'ਤੇ ਪੂਰੀ ਤਰ੍ਹਾਂ ਲਾਗੂ ਹੋਣ ਲਈ ਇੱਕ ਰੀਸਟਾਰਟ ਦੀ ਜ਼ਰੂਰਤ ਹੋ ਸਕਦੀ ਹੈ
+  discord_rpc: ਅਮੀਰ ਮੌਜੂਦਗੀ ਨੂੰ ਰੱਦ ਕਰੋ
+  discord_rpc_description: ਹਰ ਕਿਸੇ ਨੂੰ ਦਿਖਾਓ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਸ਼ੈਲੀ ਹੈ!
   exit: ਛੱਡੋ/ਬਾਹਰ ਨਿਕਲੋ
   relaunch: ਮੁੜ-ਲਾਂਚ ਕਰੋ
   streaming_mode: ਸਟ੍ਰੀਮਿੰਗ ਮੋਡ
@@ -171,6 +180,7 @@ general:
   theme:
     available: ਉਪਲਬਧ ਥੀਮ
     selected: ਕਿਰਿਆਸ਼ੀਲ ਥੀਮ
+global: ਗਲੋਬਲ
 header:
   labels:
     config: ਸੰਰਚਨਾ
@@ -211,6 +221,7 @@ reset_to_default: ਡਿਫੌਲਟ ਵੈਲਯੂ ਤੇ ਰੀਸੈਟ ਕ�
 resources:
   affected_widgets: ਪ੍ਰਭਾਵਿਤ ਵਿਜੇਟਸ
   app_outdated: ਇਸ ਸਰੋਤ ਲਈ ਸਹੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਵੇਂ ਸੰਸਕਰਣ ਦੀ ਜ਼ਰੂਰਤ ਹੈ.
+  coming_soon: ਆਨ ਵਾਲੀ
   corrupted_wallpaper: ਥੰਬਨੇਲ ਨੂੰ ਐਕਸਟਰੈਕਟ ਕਰਨ ਵਿੱਚ ਅਸਫਲ - ਖਰਾਬ ਜਾਂ ਅਸਮਰਥਿਤ ਵੀਡੀਓ ਫਾਰਮੈਟ
   delete: ਸਰੋਤ ਨੂੰ ਮਿਟਾਓ
   discover: ਹੋਰ ਸਰੋਤਾਂ ਦੀ ਖੋਜ ਕਰੋ

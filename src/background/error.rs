@@ -1,3 +1,15 @@
+pub struct AppError {
+    code: u16, // used for http responses
+    msg: String,
+    backtrace: backtrace::Backtrace,
+}
+
+impl AppError {
+    pub fn code(&self) -> u16 {
+        self.code
+    }
+}
+
 macro_rules! define_app_errors {
     ($(
         $variant:ident($error_type:ty);
@@ -6,30 +18,11 @@ macro_rules! define_app_errors {
             impl From<$error_type> for AppError {
                 fn from(err: $error_type) -> Self {
                     let backtrace = backtrace::Backtrace::new();
-                    AppError { msg: format!("{}({:?})", stringify!($variant), err), backtrace }
+                    AppError { code: 0, msg: format!("{}({:?})", stringify!($variant), err), backtrace }
                 }
             }
         )*
     };
-}
-
-#[macro_export]
-macro_rules! log_error {
-    ($result:expr) => {
-        if let Err(err) = $result {
-            log::error!("{:?}", err);
-        }
-    };
-    ($result:expr, $context:expr) => {
-        if let Err(err) = $result {
-            log::error!("Context: {:?} Err: {:?}", $context, err);
-        }
-    };
-}
-
-pub struct AppError {
-    msg: String,
-    backtrace: backtrace::Backtrace,
 }
 
 define_app_errors!(
@@ -123,7 +116,7 @@ impl std::fmt::Debug for AppError {
 
 impl std::fmt::Display for AppError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{self:?}")
+        write!(f, "{}", self.msg)
     }
 }
 
@@ -150,13 +143,27 @@ impl From<tauri_plugin_shell::process::Output> for AppError {
             cow.to_string().to_owned()
         };
         let backtrace = backtrace::Backtrace::new();
-        AppError { msg, backtrace }
+        AppError {
+            code: 0,
+            msg,
+            backtrace,
+        }
     }
 }
 
 impl<T> From<crossbeam_channel::SendError<T>> for AppError {
     fn from(_err: crossbeam_channel::SendError<T>) -> Self {
         "Crossbeam channel disconnected".into()
+    }
+}
+
+impl From<reqwest::StatusCode> for AppError {
+    fn from(status: reqwest::StatusCode) -> Self {
+        AppError {
+            code: status.as_u16(),
+            msg: status.canonical_reason().unwrap_or("Unknown").to_string(),
+            backtrace: backtrace::Backtrace::new(),
+        }
     }
 }
 
@@ -175,11 +182,6 @@ pub trait ResultLogExt {
     fn log_error(self);
 }
 
-// todo remove this trait
-pub trait ErrorMap<T> {
-    fn wrap_error(self) -> core::result::Result<T, AppError>;
-}
-
 impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
     fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error> {
         match self {
@@ -195,13 +197,6 @@ impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
                 }
             }
         }
-    }
-}
-
-impl<T, E: Into<AppError>> ErrorMap<T> for core::result::Result<T, E> {
-    #[inline(always)]
-    fn wrap_error(self) -> core::result::Result<T, AppError> {
-        self.map_err(Into::into)
     }
 }
 

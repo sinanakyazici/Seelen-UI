@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Учитајте прилагођену конфигуријску датотеку
   data_folder: Мапа података
   enable: Омогућите алате за програмере
+  enable_description: >-
+    Откључава напредне алате за проверу и отклањање грешака у унутрашњости
+    Сеелен корисничког интерфејса. Није намењен за редовну употребу.
   icons: Кеширане иконе
   install_folder: Инсталациона мапа
   load: Оптеретити
@@ -94,6 +97,10 @@ devtools:
     trigger: Симулирајте
     widget_id_placeholder: '@аутхор/видгет-наме'
   tools: Алати
+  unlock_shortcuts: Откључајте пречице само за читање
+  unlock_shortcuts_description: >-
+    Дозволите пречице за уређивање које су обично само за читање (нпр. системске
+    замене).
   unstable_optimizations: Нестабилне оптимизације
   unstable_optimizations_description: >-
     Омогућите експерименталне Цхромиум ознаке које смањују употребу РАМ-а. 
@@ -125,6 +132,8 @@ extras:
   clear_icons_tooltip: >-
     Могло би се поновно покретање моћи да у потпуности ступи на снагу на све
     видгете
+  discord_rpc: Раздор богато присуство
+  discord_rpc_description: Покажите свима да имате стила!
   exit: Престанак / излаз
   relaunch: Поновити
   streaming_mode: Стреаминг Моде
@@ -176,6 +185,7 @@ general:
   theme:
     available: Доступне теме
     selected: Активне теме
+global: Глобал
 header:
   labels:
     config: Конфигурације
@@ -216,6 +226,7 @@ reset_to_default: Ресетујте на подразумевану вредн�
 resources:
   affected_widgets: Погођени виџети
   app_outdated: Овај ресурс захтева новију верзију СЕЕЛЕН-а да ради правилно.
+  coming_soon: Ускоро
   corrupted_wallpaper: Екстраховање сличице није успело – оштећен или неподржан видео формат
   delete: Избриши ресурс
   discover: Откријте више ресурса

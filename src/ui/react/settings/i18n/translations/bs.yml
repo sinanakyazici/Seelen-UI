@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Učitajte prilagođenu datoteku config config
   data_folder: Mapa podataka
   enable: Omogućite alate za programere
+  enable_description: >-
+    Otključava napredne alate za inspekciju i otklanjanje grešaka u
+    unutrašnjosti Seelen UI. Nije predviđeno za redovnu upotrebu.
   icons: Keširane ikone
   install_folder: Instalacijska mapa
   load: Opteretiti
@@ -95,6 +98,10 @@ devtools:
     trigger: Simuliraj
     widget_id_placeholder: '@autor/ime-widgeta'
   tools: Alati
+  unlock_shortcuts: Otključajte prečice samo za čitanje
+  unlock_shortcuts_description: >-
+    Dozvolite prečice za uređivanje koje su obično samo za čitanje (npr.
+    sistemska poništavanja).
   unstable_optimizations: Nestabilne optimizacije
   unstable_optimizations_description: >-
     Omogućite eksperimentalne Chromium zastavice koje smanjuju korištenje RAM-a.
@@ -124,6 +131,8 @@ extras:
   backup_sync_description: Automatski napravite rezervnu kopiju i vratite svoje postavke putem oblaka.
   clear_icons: Clear System Icons predmemorija
   clear_icons_tooltip: Može se ponovo pokrenuti za u potpunosti stupiti na snagu na svim widgetima
+  discord_rpc: Discord bogato prisustvo
+  discord_rpc_description: Pokažite svima da imate stila!
   exit: Prestanite / izlaz
   relaunch: Ponovno pokretanje
   streaming_mode: Streaming Mode
@@ -175,6 +184,7 @@ general:
   theme:
     available: Dostupne teme
     selected: Aktivne teme
+global: Global
 header:
   labels:
     config: Konfiguracija
@@ -215,6 +225,7 @@ reset_to_default: Resetiranje na zadanu vrijednost
 resources:
   affected_widgets: Pogođeni vidžeti
   app_outdated: Ovaj resurs zahtijeva noviju verziju Seelen Ui da radi pravilno.
+  coming_soon: Uskoro
   corrupted_wallpaper: Ekstrahiranje sličice nije uspjelo - oštećen ili nepodržan video format
   delete: Izbriši resurs
   discover: Otkrijte više resursa

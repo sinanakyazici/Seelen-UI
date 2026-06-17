@@ -80,6 +80,9 @@ devtools:
   custom_config_file: कस्टम कॉन्फ़िगर फ़ाइल लोड करें
   data_folder: डेटा फ़ोल्डर
   enable: डेवलपर टूल सक्षम करें
+  enable_description: >-
+    सेलेन यूआई आंतरिकों के निरीक्षण और डिबगिंग के लिए उन्नत टूल को अनलॉक करता
+    है। नियमित उपयोग के लिए अभिप्रेत नहीं है.
   icons: कैश्ड चिह्न
   install_folder: स्थापना फ़ोल्डर
   load: भार
@@ -95,6 +98,10 @@ devtools:
     trigger: अनुकरण
     widget_id_placeholder: '@लेखक/विजेट-नाम'
   tools: औजार
+  unlock_shortcuts: केवल पढ़ने योग्य शॉर्टकट अनलॉक करें
+  unlock_shortcuts_description: >-
+    ऐसे शॉर्टकट संपादित करने की अनुमति दें जो सामान्य रूप से केवल-पढ़ने के लिए
+    होते हैं (उदाहरण के लिए सिस्टम ओवरराइड)।
   unstable_optimizations: अस्थिर अनुकूलन
   unstable_optimizations_description: >-
     प्रयोगात्मक क्रोमियम फ़्लैग सक्षम करें जो RAM उपयोग को कम करते हैं।
@@ -128,6 +135,8 @@ extras:
   clear_icons_tooltip: >-
     सभी विजेट पर पूरी तरह से प्रभावी होने के लिए एक पुनरारंभ की आवश्यकता हो सकती
     है
+  discord_rpc: कलह समृद्ध उपस्थिति
+  discord_rpc_description: हर किसी को दिखाएँ कि आपके पास स्टाइल है!
   exit: छोड़ देना/बाहर निकलना
   relaunch: 'पुन: लॉन्च'
   streaming_mode: स्ट्रीमिंग मोड
@@ -180,6 +189,7 @@ general:
   theme:
     available: उपलब्ध थीम्स
     selected: सक्रिय विषय-वस्तु
+global: वैश्विक
 header:
   labels:
     config: विन्यास
@@ -222,6 +232,7 @@ resources:
   app_outdated: >-
     इस संसाधन को ठीक से काम करने के लिए सेलेन यूआई के एक नए संस्करण की आवश्यकता
     होती है।
+  coming_soon: जल्द आ रहा है
   corrupted_wallpaper: थंबनेल निकालने में विफल - दूषित या असमर्थित वीडियो प्रारूप
   delete: संसाधन हटाएं
   discover: अधिक संसाधनों की खोज करें

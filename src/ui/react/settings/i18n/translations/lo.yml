@@ -77,6 +77,9 @@ devtools:
   custom_config_file: ໂຫຼດໄຟລ໌ການຕັ້ງຄ່າແບບກຳນົດເອງ
   data_folder: ແຟ້ມຂໍ້ມູນ
   enable: ເປີດໃຊ້ເຄື່ອງມືນັກພັດທະນາ
+  enable_description: >-
+    ປົດລັອກເຄື່ອງມືຂັ້ນສູງສຳລັບການກວດສອບ ແລະແກ້ໄຂຂໍ້ມູນພາຍໃນ Seelen UI.
+    ບໍ່ໄດ້ມີຈຸດປະສົງສໍາລັບການນໍາໃຊ້ປົກກະຕິ.
   icons: ໄອຄອນທີ່ຈັດເກັບໄວ້
   install_folder: ໂຟນເດີການຕິດຕັ້ງ
   load: ໂຫຼດ
@@ -92,6 +95,8 @@ devtools:
     trigger: ຈຳລອງ
     widget_id_placeholder: '@author/widget-name'
   tools: ເຄື່ອງມື
+  unlock_shortcuts: ປົດລັອກທາງລັດອ່ານເທົ່ານັ້ນ
+  unlock_shortcuts_description: 'ອະນຸຍາດໃຫ້ແກ້ໄຂທາງລັດທີ່ປົກກະຕິອ່ານເທົ່ານັ້ນ (ເຊັ່ນ: ການລົບລ້າງລະບົບ).'
   unstable_optimizations: ການເພີ່ມປະສິດທິພາບທີ່ບໍ່ສະຖຽນ
   unstable_optimizations_description: >-
     ເປີດໃຊ້ທຸງ Chromium ທົດລອງທີ່ຫຼຸດການໃຊ້ RAM.
@@ -121,6 +126,8 @@ extras:
   backup_sync_description: ສຳຮອງຂໍ້ມູນອັດຕະໂນມັດ ແລະຟື້ນຟູການຕັ້ງຄ່າຂອງທ່ານຜ່ານຄລາວ.
   clear_icons: ລະບົບໄອຄອນລະບົບໄອຄອນ
   clear_icons_tooltip: ການເລີ່ມຕົ້ນໃຫມ່ອາດຈະມີຜົນບັງຄັບໃຊ້ຢ່າງເຕັມສ່ວນໃນທຸກໆ widget
+  discord_rpc: ຄວາມຂັດແຍ້ງທີ່ອຸດົມສົມບູນ
+  discord_rpc_description: ສະແດງໃຫ້ທຸກຄົນມີສະໄຕລ໌!
   exit: ອອກ/ອອກ
   relaunch: ເປີດຄືນໃໝ່
   streaming_mode: ໂໝດສະຕຣີມ
@@ -172,6 +179,7 @@ general:
   theme:
     available: ຮູບແບບສີສັນທີ່ມີຢູ່
     selected: ຮູບແບບການເຄື່ອນໄຫວ
+global: ທົ່ວໂລກ
 header:
   labels:
     config: ການຕັ້ງຄ່າການຕັ້ງຄ່າ
@@ -212,6 +220,7 @@ reset_to_default: ຕັ້ງຄ່າໃຫມ່ໃຫ້ກັບຄ່າ�
 resources:
   affected_widgets: Widgets ໄດ້ຮັບຜົນກະທົບ
   app_outdated: ຊັບພະຍາກອນນີ້ຮຽກຮ້ອງໃຫ້ມີ Searen ລຸ້ນໃຫມ່ UI ໃຫ້ເຮັດວຽກຢ່າງຖືກຕ້ອງ.
+  coming_soon: ໄວໆນີ້
   corrupted_wallpaper: ລົ້ມເຫລວໃນການສະກັດຮູບຫຍໍ້ - ຮູບແບບວິດີໂອເສຍຫາຍ ຫຼືບໍ່ຮອງຮັບ
   delete: ລົບລ້າງຊັບພະຍາກອນ
   discover: ຄົ້ນພົບຊັບພະຍາກອນເພີ່ມເຕີມ

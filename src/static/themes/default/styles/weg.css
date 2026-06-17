@@ -16,13 +16,17 @@
   }
 }
 
-.taskbar {
-  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
+.taskbar[data-has-margin="true"],
+.taskbar[data-size="min-content"] {
   border-radius: 15px;
 
   > .weg-items-container {
     border-radius: 15px;
   }
+}
+
+.taskbar {
+  background-color: oklch(from var(--slu-std-bg-color) l c h / 0.8);
 
   &.horizontal {
     > .weg-items-container {

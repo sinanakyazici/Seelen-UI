@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Luede personaliséiert Konfiguratiounsdatei
   data_folder: Etabond Dossier
   enable: Aktivéiert Entwéckler Tools
+  enable_description: >-
+    Spär fortgeschratt Tools fir Inspektioun an Debugging Seelen UI Interns. Net
+    fir regelméisseg Gebrauch geduecht.
   icons: Cache Ikonen
   install_folder: Installatioun Dossier
   load: Lueden
@@ -95,6 +98,10 @@ devtools:
     trigger: Simuléieren
     widget_id_placeholder: '@auteur/widget-name'
   tools: Tools
+  unlock_shortcuts: Spär Read-Only Ofkiirzungen
+  unlock_shortcuts_description: >-
+    Erlaabt Änneren Ofkiirzungen déi normalerweis nëmme liesen (z.B. System
+    Iwwerschreiden).
   unstable_optimizations: Onbestänneg Optimisatiounen
   unstable_optimizations_description: >-
     Aktivéiert experimentell Chromium Fändelen déi d'RAM Benotzung reduzéieren.
@@ -124,6 +131,8 @@ extras:
   backup_sync_description: Automatesch Backup a restauréiert Är Astellungen iwwer d'Wollek.
   clear_icons: Kloer System Symboler Cache
   clear_icons_tooltip: E Restart konnt noutwendeg sinn fir ganz wéi all Widgets ze maachen
+  discord_rpc: Discord räich Präsenz
+  discord_rpc_description: Weist jidderengem datt Dir Stil hutt!
   exit: Ophalen / erausfannen
   relaunch: Relatioun
   streaming_mode: Streaming Modus
@@ -176,6 +185,7 @@ general:
   theme:
     available: Verfügbar Themen
     selected: Aktiv Themen
+global: Global
 header:
   labels:
     config: Konfiguratioun
@@ -216,6 +226,7 @@ reset_to_default: Reset op Standardwäert
 resources:
   affected_widgets: Betraff Widgets
   app_outdated: Dës Ressource brauch eng nei Versioun vu Seelen Ui fir richteg ze schaffen.
+  coming_soon: Geschwënn
   corrupted_wallpaper: Ausgefall Miniatur Extrait - korrupt oder net ënnerstëtzt Video Format
   delete: Läschen Ressource
   discover: Entdeckt méi Ressourcen

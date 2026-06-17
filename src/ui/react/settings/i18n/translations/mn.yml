@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Custom Compigh файлыг ачаалах
   data_folder: Д код хавтас
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
+  enable_description: >-
+    Seelen UI-ийн дотоод хэсгүүдийг шалгаж, дибаг хийх дэвшилтэт хэрэгслүүдийн
+    түгжээг нээдэг. Тогтмол хэрэглээнд зориулагдаагүй.
   icons: Кэшлэгдсэн дүрсүүд
   install_folder: Суулгалах хүрээ
   load: Ачих
@@ -94,6 +97,10 @@ devtools:
     trigger: Дуурайх
     widget_id_placeholder: '@зохиогч/виджетийн нэр'
   tools: Багаж хэрэгсэл
+  unlock_shortcuts: Зөвхөн унших боломжтой товчлолуудын түгжээг тайл
+  unlock_shortcuts_description: >-
+    Ердийн үед зөвхөн унших боломжтой товчлолуудыг засварлахыг зөвшөөрөх (жишээ
+    нь, системийн хүчингүй болгох).
   unstable_optimizations: Тогтворгүй оновчлолууд
   unstable_optimizations_description: >-
     RAM ашиглалтыг бууруулдаг туршилтын Chromium дарцагуудыг идэвхжүүлнэ үү.
@@ -125,6 +132,8 @@ extras:
   clear_icons_tooltip: >-
     Бүх виджет дээр хүчин төгөлдөр болохын тулд дахин эхлүүлэх шаардлагатай байж
     болно
+  discord_rpc: Баян оршихуйг зөрчих
+  discord_rpc_description: Өөрийнхөө хэв маягийг хүн бүрт харуул!
   exit: Гарах / гарах
   relaunch: OradAUN
   streaming_mode: Дамжуулах горим
@@ -177,6 +186,7 @@ general:
   theme:
     available: Боломжтой загварууд
     selected: Идэвхтэй сэдэв
+global: Глобал
 header:
   labels:
     config: Тохиргоо
@@ -217,6 +227,7 @@ reset_to_default: Үндсэн утга руу дахин тохируулна �
 resources:
   affected_widgets: Нөлөөлөлд өртсөн виджетүүд
   app_outdated: Энэ нөөц нь Seelen Ui-ийн шинэ хувилбарыг зөв ажиллахыг шаарддаг.
+  coming_soon: Удахгүй
   corrupted_wallpaper: Өнгөц зургийг задалж чадсангүй - гэмтсэн эсвэл дэмжигдээгүй видео формат
   delete: Нөөцийг устгах
   discover: Илүү их нөөцийг олж мэдэх

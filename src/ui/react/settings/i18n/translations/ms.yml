@@ -80,6 +80,9 @@ devtools:
   custom_config_file: Muatkan fail konfigurasi tersuai
   data_folder: Folder Data
   enable: Dayakan alat pemaju
+  enable_description: >-
+    Membuka kunci alatan lanjutan untuk memeriksa dan menyahpepijat dalaman UI
+    Seelen. Tidak bertujuan untuk kegunaan biasa.
   icons: Ikon Cache
   install_folder: Folder pemasangan
   load: Beban
@@ -95,6 +98,10 @@ devtools:
     trigger: Simulasikan
     widget_id_placeholder: '@nama pengarang/widget'
   tools: Alatan
+  unlock_shortcuts: Buka kunci Pintasan Baca Sahaja
+  unlock_shortcuts_description: >-
+    Benarkan pintasan pengeditan yang biasanya dibaca sahaja (cth. menimpa
+    sistem).
   unstable_optimizations: Pengoptimuman Tidak Stabil
   unstable_optimizations_description: >-
     Dayakan bendera Chromium percubaan yang mengurangkan penggunaan RAM.
@@ -124,6 +131,8 @@ extras:
   backup_sync_description: Sandarkan dan pulihkan tetapan anda secara automatik melalui awan.
   clear_icons: Cacon Ikon Sistem Jelas
   clear_icons_tooltip: Restart boleh dikehendaki sepenuhnya pada semua widget
+  discord_rpc: Kehadiran yang kaya dengan perselisihan
+  discord_rpc_description: Tunjukkan kepada semua orang bahawa anda mempunyai gaya!
   exit: Berhenti/keluar
   relaunch: Pelancaran semula
   streaming_mode: Mod Penstriman
@@ -176,6 +185,7 @@ general:
   theme:
     available: Tema yang Tersedia
     selected: Tema Aktif
+global: Global
 header:
   labels:
     config: Konfigurasi
@@ -218,6 +228,7 @@ resources:
   app_outdated: >-
     Sumber ini memerlukan versi Seelen UI yang lebih baru untuk berfungsi dengan
     baik.
+  coming_soon: Akan Datang
   corrupted_wallpaper: Gagal mengeluarkan lakaran kecil - format video rosak atau tidak disokong
   delete: Padam sumber
   discover: Cari lebih banyak sumber

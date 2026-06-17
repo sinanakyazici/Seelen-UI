@@ -79,6 +79,9 @@ devtools:
   custom_config_file: Tagħbija Fajl tal-Konfigurazzjoni Custom
   data_folder: Folder tad-dejta
   enable: Ippermetti għodod għall-iżviluppaturi
+  enable_description: >-
+    Jiżblokka għodod avvanzati għall-ispezzjoni u l-iddibaggjar tal-interns
+    tal-UI Seelen. Mhux maħsub għal użu regolari.
   icons: Ikoni Cached
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
@@ -94,6 +97,10 @@ devtools:
     trigger: Issimula
     widget_id_placeholder: '@ awtur/widget-isem'
   tools: Għodda
+  unlock_shortcuts: Nisfruttaw Shortcuts tal-Qari biss
+  unlock_shortcuts_description: >-
+    Ippermetti shortcuts tal-editjar li normalment jinqraw biss (eż. overrides
+    tas-sistema).
   unstable_optimizations: Ottimizzazzjonijiet instabbli
   unstable_optimizations_description: >-
     Ippermetti bnadar sperimentali tal-Kromju li jnaqqsu l-użu tar-RAM.
@@ -127,6 +134,8 @@ extras:
   clear_icons_tooltip: >-
     Jista 'jkun meħtieġ li jerġa' jkun meħtieġ biex jidħol fis-seħħ fuq
     il-widgets kollha
+  discord_rpc: Discord preżenza rikka
+  discord_rpc_description: Uri lil kulħadd li għandek stil!
   exit: Nieqaf / ħruġ
   relaunch: Tnedija mill-ġdid
   streaming_mode: Modalità Streaming
@@ -179,6 +188,7 @@ general:
   theme:
     available: Temi Disponibbli
     selected: Temi Attivi
+global: Globali
 header:
   labels:
     config: Konfigurazzjonijiet
@@ -219,6 +229,7 @@ reset_to_default: Irrisettja għall-valur awtomatiku
 resources:
   affected_widgets: Widgets Affettwati
   app_outdated: Din ir-riżorsa teħtieġ verżjoni aktar ġdida ta 'Seelen UI biex taħdem sew.
+  coming_soon: Dalwaqt
   corrupted_wallpaper: >-
     Naqas milli jiġi estratt thumbnail - format tal-vidjo korrotta jew mhux
     appoġġjata

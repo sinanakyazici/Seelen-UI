@@ -76,6 +76,9 @@ devtools:
   custom_config_file: โหลดไฟล์กำหนดค่าที่กำหนดเอง
   data_folder: โฟลเดอร์ข้อมูล
   enable: เปิดใช้งานเครื่องมือนักพัฒนาซอฟต์แวร์
+  enable_description: >-
+    ปลดล็อกเครื่องมือขั้นสูงสำหรับการตรวจสอบและแก้ไขจุดบกพร่องภายใน UI ของ
+    Seelen ไม่ได้มีไว้สำหรับการใช้งานปกติ
   icons: ไอคอนแคช
   install_folder: โฟลเดอร์การติดตั้ง
   load: โหลด
@@ -91,6 +94,8 @@ devtools:
     trigger: จำลอง
     widget_id_placeholder: '@author/widget-name'
   tools: เครื่องมือ
+  unlock_shortcuts: ปลดล็อคทางลัดแบบอ่านอย่างเดียว
+  unlock_shortcuts_description: อนุญาตให้แก้ไขทางลัดที่ปกติเป็นแบบอ่านอย่างเดียว (เช่น การแทนที่ระบบ)
   unstable_optimizations: การเพิ่มประสิทธิภาพที่ไม่เสถียร
   unstable_optimizations_description: >-
     เปิดใช้งานการตั้งค่าสถานะ Chromium รุ่นทดลองที่ลดการใช้ RAM 
@@ -120,6 +125,8 @@ extras:
   backup_sync_description: สำรองและกู้คืนการตั้งค่าของคุณโดยอัตโนมัติผ่านระบบคลาวด์
   clear_icons: ล้างไอคอนระบบแคช
   clear_icons_tooltip: การรีสตาร์ทอาจจำเป็นต้องมีผลอย่างเต็มที่กับวิดเจ็ตทั้งหมด
+  discord_rpc: ไม่ลงรอยกันการปรากฏตัวที่อุดมไปด้วย
+  discord_rpc_description: แสดงให้ทุกคนเห็นว่าคุณมีสไตล์!
   exit: ออก/ออก
   relaunch: เปิดใหม่
   streaming_mode: โหมดสตรีมมิ่ง
@@ -171,6 +178,7 @@ general:
   theme:
     available: ธีมที่มีจำหน่าย
     selected: ธีมที่ใช้งานอยู่
+global: ทั่วโลก
 header:
   labels:
     config: การกำหนดค่า
@@ -211,6 +219,7 @@ reset_to_default: รีเซ็ตเป็นค่าเริ่มต้�
 resources:
   affected_widgets: วิดเจ็ตที่ได้รับผลกระทบ
   app_outdated: ทรัพยากรนี้ต้องการ Seelen UI รุ่นใหม่กว่าเพื่อทำงานอย่างถูกต้อง
+  coming_soon: เร็วๆ นี้
   corrupted_wallpaper: ไม่สามารถแยกภาพขนาดย่อได้ - รูปแบบวิดีโอเสียหายหรือไม่รองรับ
   delete: ลบทรัพยากร
   discover: ค้นพบทรัพยากรเพิ่มเติม

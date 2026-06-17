@@ -80,6 +80,9 @@ devtools:
   custom_config_file: ჩატვირთეთ პერსონალური კონფიგურაციის ფაილი
   data_folder: მონაცემთა საქაღალდე
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
+  enable_description: >-
+    ხსნის მოწინავე ინსტრუმენტებს Seelen UI-ის ინტერიერების შესამოწმებლად და
+    გამართვისთვის. არ არის განკუთვნილი რეგულარული გამოყენებისთვის.
   icons: ქეშირებული ხატები
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
@@ -95,6 +98,10 @@ devtools:
     trigger: სიმულაცია
     widget_id_placeholder: '@author/widget-name'
   tools: ხელსაწყოები
+  unlock_shortcuts: განბლოკეთ მხოლოდ წაკითხული მალსახმობები
+  unlock_shortcuts_description: >-
+    მალსახმობების რედაქტირების დაშვება, რომლებიც ჩვეულებრივ მხოლოდ წაკითხვადია
+    (მაგ. სისტემის უგულებელყოფა).
   unstable_optimizations: არასტაბილური ოპტიმიზაცია
   unstable_optimizations_description: >-
     ჩართეთ ექსპერიმენტული Chromium დროშები, რომლებიც ამცირებს RAM-ის
@@ -127,6 +134,8 @@ extras:
     ღრუბლის საშუალებით.
   clear_icons: სუფთა სისტემის ხატები ქეში
   clear_icons_tooltip: გადატვირთვა შეიძლება საჭირო გახდეს, რომ სრულად იმოქმედოს ყველა ვიჯეტზე
+  discord_rpc: უთანხმოება მდიდარი ყოფნა
+  discord_rpc_description: აჩვენე ყველას, რომ სტილი გაქვს!
   exit: დატოვება/გასვლა
   relaunch: გაუქმება
   streaming_mode: სტრიმინგის რეჟიმი
@@ -178,6 +187,7 @@ general:
   theme:
     available: ხელმისაწვდომი თემები
     selected: აქტიური თემები
+global: გლობალური
 header:
   labels:
     config: კონფიგურაცია
@@ -218,6 +228,7 @@ reset_to_default: ნაგულისხმევი მნიშვნელ�
 resources:
   affected_widgets: დაზარალებული ვიჯეტები
   app_outdated: ეს რესურსი მოითხოვს Seelen UI– ს ახალ ვერსიას, რომ სწორად იმუშაოს.
+  coming_soon: მალე
   corrupted_wallpaper: ესკიზის ამოღება ვერ მოხერხდა - ვიდეო ფორმატი დაზიანებულია ან მხარდაუჭერელია
   delete: წაშალეთ რესურსი
   discover: აღმოაჩინეთ მეტი რესურსი
