@@ -28,11 +28,6 @@
     pinnedTrayIcons = icons;
   });
 
-  // Re-broadcast `TaskbarCreated` whenever the flyout opens so apps that hadn't
-  // registered their tray icon yet re-add it (the same recovery explorer.exe
-  // does on restart). Newly registered icons arrive live via SystemTrayChanged.
-  invoke(SeelenCommand.RefreshSystemTrayIcons).catch(() => {});
-
   function onClick(event: MouseEvent, id: SysTrayIconId) {
     // prevent be triggered by double click
     if (event.detail === 2) {
@@ -140,7 +135,7 @@
 
 <div class={["slu-std-popover", "system-tray"]}>
   {#each trayState.trayItems as item}
-    {#if (!item.guid || !GUIDS_TO_IGNORE.includes(item.guid))}
+    {#if item.is_visible && (!item.guid || !GUIDS_TO_IGNORE.includes(item.guid))}
       <button
         class="system-tray-item"
         onclick={(e) => onClick(e, item.stable_id)}
