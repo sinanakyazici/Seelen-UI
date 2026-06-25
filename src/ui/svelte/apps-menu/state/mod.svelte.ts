@@ -1,7 +1,13 @@
-import { invoke, SeelenCommand, SeelenEvent, subscribe } from "@seelen-ui/lib";
+import { invoke, SeelenCommand, SeelenEvent, Settings, subscribe } from "@seelen-ui/lib";
 import type { StartMenuItem, StartMenuLayoutItem } from "@seelen-ui/lib/types";
 import { lazyRune, persistentRune } from "libs/ui/svelte/utils";
 import { StartDisplayMode, StartView } from "../constants";
+import { foldersAsStartMenuItems } from "./knownFolders.svelte";
+
+import { locale } from "../i18n/index.ts";
+
+let settings = lazyRune(() => Settings.getAsync());
+Settings.onChange((s) => (settings.value = s));
 
 const user = lazyRune(() => invoke(SeelenCommand.GetUser));
 subscribe(SeelenEvent.UserChanged, user.setByPayload);
@@ -12,7 +18,13 @@ subscribe(SeelenEvent.SystemMonitorsChanged, monitors.setByPayload);
 const startMenuItems = lazyRune(() => invoke(SeelenCommand.GetStartMenuItems));
 subscribe(SeelenEvent.StartMenuItemsChanged, startMenuItems.setByPayload);
 
-await Promise.all([user.init(), monitors.init(), startMenuItems.init()]);
+await Promise.all([settings.init(), user.init(), monitors.init(), startMenuItems.init()]);
+
+$effect.root(() => {
+  $effect(() => {
+    locale.set(settings.value.language || "en");
+  });
+});
 
 // Folder and pinned items types
 export interface FavFolderItem {
@@ -218,31 +230,33 @@ function disbandFolder(folderId: string): void {
 // Verify pinned items still exist
 function verifyPinnedItems() {
   const items = startMenuItems.value;
-  const validIds = new Set(items.map(getItemId));
+  const folderItems = foldersAsStartMenuItems.value;
+  const validIds = new Set([...items, ...folderItems].map(getItemId));
 
-  const validPinned = pinnedItems.value
-    .map((pinned) => {
-      if (pinned.type === "app") {
-        return validIds.has(pinned.itemId) ? pinned : null;
-      } else {
-        const validItemIds = pinned.itemIds.filter((id) => validIds.has(id));
-        // Remove folder if it has less than 2 items
-        if (validItemIds.length < 2) {
-          return null;
-        }
-        return { ...pinned, itemIds: validItemIds };
-      }
-    })
-    .filter((item): item is FavPinnedItem => item !== null);
+  // Path-based items (manually pinned arbitrary files) are always kept.
+  function isValid(id: string): boolean {
+    return validIds.has(id) || id.includes("\\") || id.includes("/");
+  }
 
-  if (validPinned.length !== pinnedItems.value.length) {
+  const current = pinnedItems.value;
+  const validPinned: FavPinnedItem[] = [];
+
+  for (const pinned of current) {
+    if (pinned.type === "app") {
+      if (isValid(pinned.itemId)) validPinned.push(pinned);
+    } else {
+      const validItemIds = pinned.itemIds.filter(isValid);
+      if (validItemIds.length >= 2) validPinned.push({ ...pinned, itemIds: validItemIds });
+    }
+  }
+
+  if (validPinned.length !== current.length) {
     pinnedItems.value = validPinned;
   }
 }
 
 $effect.root(() => {
   $effect(() => {
-    startMenuItems.value;
     verifyPinnedItems();
   });
 });
@@ -296,7 +310,24 @@ class State {
 
   // Get StartMenuItem by ID
   getMenuItem(id: string): StartMenuItem | undefined {
-    return this.allItems.find((item) => getItemId(item) === id);
+    const fromStart = this.allItems.find((item) => getItemId(item) === id);
+    if (fromStart) return fromStart;
+
+    const fromFolders = foldersAsStartMenuItems.value.find((item) => getItemId(item) === id);
+    if (fromFolders) return fromFolders;
+
+    // Synthesize an item for arbitrary path-based pins (e.g. pinned from dock)
+    if (id.includes("\\") || id.includes("/")) {
+      return {
+        path: id,
+        umid: null,
+        display_name: id.split(/[\\/]/g).pop() || id,
+        target: null,
+        toast_activator: null,
+      };
+    }
+
+    return undefined;
   }
 }
 

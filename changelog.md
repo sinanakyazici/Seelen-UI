@@ -1,5 +1,36 @@
 # Changelog
 
+## [2.7.4-dev]
+
+### enhancements
+
+- default theme inconsistencies.
+
+## [2.7.3]
+
+### fix
+
+- slu client failing without printing real error.
+- tooltips being focused on show.
+- not closing tooltips on hide.
+
+## [2.7.2]
+
+### features
+
+- html wallpapers.
+
+### enhancements
+
+- twm animations.
+- lazy load of translations.
+- reduce boot time for toolbar and dock.
+
+### fix
+
+- app bars not being registered.
+- dock and toolbar not being on top, after exiting from fullscreen app.
+
 ## [2.7.1]
 
 ### enhancements

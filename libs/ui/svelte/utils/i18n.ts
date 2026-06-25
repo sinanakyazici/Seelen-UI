@@ -1,7 +1,8 @@
 import { derived, get, writable } from "svelte/store";
+import yaml from "js-yaml";
 
-export const locale = writable("en");
-const messages = writable<Record<string, any>>({});
+const _locale = writable("en");
+const _messages = writable<Record<string, any>>({});
 
 function translate(locale: string, key: string, vars: Record<string, string> = {}) {
   // Let's throw some errors if we're trying to use keys/locales that don't exist.
@@ -12,7 +13,7 @@ function translate(locale: string, key: string, vars: Record<string, string> = {
   // Grab the translation from the translations object.
   // Support nested keys like "profile.log_out"
   const keys = key.split(".");
-  let text = get(messages)[locale];
+  let text = get(_messages)[locale];
   for (const k of keys) {
     text = text?.[k];
   }
@@ -20,7 +21,7 @@ function translate(locale: string, key: string, vars: Record<string, string> = {
   if (!text) {
     console.error(`no translation found for ${locale}.${key}`);
     // Try fallback to English
-    let fallback = get(messages)["en"];
+    let fallback = get(_messages)["en"];
     for (const k of keys) {
       fallback = fallback?.[k];
     }
@@ -41,10 +42,32 @@ function translate(locale: string, key: string, vars: Record<string, string> = {
 }
 
 export const t = derived(
-  locale,
-  ($locale) => (key: string, vars?: Record<string, string>) => translate($locale, key, vars),
+  _locale,
+  (locale) => (key: string, vars?: Record<string, string>) => translate(locale, key, vars),
 );
 
+export const locale = {
+  get value() {
+    return get(_locale);
+  },
+
+  async set(newLocale: string) {
+    if (get(_messages)[newLocale]) {
+      _locale.set(newLocale);
+      return;
+    }
+
+    const res = await fetch(`./translations/${newLocale}.yml`);
+    const text = await res.text();
+    const messages = yaml.load(text) as Record<string, any>;
+    _messages.update((m) => ({
+      ...m,
+      [newLocale]: messages,
+    }));
+    _locale.set(newLocale);
+  },
+};
+
 export function setMessages(newMessages: Record<string, any>) {
-  messages.set(newMessages);
+  _messages.set(newMessages);
 }

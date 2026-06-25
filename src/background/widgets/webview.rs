@@ -28,7 +28,7 @@ impl WidgetWebview {
         let title = widget.metadata.display_name.get(state.locale());
 
         let args = WebviewArgs::create(
-            state.settings.hardware_acceleration || widget.id == WidgetId::known_wall(),
+            state.settings.hardware_acceleration || widget.force_hardware_acceleration,
             state.settings.unstable_optimizations,
         );
 
@@ -70,12 +70,11 @@ impl WidgetWebview {
                 .skip_taskbar(true)
                 .minimizable(false)
                 .maximizable(false)
-                .closable(false)
-                .focusable(false);
+                .closable(false);
         }
 
         if matches!(widget.preset, WidgetPreset::Desktop | WidgetPreset::Overlay) {
-            builder = builder.focusable(false);
+            builder = builder.focusable(false).focused(false);
         }
 
         match widget.preset {
@@ -222,15 +221,23 @@ impl WebviewArgs {
         "--disable-features=translate,msWebOOUI,msPdfOOUI,msSmartScreenProtection,RendererAppContainer,BackForwardCache,InterestCohort,SharedArrayBuffer,CalculateNativeWinOcclusion,OptimizationHints,AutofillServerCommunication",
         "--no-first-run",
         "--disable-site-isolation-trials",
-        "--disk-cache-size=0",
-        "--media-cache-size=0",
+
+        "--disk-cache-size=1",
+        "--media-cache-size=1",
+
+        "--disable-extensions",
+        "--disable-component-extensions-with-background-pages",
+
+        "--disable-breakpad",
+        "--disable-crash-reporter",
+
         "--disable-background-networking",
+        "--disable-component-update",
         "--disable-background-timer-throttling",
         "--disable-backgrounding-occluded-windows",
         "--disable-renderer-backgrounding",
         "--disable-sync",
-        "--disable-breakpad",
-        "--disable-component-extensions-with-background-pages",
+
         "--no-pings",
         // "--aggressive-cache-discard", // maybe causes more resources than it reduces
     ];
@@ -249,7 +256,8 @@ impl WebviewArgs {
         // "--enable-low-end-device-mode", // unstable flag that causes more issues than it solves
         // "--in-process-gpu", // unstable flag
         "--disable-gpu",
-        "--disable-accelerated-video-decode",
+        "--disable-gpu-compositing",
+        "--disable-gpu-shader-disk-cache",
         "--disable-accelerated-video-encode",
         "--disable-gpu-rasterization",
         "--disable-software-rasterizer",

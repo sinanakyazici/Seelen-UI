@@ -96,6 +96,11 @@ export class Widget {
     return this.runtimeState.hwnd;
   }
 
+  /** Returns if the widget is ready */
+  get isReady(): boolean {
+    return this.runtimeState.ready;
+  }
+
   /** Returns the default config of the widget, declared on the widget definition */
   public getDefaultConfig(): ThirdPartyWidgetSettings {
     const config: ThirdPartyWidgetSettings = { enabled: true };
@@ -256,7 +261,9 @@ export class Widget {
         break;
     }
 
-    await startThemingTool();
+    if (options.useThemes ?? true) {
+      await startThemingTool();
+    }
     await initMonitorsState();
 
     if (options.disableCssAnimations ?? true) {
@@ -293,7 +300,6 @@ export class Widget {
 
     if (show && !(await this.window.isVisible())) {
       await this.show();
-      // await this.focus();
     }
 
     // this will mark the widget as ready, and send pending trigger event if exists

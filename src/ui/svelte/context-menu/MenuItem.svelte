@@ -61,7 +61,7 @@
   onmouseenter={closeOpenSubmenu}
 >
   {#if item.checked !== null}
-    <input type="checkbox" checked={internalChecked} />
+    <input type="checkbox" data-skin="default" checked={internalChecked} />
   {/if}
   {#if item.icon?.startsWith("http://asset.localhost")}
     <img class="menu-item-img-icon" src={item.icon} alt="" />

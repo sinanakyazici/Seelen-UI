@@ -4484,9 +4484,9 @@ checksum = "20675572f6f24e9e76ef639bc5552774ed45f1c30e2951e1e99c59888861c539"
 
 [[package]]
 name = "rayon"
-version = "1.11.0"
+version = "1.12.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "368f01d005bf8fd9b1206fb6fa653e6c4a81ceb1466406b81792d87c5677a58f"
+checksum = "fb39b166781f92d482534ef4b4b1b2568f42613b53e5b6c160e24cfbfa30926d"
 dependencies = [
  "either",
  "rayon-core",
@@ -5098,6 +5098,7 @@ version = "2.8.10"
 dependencies = [
  "base64 0.22.1",
  "chrono",
+ "futures",
  "grass",
  "num_enum",
  "paste",
@@ -5109,6 +5110,7 @@ dependencies = [
  "serde_path_to_error",
  "serde_yaml",
  "sys-locale",
+ "tokio",
  "ts-rs",
  "url",
  "uuid 1.22.0",
