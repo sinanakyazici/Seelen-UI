@@ -61,10 +61,26 @@
     }
   }
 
+  let rafId = 0;
+  // Keep the popover glued to the folder's CURRENT rect every frame while open.
+  // The active theme magnifies the folder icon on hover, which shifts its
+  // position/center; a one-shot measure at open time would leave the popover
+  // off to one side. Tracking each frame keeps it centred as the folder grows.
+  function trackPopover() {
+    computePopoverStyle();
+    if (open) rafId = requestAnimationFrame(trackPopover);
+  }
+
   function openPopover() {
     if (item.items.length === 0) return;
-    computePopoverStyle();
     open = true;
+    cancelAnimationFrame(rafId);
+    trackPopover();
+  }
+
+  function closePopover() {
+    open = false;
+    cancelAnimationFrame(rafId);
   }
 
   function entryWindowsOf(entry: FolderWegItem["items"][number]) {
@@ -119,7 +135,7 @@
   role="menu"
   tabindex="0"
   onmouseenter={openPopover}
-  onmouseleave={() => (open = false)}
+  onmouseleave={closePopover}
 >
   <div
     bind:this={folderEl}

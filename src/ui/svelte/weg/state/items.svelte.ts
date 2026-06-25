@@ -283,8 +283,17 @@ $effect.root(() => {
     );
 
     const remainingItems = appOrFileItems.filter((item) => !itemsToRemove.has(item.id));
+
+    // Apps nested inside folders also "cover" their windows, so launching one
+    // from the folder popover must NOT spawn a duplicate temporal item on the
+    // dock (the folder already represents it).
+    const folderEntries = state.items
+      .filter((i): i is Extract<WegItem, { type: "Folder" }> => i.type === WegItemType.Folder)
+      .flatMap((f) => f.items.map((e) => ({ type: WegItemType.AppOrFile, ...e } as AppOrFileWegItem)));
+    const coveringItems = [...remainingItems, ...folderEntries];
+
     const uncoveredWindows = windows.filter(
-      (w) => !remainingItems.some((item) => getWindowsForItem(item, [w]).length > 0),
+      (w) => !coveringItems.some((item) => getWindowsForItem(item, [w]).length > 0),
     );
 
     const seen = new Set<string>();
