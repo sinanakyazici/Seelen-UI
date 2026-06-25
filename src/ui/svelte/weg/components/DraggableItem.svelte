@@ -24,6 +24,11 @@
     get index() {
       return index;
     },
+    // Carry the item type so a folder's "folder-drop" zone can accept only app
+    // drags (and ignore folder reordering, which would otherwise hijack it).
+    get type() {
+      return item.type;
+    },
     get disabled() {
       return dockState.isReorderDisabled;
     },

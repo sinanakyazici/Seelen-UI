@@ -14,6 +14,7 @@ type BarMenuKey =
   | "add-media-module"
   | "add-trash-bin-module"
   | "add-item"
+  | "create-group"
   | "reorder"
   | "task_manager"
   | "settings";
@@ -31,6 +32,9 @@ async function handleBarMenuClick(key: BarMenuKey) {
       break;
     case "add-trash-bin-module":
       dockStateActions.addTrashBinModule();
+      break;
+    case "create-group":
+      dockStateActions.createFolder();
       break;
     case "reorder":
       dockState.state = {
@@ -108,6 +112,13 @@ export function getSeelenWegMenu(t: (key: string) => string): ContextMenu {
         key: "add-item",
         icon: "RiFileAddLine",
         label: t("taskbar_menu.add_file"),
+        callbackEvent: onBarMenuClick,
+      },
+      {
+        type: "Item",
+        key: "create-group",
+        icon: "MdCreateNewFolder",
+        label: t("separator.create_group"),
         callbackEvent: onBarMenuClick,
       },
       { type: "Separator" },

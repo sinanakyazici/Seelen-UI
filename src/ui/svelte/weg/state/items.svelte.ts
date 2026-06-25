@@ -174,7 +174,98 @@ export const dockStateActions = {
       };
     }
   },
+  // ---- Folder (group) actions — fork feature, re-ported to the Svelte weg ----
+  createFolder() {
+    const folder = {
+      id: crypto.randomUUID(),
+      type: WegItemType.Folder,
+      displayName: "Group",
+      color: null,
+      items: [],
+    } as unknown as WegItem;
+    const items = [..._dockState.items];
+    const sepIdx = items.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
+    items.splice(sepIdx === -1 ? items.length : sepIdx, 0, folder);
+    _dockState = { ..._dockState, items };
+  },
+  deleteFolder(id: string) {
+    _dockState = {
+      ..._dockState,
+      items: _dockState.items.filter((i) => i.id !== id),
+    };
+  },
+  changeFolderColor(id: string, color: string | null) {
+    _dockState = {
+      ..._dockState,
+      items: _dockState.items.map((i) => i.id === id && i.type === WegItemType.Folder ? { ...i, color } : i),
+    };
+  },
+  /** Move a dock app item into a folder. Deduped by app identity so the same
+   * app can't be added to the same group twice. */
+  moveItemToFolder(itemId: string, folderId: string) {
+    const items = _dockState.items;
+    const moving = items.find((i) => i.id === itemId && i.type === WegItemType.AppOrFile);
+    if (!moving || itemId === folderId) return;
+    const { type: _t, ...data } = moving as Extract<WegItem, { type: "AppOrFile" }>;
+    const movingKey = appIdentity(data);
+    _dockState = {
+      ..._dockState,
+      items: items
+        .filter((i) => i.id !== itemId)
+        .map((i) => {
+          if (i.id === folderId && i.type === WegItemType.Folder) {
+            if (i.items.some((it) => appIdentity(it) === movingKey)) return i;
+            return { ...i, items: [...i.items, data] };
+          }
+          return i;
+        }),
+    };
+  },
+  /** Remove an entry from a folder, discarding it (not restored to the dock). */
+  deleteItemFromFolder(folderId: string, entryId: string) {
+    _dockState = {
+      ..._dockState,
+      items: _dockState.items.map((i) =>
+        i.id === folderId && i.type === WegItemType.Folder
+          ? { ...i, items: i.items.filter((it) => it.id !== entryId) }
+          : i
+      ),
+    };
+  },
+  /** Extract an entry out of a folder back onto the dock, before `beforeItemId`
+   * (or just before the right separator when null). */
+  insertItemFromFolderAt(folderId: string, entryId: string, beforeItemId: string | null) {
+    const items = [..._dockState.items];
+    const folder = items.find(
+      (i): i is Extract<WegItem, { type: "Folder" }> => i.id === folderId && i.type === WegItemType.Folder,
+    );
+    if (!folder) return;
+    const data = folder.items.find((it) => it.id === entryId);
+    if (!data) return;
+    const next = items.map((i) =>
+      i.id === folderId && i.type === WegItemType.Folder
+        ? { ...i, items: i.items.filter((it) => it.id !== entryId) }
+        : i
+    );
+    const restored = { type: WegItemType.AppOrFile, ...data } as unknown as WegItem;
+    const beforeIdx = beforeItemId ? next.findIndex((i) => i.id === beforeItemId) : -1;
+    if (beforeIdx === -1) {
+      const sepIdx = next.findIndex((i) => i.id === HARDCODED_SEPARATOR_RIGHT.id);
+      next.splice(sepIdx === -1 ? next.length : sepIdx, 0, restored);
+    } else {
+      next.splice(beforeIdx, 0, restored);
+    }
+    _dockState = { ..._dockState, items: next };
+  },
 };
+
+/** Stable identity for an app/file entry (same app across pinned instances):
+ * umid, else relaunch command, else path. Used to dedup folder contents. */
+function appIdentity(
+  item: { umid?: string | null; path?: string | null; relaunch?: { command?: string | null } | null },
+) {
+  return (item.umid || item.relaunch?.command || item.path || "").toLowerCase();
+}
 
 $effect.root(() => {
   $effect(() => {

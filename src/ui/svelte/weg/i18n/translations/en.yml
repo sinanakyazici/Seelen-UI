@@ -27,6 +27,8 @@ folder_item:
 media:
   label: Media Player
   not_playing: Nothing is playing
+separator:
+  create_group: Create Group
 show_desktop:
   label: Show Desktop
 start:

@@ -5,7 +5,7 @@
   import { move } from "@dnd-kit/helpers";
   import { BackgroundByLayers } from "libs/ui/svelte/components/BackgroundByLayers";
   import { t } from "../i18n/index.ts";
-  import { dockState } from "../state/items.svelte.ts";
+  import { dockState, dockStateActions } from "../state/items.svelte.ts";
   import { settingsState, getDockContextMenuAlignment } from "../state/settings.svelte.ts";
   import { systemState } from "../state/system.svelte.ts";
   import { interactables, getWindowsForItem } from "../state/windows.svelte.ts";
@@ -20,6 +20,7 @@
   import RecycleBin from "./items/RecycleBin.svelte";
   import MediaSession from "./items/MediaSession.svelte";
   import UserApplication from "./items/UserApplication.svelte";
+  import Folder from "./items/Folder.svelte";
 
   const settings = $derived(settingsState.value as any);
   const isHorizontal = $derived(
@@ -63,9 +64,38 @@
     });
   }
 
+  function itemById(id: unknown) {
+    return dockState.items.find((i) => i.id === String(id));
+  }
+
+  // A folder exposes two overlapping droppables: its sortable (id === folder id)
+  // and a dedicated "folder-drop:<id>" zone. Accept either as "drop into folder".
+  function resolveFolderId(targetId: unknown): string | undefined {
+    const id = String(targetId ?? "");
+    if (id.startsWith("folder-drop:")) return id.slice("folder-drop:".length);
+    const it = itemById(id);
+    return it?.type === WegItemType.Folder ? it.id : undefined;
+  }
+
   function handleDragOver(event: any) {
+    const { source, target } = event.operation;
+    // While dragging an app over a folder, don't reorder — let it nest on drop.
+    const src = itemById(source?.id);
+    if (src?.type === WegItemType.AppOrFile && resolveFolderId(target?.id)) {
+      return;
+    }
     const newItems = move(dockState.items, event);
     dockState.items = newItems;
+  }
+
+  function handleDragEnd(event: any) {
+    const { source, target } = event.operation;
+    if (!source || !target) return;
+    const src = itemById(source.id);
+    const folderId = resolveFolderId(target.id);
+    if (src?.type === WegItemType.AppOrFile && folderId && folderId !== String(source.id)) {
+      dockStateActions.moveItemToFolder(String(source.id), folderId);
+    }
   }
 </script>
 
@@ -82,7 +112,7 @@
 >
   <BackgroundByLayers />
   <div class="weg-items-container">
-    <DragDropProvider plugins={DND_PLUGINS} sensors={DND_SENSORS} onDragOver={handleDragOver}>
+    <DragDropProvider plugins={DND_PLUGINS} sensors={DND_SENSORS} onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
       <div class="weg-items">
         {#if isEmpty}
           <span class="weg-empty-state-label">{$t("weg.empty")}</span>
@@ -101,6 +131,8 @@
                 <Separator {item} />
               {:else if item.type === WegItemType.TrashBin}
                 <RecycleBin {item} />
+              {:else if item.type === WegItemType.Folder}
+                <Folder {item} />
               {/if}
             </DraggableItem>
           {/each}
@@ -123,6 +155,8 @@
               <Separator item={overlayItem} />
             {:else if overlayItem.type === WegItemType.TrashBin}
               <RecycleBin item={overlayItem} />
+            {:else if overlayItem.type === WegItemType.Folder}
+              <Folder item={overlayItem} isOverlay={true} />
             {/if}
           {/if}
         {/snippet}
