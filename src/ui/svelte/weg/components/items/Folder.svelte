@@ -162,7 +162,7 @@
       {#each item.items as entry (entry.id)}
         {@const entryWindows = entryWindowsOf(entry)}
         <div
-          class="weg-folder-popover-item"
+          class="weg-folder-popover-item weg-item-overlay"
           role="menuitem"
           tabindex="0"
           title={entry.displayName}
