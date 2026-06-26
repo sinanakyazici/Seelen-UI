@@ -77,6 +77,22 @@ body {
   border-radius: 0 !important;
 }
 
+/* Make icons fill their item box. The theme pads `.weg-item` by --inner-spacing
+   (config-item-size * 0.15) and only zeroes it for data-shape="square" icons,
+   so round icons sit small with a gap to the surrounding square. Zero the
+   padding for every icon-bearing dock item so round icons fill it too. Scoped
+   through #root so it wins over the theme. */
+#root .weg-item:has(.weg-item-icon) {
+  padding: 0 !important;
+}
+
+/* With the item padding removed above, adjacent icons sit flush. Add a little
+   breathing room between dock items on top of the configured spacing (scales
+   with icon size). */
+#root .weg-items {
+  gap: calc(var(--config-space-between-items) + var(--config-item-size) * 0.1) !important;
+}
+
 /** Taskbar Styles */
 .taskbar {
   position: relative;
@@ -197,7 +213,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--config-space-between-items, 8px);
+  gap: calc(var(--config-space-between-items, 8px) + var(--config-item-size) * 0.1);
   padding: 6px;
 }
 
@@ -218,8 +234,10 @@ body {
 
 .weg-folder-popover-remove {
   position: absolute;
-  top: -3px;
-  right: -3px;
+  top: 0;
+  right: 0;
+  /* above the hovered icon (which scales to 1.5 with z-index 2) so it stays
+     visible and clickable */
   z-index: 3;
   display: flex;
   align-items: center;
@@ -233,10 +251,23 @@ body {
   font-size: 11px;
   cursor: pointer;
   opacity: 0;
+  transform-origin: center;
+  transition: transform 200ms cubic-bezier(0.25, 1, 0.5, 1), opacity 200ms;
 }
 
+.weg-folder-popover-remove:hover {
+  background: rgb(0 0 0 / 95%);
+}
+
+/* On hover the icon scales 1.5 from center (overflowing the item by 0.25× on
+   each side); sit the close button on that enlarged icon's top-right corner
+   with ~30% of the button overflowing past the corner. */
 .weg-folder-popover-item:hover .weg-folder-popover-remove {
   opacity: 1;
+  transform: translate(
+    calc(var(--config-item-size) * 0.25 + 5px),
+    calc(var(--config-item-size) * -0.25 - 5px)
+  );
 }
 
 /* Highlight the folder while a dock app is dragged over it (drop target). */
@@ -264,4 +295,12 @@ body {
 }
 .weg-folder-popover-item:hover {
   margin-block: calc(var(--config-item-size) * 0.25);
+}
+
+/* Press feedback, mirroring the dock's `.weg-item:active { scale(0.8) }`. The
+   icon is magnified to 1.5 on hover; pressing shrinks it to 1.2 (same ~20%
+   ratio as the dock) with an instant press and an animated release. */
+.weg-folder-popover-item:active .weg-item-icon {
+  transform: scale(1.2);
+  transition: none;
 }
