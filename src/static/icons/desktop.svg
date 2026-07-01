@@ -35,11 +35,14 @@
               fill: #edf9ff;
             }
 
-            .cls-2, .cls-3, .cls-4 {
+            .cls-2,
+            .cls-3,
+            .cls-4 {
               fill-rule: evenodd;
             }
 
-            .cls-2, .cls-4 {
+            .cls-2,
+            .cls-4 {
               opacity: 0.69;
             }
 
