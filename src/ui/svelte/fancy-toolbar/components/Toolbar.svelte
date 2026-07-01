@@ -4,6 +4,7 @@
   import { Alignment, FancyToolbarSide } from "@seelen-ui/lib/types";
   import { DragDropProvider, DragOverlay } from "@dnd-kit/svelte";
   import { move } from "@dnd-kit/helpers";
+  import { convertFileSrc } from "@tauri-apps/api/core";
   import { onDestroy, onMount } from "svelte";
   import { BackgroundByLayers } from "libs/ui/svelte/components/BackgroundByLayers";
   import { getResourceText } from "libs/ui/react/utils/index.ts";
@@ -20,10 +21,20 @@
   import { settingsState } from "../state/settings.svelte.ts";
   import { hiddenByAutohide } from "../state/hidden.svelte.ts";
   import { windowsState } from "../state/windows.svelte.ts";
+  import {
+    PINNED_TRAY_SORTABLE_PREFIX,
+    persistPinnedOrder,
+    pinnedSortableId,
+    pinnedTray,
+    reorderPinned,
+  } from "../state/pinnedTray.svelte.ts";
+  import { matchesPinnedTrayIcon } from "libs/ui/svelte/utils/pinnedTray.ts";
+  import { trayState } from "../state/systemTray.svelte.ts";
   import { matchIds } from "../utils.ts";
   import ItemsGroup from "./ItemsGroup.svelte";
   import CornerAction from "./CornerAction.svelte";
   import Item from "./Item.svelte";
+  import PinnedTrayIcons from "./PinnedTrayIcons.svelte";
 
   // ── Derived splits ───────────────────────────────────────────────────────
 
@@ -53,6 +64,17 @@
   let unlistenTogglePlugin: (() => void) | undefined;
 
   onMount(() => {
+    // Clean up stale pinned-tray toolbar items persisted by the old React build
+    // (they carried `template: TrayIcon(...)` which the Svelte sandbox can't
+    // evaluate → "TrayIcon is not defined" spam). Pinned tray icons now live in
+    // pinned_tray_icons.json and render via <PinnedTrayIcons/>, not toolbarState.
+    const cleaned = toolbarState.items.filter(
+      (i) => typeof i === "string" || !i.id.startsWith(PINNED_TRAY_SORTABLE_PREFIX),
+    );
+    if (cleaned.length !== toolbarState.items.length) {
+      toolbarState.items = cleaned;
+    }
+
     Widget.self.webview
       .listen(onContextMenuClickEvent, ({ payload }) => {
         const { key } = payload as any;
@@ -177,9 +199,35 @@
   // ── DnD ──────────────────────────────────────────────────────────────────
 
   function handleDragOver(event: any) {
+    const srcId = String(event.operation?.source?.id ?? "");
+    // Pinned tray icons are their own sortable group; reorder them live among
+    // themselves (never interleave with toolbar items). The pinned list only
+    // depends on the stable order (icon lookup is internal), so live reordering
+    // here doesn't fight @dnd-kit the way the churn-driven list did.
+    if (srcId.startsWith(PINNED_TRAY_SORTABLE_PREFIX)) {
+      const tgtId = String(event.operation?.target?.id ?? "");
+      if (!tgtId.startsWith(PINNED_TRAY_SORTABLE_PREFIX)) return;
+      reorderPinned(srcId, tgtId);
+      return;
+    }
     const temp = toolbarState.items.map((item) => (typeof item === "string" ? item : item.id));
     const newIds = move(temp, event);
     toolbarState.items = newIds.map((id) => toolbarState.items.find((i) => matchIds(i, id))!);
+  }
+
+  function handleDragEnd(event: any) {
+    const srcId = String(event.operation?.source?.id ?? "");
+    if (srcId.startsWith(PINNED_TRAY_SORTABLE_PREFIX)) {
+      // Order was updated live in handleDragOver; persist the final order.
+      persistPinnedOrder();
+    }
+  }
+
+  // Live tray icon for a pinned sortable id, for rendering the drag overlay.
+  function overlayPinnedItem(sourceId: string) {
+    const icon = pinnedTray.icons.find((i) => pinnedSortableId(i) === sourceId);
+    if (!icon) return undefined;
+    return trayState.items.find((it) => matchesPinnedTrayIcon(it, icon));
   }
 
   // ── Resolve overlay item ──────────────────────────────────────────────────
@@ -208,20 +256,42 @@
   <CornerAction />
   <BackgroundByLayers />
 
-  <DragDropProvider plugins={DND_PLUGINS} sensors={DND_SENSORS} onDragOver={handleDragOver}>
+  <DragDropProvider
+    plugins={DND_PLUGINS}
+    sensors={DND_SENSORS}
+    onDragOver={handleDragOver}
+    onDragEnd={handleDragEnd}
+  >
     <ItemsGroup id="left" items={splittedItems.left} startIndex={0} />
     <ItemsGroup id="center" items={splittedItems.center} startIndex={splittedItems.left.length} />
     <ItemsGroup
       id="right"
       items={splittedItems.right}
       startIndex={splittedItems.left.length + splittedItems.center.length}
-    />
+    >
+      {#snippet before()}
+        <PinnedTrayIcons />
+      {/snippet}
+    </ItemsGroup>
 
     <DragOverlay>
       {#snippet children(source)}
-        {@const module = resolveOverlayModule(source.id as string)}
+        {@const sourceId = source.id as string}
+        {@const module = resolveOverlayModule(sourceId)}
         {#if module}
           <Item {module} />
+        {:else if sourceId.startsWith(PINNED_TRAY_SORTABLE_PREFIX)}
+          {@const trayItem = overlayPinnedItem(sourceId)}
+          {#if trayItem?.icon_path}
+            <div class="ft-bar-pinned-tray-item">
+              <img
+                class="ft-bar-pinned-tray-icon"
+                src={convertFileSrc(trayItem.icon_path) + `?hash=${trayItem.icon_image_hash || "null"}`}
+                alt=""
+                draggable={false}
+              />
+            </div>
+          {/if}
         {/if}
       {/snippet}
     </DragOverlay>

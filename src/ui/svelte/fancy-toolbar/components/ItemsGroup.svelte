@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { Snippet } from "svelte";
   import type { ToolbarItem, ToolbarItem2 } from "@seelen-ui/lib/types";
   import { plugins } from "../state/items.svelte.ts";
   import SortableItem from "./SortableItem.svelte";
@@ -7,12 +8,14 @@
     id: string;
     items: ToolbarItem2[];
     startIndex: number;
+    before?: Snippet;
   }
 
-  let { id, items, startIndex }: Props = $props();
+  let { id, items, startIndex, before }: Props = $props();
 </script>
 
 <div class="ft-bar-container ft-bar-{id}">
+  {@render before?.()}
   {#each items as entry, localIndex (typeof entry === "string" ? entry : entry.id)}
     {@const index = startIndex + localIndex}
     {#if typeof entry === "string"}

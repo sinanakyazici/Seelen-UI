@@ -124,7 +124,25 @@ body {
   }
 }
 
+.ft-bar-pinned-tray {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.ft-bar-pinned-tray-icon {
+  width: var(--config-item-size);
+  height: var(--config-item-size);
+  object-fit: contain;
+  /* Let pointer events fall through to the button so drag activation works from
+     the icon center too (otherwise the <img> starts a native image-drag that
+     blocks @dnd-kit — you could only grab the item by its padding edges). */
+  pointer-events: none;
+}
+
 .ft-bar-pinned-tray-item {
+  position: relative;
+  z-index: 2;
   width: calc(var(--config-item-size) + var(--item-padding) * 2);
   height: 100%;
   display: flex;

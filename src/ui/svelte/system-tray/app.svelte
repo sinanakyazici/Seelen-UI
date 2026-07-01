@@ -5,18 +5,14 @@
   import { emit } from "@tauri-apps/api/event";
   import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
   import { Icon, MissingIcon } from "libs/ui/svelte/components/Icon";
-
-  const PINNED_TRAY_CHANGED_EVENT = "seelen:pinned-tray-icons-changed";
-  const GET_PINNED_TRAY_ICONS_COMMAND = "get_pinned_tray_icons";
-  const SET_PINNED_TRAY_ICONS_COMMAND = "set_pinned_tray_icons";
-
-  type PinnedTrayIcon = {
-    key: string;
-    stableId: SysTrayIconId;
-    tooltip: string;
-    guid: string | null;
-    uid: number | null;
-  };
+  import {
+    GET_PINNED_TRAY_ICONS_COMMAND,
+    matchesPinnedTrayIcon,
+    PINNED_TRAY_CHANGED_EVENT,
+    type PinnedTrayIcon,
+    SET_PINNED_TRAY_ICONS_COMMAND,
+    toPinnedTrayIcon,
+  } from "libs/ui/svelte/utils/pinnedTray.ts";
 
   let pinnedTrayIcons = $state<PinnedTrayIcon[]>([]);
 
@@ -61,21 +57,6 @@
     return item.tooltip || item.guid || `${item.window_handle?.toString(16)}::${item.uid}`;
   }
 
-  function trayIdKey(id: SysTrayIconId) {
-    return JSON.stringify(id);
-  }
-
-  function toPinnedTrayIcon(item: SysTrayIcon): PinnedTrayIcon {
-    return {
-      key: trayIdKey(item.stable_id),
-      stableId: item.stable_id,
-      tooltip: item.tooltip,
-      guid: item.guid,
-      uid: item.uid,
-    };
-  }
-
-
   async function getPinnedTrayIcons() {
     // The backend file is the single source of truth (no localStorage fallback).
     try {
@@ -89,24 +70,6 @@
     pinnedTrayIcons = icons;
     await (invoke as any)(SET_PINNED_TRAY_ICONS_COMMAND, { pinnedIcons: icons });
     emit(PINNED_TRAY_CHANGED_EVENT, icons);
-  }
-
-  // Keep this stable identity in sync with the toolbar's PinnedTrayIcons.tsx:
-  // guid, else a tooltip stripped of its volatile numbers, else the serialized id.
-  function normalizeTooltip(tooltip: string) {
-    return tooltip.replace(/\d+/g, "").replace(/\s+/g, " ").trim();
-  }
-
-  function stableKey(guid: string | null, tooltip: string, fallback: string) {
-    if (guid) return `guid::${guid}`;
-    const normalized = normalizeTooltip(tooltip);
-    if (normalized) return `tip::${normalized}`;
-    return `sid::${fallback}`;
-  }
-
-  function matchesPinnedTrayIcon(item: SysTrayIcon, pinnedIcon: PinnedTrayIcon) {
-    return stableKey(item.guid, item.tooltip, trayIdKey(item.stable_id)) ===
-      stableKey(pinnedIcon.guid, pinnedIcon.tooltip, pinnedIcon.key);
   }
 
   function isPinned(item: SysTrayIcon) {
