@@ -3,12 +3,11 @@ pub use slu_ipc::commands::{Axis, NodeSiblingSide, Sizing, StepWay, WindowManage
 
 use seelen_core::state::twm::TwmReservation;
 
-use crate::app::emit_to_webviews;
 use crate::error::Result;
 use crate::state::application::FULL_STATE;
 use crate::virtual_desktops::SluWorkspacesManager2;
 use crate::widgets::window_manager::state_v2::{
-    set_rect_to_float_initial_size, TwmState, TwmStateEvent, WM_STATE,
+    twm_set_rect_to_float_initial_size, TwmState, TwmStateEvent, WM_STATE,
 };
 use crate::windows_api::monitor::Monitor;
 use crate::windows_api::window::Window;
@@ -35,7 +34,7 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
 
     match cmd {
         WmCommand::Toggle => {
-            emit_to_webviews("internal:twm-toggle-pause", ());
+            WM_STATE.lock().toggle_paused();
         }
         WmCommand::Width { action } => {
             let percentage = match action {
@@ -71,7 +70,7 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
                         TwmState::send(TwmStateEvent::Changed);
                     }
                 } else {
-                    set_rect_to_float_initial_size(&foreground, &foreground.monitor())?;
+                    twm_set_rect_to_float_initial_size(&foreground, &foreground.monitor())?;
                 }
             }
         }
@@ -84,7 +83,7 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
             if state.is_tiled(&foreground) {
                 state.remove(&foreground);
                 state.add_to_floating(&foreground, &workspace_id);
-                set_rect_to_float_initial_size(&foreground, &foreground.monitor())?;
+                twm_set_rect_to_float_initial_size(&foreground, &foreground.monitor())?;
             } else {
                 state.remove(&foreground);
                 state.add_to_layout(&foreground, &workspace_id);
@@ -104,6 +103,10 @@ fn process_wm_command(cmd: WmCommand) -> Result<()> {
             let fg_rect = foreground.inner_rect()?;
 
             let mut guard = WM_STATE.lock();
+            if !guard.is_tiled(&foreground) {
+                return Ok(());
+            }
+
             let Some((ws_id, _)) = guard.get_tree_for_window_mut(&foreground) else {
                 return Ok(());
             };
@@ -175,18 +178,36 @@ fn process_move_to_monitor(foreground: &Window, side: NodeSiblingSide) -> Result
         log::warn!("There is no monitor at {side:?}");
         return Ok(());
     };
+    let target_monitor_id = target_monitor.stable_id()?;
 
     if let Some(target_workspace_id) = SluWorkspacesManager2::instance()
         .monitors
-        .get(&target_monitor.stable_id()?, |m| {
-            m.active_workspace_id().clone()
-        })
+        .get(&target_monitor_id, |m| m.active_workspace_id().clone())
     {
-        let mut guard = WM_STATE.lock();
+        // Reassign via the workspaces manager (emits a single WindowMoved event) instead of
+        // mutating WM_STATE directly here. Otherwise, once the window physically lands on the
+        // target monitor, the SyntheticMonitorChanged hook finds the workspaces manager's own
+        // bookkeeping stale and re-triggers a redundant remove+add cycle, doubling up on
+        // WM_STATE updates and causing extra set_app_windows_positions calls.
+        SluWorkspacesManager2::instance().send_to(foreground, &target_workspace_id)?;
 
-        guard.remove(foreground);
-        guard.add_to_layout(foreground, &target_workspace_id);
-        TwmState::send(TwmStateEvent::Changed);
+        let is_target_paused = {
+            let guard = WM_STATE.lock();
+            guard.state.paused
+                || guard
+                    .state
+                    .paused_by_monitor
+                    .get(&target_monitor_id)
+                    .copied()
+                    .unwrap_or(false)
+        };
+        // If the target monitor is paused, its window-manager widget skips positioning
+        // entirely (see `requestPositioningOfLeaves`), so the normal layout reflow that would
+        // otherwise place the window never runs and it stays at its old screen coordinates.
+        // Place it explicitly in that case.
+        if is_target_paused {
+            twm_set_rect_to_float_initial_size(foreground, &target_monitor)?;
+        }
     }
     Ok(())
 }

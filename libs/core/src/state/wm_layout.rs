@@ -8,16 +8,20 @@ use crate::{
         },
         WorkspaceId,
     },
+    system_state::MonitorId,
     Rect,
 };
 
 pub type NodeId = u64;
 pub type WindowId = isize;
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct TwmGlobalRuntimeTree {
     pub workspaces: HashMap<WorkspaceId, TwmRuntimeTree>,
+    pub paused: bool,
+    pub paused_by_monitor: HashMap<MonitorId, bool>,
 }
 
 impl TwmGlobalRuntimeTree {
@@ -40,7 +44,8 @@ impl TwmGlobalRuntimeTree {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct TwmRuntimeTree {
     #[serde(skip)]
@@ -642,7 +647,8 @@ impl<'a> Iterator for TwmTreeIterMut<'a> {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
 pub struct TwmRuntimeNode {
     pub id: NodeId,

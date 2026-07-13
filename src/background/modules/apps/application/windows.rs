@@ -67,8 +67,7 @@ impl UserAppsManager {
             // Scan for windows that now qualify but were never tracked (e.g. style/frame
             // state was not settled at creation time).
             let _ = WindowEnumerator::new().for_each(|window| {
-                if is_interactable_window(&window) && !USER_APPS_MANAGER.contains_win(&window) {
-                    USER_APPS_MANAGER.add_win(&window);
+                if is_interactable_window(&window) && USER_APPS_MANAGER.add_win(&window) {
                     Self::send(UserAppWinEvent::Added(window.address()));
                 }
             });
@@ -82,8 +81,10 @@ impl UserAppsManager {
 
         match event {
             WinEvent::ObjectCreate | WinEvent::ObjectShow => {
-                if !is_interactable && is_interactable_window(&window) {
-                    USER_APPS_MANAGER.add_win(&window);
+                if !is_interactable
+                    && is_interactable_window(&window)
+                    && USER_APPS_MANAGER.add_win(&window)
+                {
                     Self::send(UserAppWinEvent::Added(window.address()));
                 }
             }
@@ -95,8 +96,9 @@ impl UserAppsManager {
                 is_interactable = is_interactable_window(&window);
                 match (was_interactable, is_interactable) {
                     (false, true) => {
-                        USER_APPS_MANAGER.add_win(&window);
-                        Self::send(UserAppWinEvent::Added(window.address()));
+                        if USER_APPS_MANAGER.add_win(&window) {
+                            Self::send(UserAppWinEvent::Added(window.address()));
+                        }
                     }
                     (true, false) => {
                         USER_APPS_MANAGER.remove_win(&window);
@@ -108,10 +110,9 @@ impl UserAppsManager {
                 // re-check for UWP apps that on creation starts without a parent
                 if event == WinEvent::ObjectParentChange {
                     if let Some(parent) = window.parent() {
-                        if !USER_APPS_MANAGER.contains_win(&parent)
-                            && parent.is_interactable_and_not_hidden()
+                        if parent.is_interactable_and_not_hidden()
+                            && USER_APPS_MANAGER.add_win(&parent)
                         {
-                            USER_APPS_MANAGER.add_win(&parent);
                             Self::send(UserAppWinEvent::Added(parent.address()));
                         }
                     }
@@ -124,6 +125,7 @@ impl UserAppsManager {
                     Self::send(UserAppWinEvent::Removed(window.address()));
                 }
             }
+            #[allow(clippy::collapsible_match)]
             WinEvent::ObjectDestroy => {
                 if is_interactable {
                     USER_APPS_MANAGER.remove_win(&window);
@@ -175,13 +177,12 @@ impl UserAppsManager {
                 data.is_iconic = false;
                 true
             }
-            WinEvent::SyntheticFullscreenStart => {
-                data.is_fullscreen = true;
-                true
-            }
-            WinEvent::SyntheticFullscreenEnd => {
-                data.is_fullscreen = false;
-                true
+            WinEvent::SyntheticFullscreenStart | WinEvent::SyntheticFullscreenEnd => {
+                // here we do a double check to see because native shell reports fullscreen ends on focus change,
+                // but the window on background can still be fullscreened
+                let old = data.is_fullscreen;
+                data.is_fullscreen = Window::from(data.hwnd).is_fullscreen();
+                old != data.is_fullscreen
             }
             _ => false,
         }

@@ -2,6 +2,21 @@
 
 ## [2.7.5-dev]
 
+### enhancements
+
+- toolbar and dock autohide on overlap logic for multimonitor setups.
+- tooltips on sliders.
+- bluetooth toolbar module.
+- twm animations for multimonitor movement.
+
+### fix
+
+- fullscreen state being removed from background windows on foreground change.
+- dock and toolbar hidding while dragging items.
+- state while switching workspaces.
+- twm window not being moved when there is a fullscreen app on target monitor.
+- native taskbar autohide being disabled on settings save.
+
 ## [2.7.4]
 
 ### enhancements

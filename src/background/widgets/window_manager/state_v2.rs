@@ -19,12 +19,13 @@ use crate::{
     error::{Result, ResultLogExt},
     event_manager,
     hook::HookManager,
+    modules::apps::application::UserAppsManager,
     state::application::FULL_STATE,
     utils::lock_free::TracedMutex,
     virtual_desktops::{events::VirtualDesktopEvent, SluWorkspacesManager2},
     widgets::window_manager::{
         cli::{Axis, NodeSiblingSide, StepWay},
-        handler::{schedule_window_position, set_app_windows_positions},
+        handler::{set_app_window_position, set_app_windows_positions},
         WindowManagerV2,
     },
     windows_api::{monitor::Monitor, window::Window},
@@ -86,6 +87,14 @@ impl TwmState {
 
         HookManager::subscribe(|(event, origin)| {
             WindowManagerV2::process_win_event(event, origin).log_error()
+        });
+
+        self.recompute_paused_by_monitor();
+        UserAppsManager::subscribe(|_event| {
+            let mut state = WM_STATE.lock();
+            if state.recompute_paused_by_monitor() {
+                TwmState::send(TwmStateEvent::Changed);
+            }
         });
 
         let settings = FULL_STATE.load();
@@ -259,7 +268,7 @@ impl TwmState {
         match side {
             TwmReservation::Float => {
                 self.add_to_floating(window, workspace_id);
-                set_rect_to_float_initial_size(window, &window.monitor()).log_error();
+                twm_set_rect_to_float_initial_size(window, &window.monitor()).log_error();
             }
             TwmReservation::Stack => {
                 let tree = self.get_or_insert_tree_mut(workspace_id);
@@ -313,7 +322,7 @@ impl TwmState {
         let residual = tree.add_to_tiled(window.address());
         for w in residual {
             tree.add_to_floating(w);
-            set_rect_to_float_initial_size(window, &window.monitor()).log_error();
+            twm_set_rect_to_float_initial_size(window, &window.monitor()).log_error();
         }
     }
 
@@ -324,7 +333,7 @@ impl TwmState {
                 let residual = tree.remove_window(&window_id);
                 for w in residual {
                     tree.add_to_floating(w);
-                    set_rect_to_float_initial_size(window, &window.monitor()).log_error();
+                    twm_set_rect_to_float_initial_size(window, &window.monitor()).log_error();
                 }
                 break;
             }
@@ -502,6 +511,28 @@ impl TwmState {
 
         *old = new_layout;
         Self::send(TwmStateEvent::Changed);
+    }
+
+    pub fn toggle_paused(&mut self) {
+        self.state.paused = !self.state.paused;
+        Self::send(TwmStateEvent::Changed);
+    }
+
+    /// Recomputes `paused_by_monitor` from the live interactable-windows list.
+    /// Returns `true` if the computed value changed.
+    pub fn recompute_paused_by_monitor(&mut self) -> bool {
+        let mut computed: HashMap<seelen_core::system_state::MonitorId, bool> = HashMap::new();
+        for w in UserAppsManager::instance().interactable_windows.to_vec() {
+            let flag = (w.is_zoomed || w.is_fullscreen) && !w.is_iconic;
+            let entry = computed.entry(w.monitor.clone()).or_insert(false);
+            *entry = *entry || flag;
+        }
+
+        if computed == self.state.paused_by_monitor {
+            return false;
+        }
+        self.state.paused_by_monitor = computed;
+        true
     }
 
     pub fn toggle_monocle(&mut self, workspace_id: &WorkspaceId) {
@@ -740,7 +771,7 @@ impl TwmState {
     }
 }
 
-pub fn set_rect_to_float_initial_size(window: &Window, monitor: &Monitor) -> Result<()> {
+pub fn twm_set_rect_to_float_initial_size(window: &Window, monitor: &Monitor) -> Result<()> {
     let guard = FULL_STATE.load();
     let config = &guard.settings.by_widget.wm.floating;
 
@@ -755,14 +786,13 @@ pub fn set_rect_to_float_initial_size(window: &Window, monitor: &Monitor) -> Res
     let x = monitor_rect.left + (monitor_width - window_width) / 2;
     let y = monitor_rect.top + (monitor_height - window_height) / 2;
 
-    schedule_window_position(
-        window.address(),
+    set_app_window_position(
+        window,
         Rect {
             left: x,
             top: y,
             right: x + window_width,
             bottom: y + window_height,
         },
-    );
-    Ok(())
+    )
 }

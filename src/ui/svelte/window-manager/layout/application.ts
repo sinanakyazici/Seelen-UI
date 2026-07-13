@@ -1,16 +1,10 @@
-import { invoke, SeelenCommand, Widget } from "@seelen-ui/lib";
+import { invoke, SeelenCommand } from "@seelen-ui/lib";
 import type { Rect } from "@seelen-ui/lib/types";
 import { toPhysicalPixels } from "libs/ui/react/utils";
 import type { State } from "../state.svelte";
 
-const monitorId = Widget.self.decoded.monitorId!;
-
 export function requestPositioningOfLeaves(state: State) {
-  const someIsMaximizedOnBg = state.interactables.some(
-    (app) => app.monitor === monitorId && (app.isZoomed || app.isFullscreen) && !app.isIconic,
-  );
-
-  if (someIsMaximizedOnBg || state.paused) {
+  if (state.paused) {
     return;
   }
 

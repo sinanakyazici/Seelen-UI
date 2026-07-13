@@ -19,7 +19,7 @@
     HARDCODED_SEPARATOR_RIGHT,
   } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
-  import { hiddenByAutohide } from "../state/hidden.svelte.ts";
+  import { hiddenByAutohide, setToolbarIsDraggingItem } from "../state/hidden.svelte.ts";
   import { windowsState } from "../state/windows.svelte.ts";
   import {
     PINNED_TRAY_SORTABLE_PREFIX,
@@ -215,7 +215,12 @@
     toolbarState.items = newIds.map((id) => toolbarState.items.find((i) => matchIds(i, id))!);
   }
 
+  function handleDragStart() {
+    setToolbarIsDraggingItem(true);
+  }
+
   function handleDragEnd(event: any) {
+    setToolbarIsDraggingItem(false);
     const srcId = String(event.operation?.source?.id ?? "");
     if (srcId.startsWith(PINNED_TRAY_SORTABLE_PREFIX)) {
       // Order was updated live in handleDragOver; persist the final order.
@@ -259,6 +264,7 @@
   <DragDropProvider
     plugins={DND_PLUGINS}
     sensors={DND_SENSORS}
+    onDragStart={handleDragStart}
     onDragOver={handleDragOver}
     onDragEnd={handleDragEnd}
   >

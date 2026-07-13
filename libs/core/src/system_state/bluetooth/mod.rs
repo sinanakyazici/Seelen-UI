@@ -1,22 +1,24 @@
 // all this structs are based on official docs https://www.bluetooth.com/specifications/assigned-numbers
 #[cfg(test)]
-mod build_low_energy_enums;
+mod build_enums;
 
-pub mod enums;
+#[rustfmt::skip]
 pub mod low_energy_enums;
+#[rustfmt::skip]
+pub mod class_of_device_enums;
 
-use enums::*;
+use class_of_device_enums::{BluetoothClass, BluetoothMajorServiceClass};
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct BluetoothDevice {
     pub id: String,
     pub name: String,
     pub address: u64,
     pub major_service_classes: Vec<BluetoothMajorServiceClass>,
-    pub major_class: BluetoothMajorClass,
-    pub minor_class: BluetoothMinorClass,
+    pub class: BluetoothClass,
     /// only available for low energy devices
     pub appearance: Option<low_energy_enums::BLEAppearance>,
     pub connected: bool,
@@ -28,110 +30,30 @@ pub struct BluetoothDevice {
 }
 
 impl BluetoothDevice {
-    fn map_services_classes(class: u32) -> Vec<BluetoothMajorServiceClass> {
-        use BluetoothMajorServiceClass::*;
-        [
-            LimitedDiscoverableMode,
-            LowEnergyAudio,
-            Reserved,
-            Positioning,
-            Networking,
-            Rendering,
-            Capturing,
-            ObjectTransfer,
-            Audio,
-            Telephony,
-            Information,
-        ]
-        .into_iter()
-        .filter(|&service| class & service as u32 != 0)
-        .collect()
-    }
+    pub fn get_parts_of_class(class: u32) -> (Vec<BluetoothMajorServiceClass>, BluetoothClass) {
+        let major_service_classes = BluetoothMajorServiceClass::from_bits(class >> 13);
 
-    pub fn get_parts_of_class(
-        class: u32,
-    ) -> (
-        Vec<BluetoothMajorServiceClass>,
-        BluetoothMajorClass,
-        BluetoothMinorClass,
-    ) {
-        let major_service_classes = class >> 13;
-        let major_service_classes = Self::map_services_classes(major_service_classes);
+        let major = ((class >> 8) & 0b11111) as u8; // 5 bits
+        let minor = ((class >> 2) & 0b111111) as u8; // 6 bits
+        let class = BluetoothClass::from_major_and_minor(major, minor);
 
-        let major_class = (class >> 8) & 0b11111; // 5 bits
-        let major_class = BluetoothMajorClass::from(major_class as u8);
-
-        let minor_class = ((class >> 2) & 0b111111) as u8; // 6 bits
-        let minor_class = match major_class {
-            BluetoothMajorClass::Miscellaneous => BluetoothMinorClass::Miscellaneous {
-                unused: minor_class,
-            },
-            BluetoothMajorClass::Computer => {
-                BluetoothMinorClass::Computer(BluetoothComputerMinor::from(minor_class))
-            }
-            BluetoothMajorClass::Phone => {
-                BluetoothMinorClass::Phone(BluetoothPhoneMinor::from(minor_class))
-            }
-            BluetoothMajorClass::NetworkAccessPoint => {
-                let minor_class = minor_class >> 3 & 0b111; // 3 bits
-                let sub_minor_class = minor_class & 0b111; // 3 bits
-                BluetoothMinorClass::NetworkAccessPoint(
-                    BluetoothNetworkMinor::from(minor_class),
-                    BluetoothNetworkSubMinor::from(sub_minor_class),
-                )
-            }
-            BluetoothMajorClass::AudioVideo => {
-                BluetoothMinorClass::AudioVideo(BluetoothAudioVideoMinor::from(minor_class))
-            }
-            BluetoothMajorClass::Peripheral => {
-                let minor_class = minor_class >> 4 & 0b11; // 2 bits
-                let sub_minor_class = minor_class & 0b1111; // 4 bits
-                BluetoothMinorClass::Peripheral(
-                    BluetoothPeripheralMinor::from(minor_class),
-                    BluetoothPeripheralSubMinor::from(sub_minor_class),
-                )
-            }
-            BluetoothMajorClass::Imaging => {
-                let minor_class = minor_class >> 2 & 0b1111; // 4 bits
-                let sub_minor_class = minor_class & 0b11; // 2 bits
-
-                use BluetoothImagingMinor::*;
-                let flags: Vec<BluetoothImagingMinor> = [Display, Camera, Scanner, Printer]
-                    .into_iter()
-                    .filter(|&flag| minor_class & flag as u8 != 0)
-                    .collect();
-
-                BluetoothMinorClass::Imaging(flags, BluetoothImagingSubMinor::from(sub_minor_class))
-            }
-            BluetoothMajorClass::Wearable => {
-                BluetoothMinorClass::Wearable(BluetoothWearableMinor::from(minor_class))
-            }
-            BluetoothMajorClass::Toy => {
-                BluetoothMinorClass::Toy(BluetoothToyMinor::from(minor_class))
-            }
-            BluetoothMajorClass::Health => {
-                BluetoothMinorClass::Health(BluetoothHealthMinor::from(minor_class))
-            }
-            BluetoothMajorClass::Uncategorized => BluetoothMinorClass::Uncategorized {
-                unused: minor_class,
-            },
-        };
-
-        (major_service_classes, major_class, minor_class)
+        (major_service_classes, class)
     }
 }
 
-#[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct BluetoothDevicePairShowPinRequest {
     pub pin: String,
     pub confirmation_needed: bool,
 }
 
-#[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(tag = "needs")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub enum DevicePairingNeededAction {
     /// No extra action is needed
     None,
@@ -149,9 +71,10 @@ pub enum DevicePairingNeededAction {
     ProvideAddress,
 }
 
-#[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Hash, Eq, PartialEq, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct DevicePairingAnswer {
     pub accept: bool,
     pub pin: Option<String>,

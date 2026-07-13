@@ -4,14 +4,17 @@ use uuid::Uuid;
 
 use crate::{error::Result, identifier_impl, resource::WallpaperId, system_state::MonitorId};
 
-#[derive(Debug, Default, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 #[serde(default, rename_all = "camelCase")]
-#[cfg_attr(feature = "gen-binds", ts(export))]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), ts(export))]
 pub struct VirtualDesktops {
     /// Workspaces per monitor
     pub monitors: HashMap<MonitorId, VirtualDesktopMonitor>,
     /// pinned windows will be not affected by switching workspaces
     pub pinned: Vec<isize>,
+    /// true if the system is currently switching workspaces
+    pub switching: bool,
 }
 
 impl VirtualDesktops {
@@ -28,7 +31,8 @@ impl VirtualDesktops {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct VirtualDesktopMonitor {
     pub workspaces: Vec<DesktopWorkspace>,
     active_workspace: WorkspaceId,
@@ -149,7 +153,8 @@ impl VirtualDesktopMonitor {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize, TS)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct DesktopWorkspace {
     pub id: WorkspaceId,
     pub name: Option<String>,
@@ -172,7 +177,8 @@ impl DesktopWorkspace {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema, TS)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash, Serialize, Deserialize, JsonSchema)]
+#[cfg_attr(all(feature = "gen-binds", not(feature = "salvo")), derive(ts_rs::TS))]
 pub struct WorkspaceId(pub String);
 
 identifier_impl!(WorkspaceId, String);

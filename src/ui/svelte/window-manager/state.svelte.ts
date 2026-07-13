@@ -1,4 +1,3 @@
-import { listen } from "@tauri-apps/api/event";
 import { invoke, RuntimeStyleSheet, SeelenCommand, SeelenEvent, Settings, subscribe, Widget } from "@seelen-ui/lib";
 import { declareDocumentAsLayeredHitbox } from "libs/ui/react/utils/layered";
 import type { FocusedApp, TwmReservation, TwmRuntimeTree, WindowManagerSettings } from "@seelen-ui/lib/types";
@@ -28,11 +27,6 @@ subscribe(SeelenEvent.WMSetReservation, (e) => {
 let forceRepositioning = $state(0);
 subscribe(SeelenEvent.WMForceRetiling, () => {
   forceRepositioning++;
-});
-
-let paused = $state(false);
-listen("internal:twm-toggle-pause", () => {
-  paused = !paused;
 });
 
 const [focusedAppInit, settingsInit] = await Promise.all([
@@ -79,7 +73,7 @@ $effect.root(() => {
 //                   Positioning
 // =================================================
 
-const monitorId = Widget.getCurrent().decoded.monitorId;
+const monitorId = Widget.getCurrent().decoded.monitorId!;
 
 const widgetRect = $derived.by(() => {
   const monitor = monitors.value.find((m) => m.id === monitorId);
@@ -165,6 +159,10 @@ await declareDocumentAsLayeredHitbox({
 
 export type State = _State;
 class _State {
+  readonly paused = $derived.by(
+    () => layouts.value.paused || !!layouts.value.pausedByMonitor[monitorId],
+  );
+
   getLayout(monitorId: string): TwmRuntimeTree | null {
     const activeWsId = workspaces.value?.monitors?.[monitorId]?.active_workspace;
     if (!activeWsId) return null;
@@ -184,9 +182,6 @@ class _State {
   }
   get reservation() {
     return reservation;
-  }
-  get paused() {
-    return paused;
   }
   get widgetRect() {
     return widgetRect;

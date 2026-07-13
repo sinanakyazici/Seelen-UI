@@ -1,11 +1,10 @@
-cargo-features = ["profile-rustflags", "codegen-backend"]
+cargo-features = ["codegen-backend"]
 
 [profile.dev]
 debug = "full"
 strip = false
 opt-level = 0
 incremental = false
-rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
 
 [profile.rust-analyzer]
 inherits = "dev"
@@ -17,13 +16,13 @@ strip = true
 opt-level = "z"
 lto = true
 codegen-units = 1
-rustflags = ["-Z", "threads=8", "-C", "link-arg=-fuse-ld=lld"]
 
 [workspace]
 members = [
   "libs/core",
   "libs/positioning",
   "libs/slu-ipc",
+  "libs/slu-macros",
   "libs/utils",
   "src",
   "src/hook_dll",
@@ -66,9 +65,11 @@ rayon = "1.10"
 regex = "1.12.3"
 reqwest = "0.13.1"
 rust-i18n = "4.1.0"
+salvo = { git = "https://github.com/eythaann/salvo.git" }
 sha2 = "0.10.9"
 seelen-core = { path = "libs/core" }
 slu-ipc = { path = "libs/slu-ipc" }
+slu-macros = { path = "libs/slu-macros" }
 slu-utils = { path = "libs/utils" }
 positioning = { path = "libs/positioning" }
 sysinfo = "0.38.3"
