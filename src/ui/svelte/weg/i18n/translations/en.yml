@@ -42,6 +42,7 @@ taskbar_menu:
   remove_media: Remove Media Module
   remove_start: Remove Start Module
   remove_trash_bin: Remove Recycle Bin Module
+  modules: Modules
   settings: Settings
   start: Add Start Module
   task_manager: Task Manager

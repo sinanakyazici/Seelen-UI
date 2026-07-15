@@ -1,6 +1,18 @@
 # Changelog
 
-## [2.7.5-dev]
+## [2.8.0-dev]
+
+### features
+
+- plugins system for dock/taskbar.
+- add clock plugin to dock.
+- add network plugin to dock
+- add bluetooth plugin to dock.
+- add notifications plugin to dock.
+- add system tray plugin to dock.
+- add keyboard selector plugin to dock.
+- add battery plugin to dock.
+- add volume plugin to dock.
 
 ### enhancements
 
@@ -16,6 +28,7 @@
 - state while switching workspaces.
 - twm window not being moved when there is a fullscreen app on target monitor.
 - native taskbar autohide being disabled on settings save.
+- icon editor missing translations.
 
 ## [2.7.4]
 

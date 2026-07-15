@@ -6,7 +6,7 @@
   import { Icon, FileIcon } from "libs/ui/svelte/components/Icon/index.ts";
   import { t } from "../../i18n/index.ts";
   import type { FolderWegItem, AppOrFileWegItem } from "../../types.ts";
-  import { settingsState, getDockContextMenuAlignment } from "../../state/settings.svelte.ts";
+  import { settingsState } from "../../state/settings.svelte.ts";
   import { interactables, getWindowsForItem, windowsState, focused } from "../../state/windows.svelte.ts";
   import { launchItem } from "../../appMenu.ts";
   import { getFolderContextMenu, getFolderEntryContextMenu } from "../../folderMenu.ts";
@@ -111,7 +111,8 @@
 
   function onFolderContextMenu(e: MouseEvent) {
     e.stopPropagation();
-    const { alignX, alignY } = getDockContextMenuAlignment(settingsState.position);
+    const alignX = settingsState.popupAlignX;
+    const alignY = settingsState.popupAlignY;
     invoke(SeelenCommand.TriggerContextMenu, {
       menu: { ...getFolderContextMenu($t, item), alignX, alignY },
       forwardTo: null,
@@ -121,7 +122,8 @@
   function onEntryContextMenu(entry: FolderWegItem["items"][number], e: MouseEvent) {
     e.stopPropagation();
     e.preventDefault();
-    const { alignX, alignY } = getDockContextMenuAlignment(settingsState.position);
+    const alignX = settingsState.popupAlignX;
+    const alignY = settingsState.popupAlignY;
     invoke(SeelenCommand.TriggerContextMenu, {
       menu: { ...getFolderEntryContextMenu($t, item.id, entry.id), alignX, alignY },
       forwardTo: null,
