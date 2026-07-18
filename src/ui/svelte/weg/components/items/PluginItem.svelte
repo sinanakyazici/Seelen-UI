@@ -3,7 +3,11 @@
   import type { WegPluginItem as WegPluginPayload, WidgetId } from "@seelen-ui/lib/types";
   import type { PluginWegItem } from "../../types.ts";
   import { t } from "../../i18n/index.ts";
-  import { getMenuForItem } from "../../generalMenu.ts";
+  import {
+    getEditCustomIconEntry,
+    getEmptyTrashBinEntry,
+    getMenuForItem,
+  } from "../../generalMenu.ts";
   import {
     compileSandboxed,
     createPluginSandbox,
@@ -14,6 +18,7 @@
   } from "../../pluginEval.svelte.ts";
   import { resolveScopes } from "libs/ui/svelte/utils/scopes.svelte.ts";
   import { prefersDarkColorScheme } from "libs/ui/svelte/runes/DarkMode.svelte.ts";
+  import { SpecificIcon } from "libs/ui/svelte/components/Icon/index.ts";
 
   import { settingsState } from "../../state/settings.svelte.ts";
 
@@ -52,12 +57,18 @@
   const onClickExec = $derived(compileSandboxed(sandbox, payload.onClick));
 
   const tooltipText = $derived(
-    payload.tooltip ? stringFromEvaluated(evalSanboxed(tooltipExec, scope)) : undefined,
+    payload.tooltip ? stringFromEvaluated(evalSanboxed(tooltipExec, scope)) : null,
   );
 
   const badgeText = $derived(
-    payload.badge ? stringFromEvaluated(evalSanboxed(badgeExec, scope)) : undefined,
+    payload.badge ? stringFromEvaluated(evalSanboxed(badgeExec, scope)) : null,
   );
+
+  const customIconKey = $derived(
+    payload.noCanvas ? stringFromEvaluated(evalSanboxed(renderExec, scope)) : null,
+  );
+
+  const hasTrashBinScope = $derived(payload.scopes.some((s) => s.toLowerCase() === "trashbin"));
 
   function handleClick() {
     evalActionSanboxed(onClickExec, {
@@ -69,14 +80,25 @@
     e.stopPropagation();
     const alignX = settingsState.popupAlignX;
     const alignY = settingsState.popupAlignY;
+
+    const menu = getMenuForItem($t, item);
+
+    if (customIconKey) {
+      menu.items.unshift(getEditCustomIconEntry($t, customIconKey), { type: "Separator" });
+    }
+
+    if (hasTrashBinScope) {
+      menu.items.unshift(getEmptyTrashBinEntry($t), { type: "Separator" });
+    }
+
     invoke(SeelenCommand.TriggerContextMenu, {
-      menu: { ...getMenuForItem($t, item), alignX, alignY },
+      menu: { ...menu, alignX, alignY },
       forwardTo: null,
     });
   }
 
   $effect(() => {
-    if (!renderExec || !img) return;
+    if (payload.noCanvas || !renderExec || !img) return;
 
     const computed = getComputedStyle(img);
     evalSanboxed(renderExec, {
@@ -131,7 +153,11 @@
       oncontextmenu={handleContextMenu}
       onkeypress={() => {}}
     >
-      <img bind:this={img} class="weg-item-icon" alt="" />
+      {#if payload.noCanvas}
+        <SpecificIcon class="weg-item-icon" name={customIconKey || ""} />
+      {:else}
+        <img bind:this={img} class="weg-item-icon" alt="" />
+      {/if}
     </div>
 
     {#if badgeText}

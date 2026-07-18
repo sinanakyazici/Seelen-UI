@@ -10,55 +10,70 @@
   import { move } from "@dnd-kit/helpers";
   import { BackgroundByLayers } from "libs/ui/svelte/components/BackgroundByLayers";
   import { t } from "../i18n/index.ts";
-  import { dockState, dockStateActions } from "../state/items.svelte.ts";
+  import { dockState, dockStateActions, listToGroups } from "../state/items.svelte.ts";
   import { settingsState } from "../state/settings.svelte.ts";
   import { systemState } from "../state/system.svelte.ts";
   import { interactables, getWindowsForItem } from "../state/windows.svelte.ts";
   import { dockShouldBeHidden, setDockIsDraggingItem } from "../state/hidden.svelte.ts";
   import { getSeelenWegMenu } from "../dockMenu.ts";
   import { DND_PLUGINS, DND_SENSORS } from "libs/ui/dnd.ts";
-  import DraggableItem from "./DraggableItem.svelte";
+  import type { SwItem } from "../types.ts";
+  import DockItemsGroup from "./DockItemsGroup.svelte";
   import WegItemSwitch from "./WegItemSwitch.svelte";
 
   const settings = $derived(settingsState.value as any);
-  const isHorizontal = $derived(
-    settings?.position === "Top" || settings?.position === "Bottom",
-  );
+  const isHorizontal = $derived(settings?.position === "Top" || settings?.position === "Bottom");
 
-  const visibleItems = $derived.by(() => {
+  function isItemVisible(item: SwItem): boolean {
     const pinnedVisibility = settings?.pinnedItemsVisibility as WegPinnedItemsVisibility;
     const temporalVisibility = settings?.temporalItemsVisibility as WegTemporalItemsVisibility;
     const monitor = systemState.currentMonitor;
 
-    const showPinned =
-      pinnedVisibility === WegPinnedItemsVisibility.Always || monitor.isPrimary;
-    const filterByMonitor =
-      temporalVisibility === WegTemporalItemsVisibility.OnMonitor;
+    const showPinned = pinnedVisibility === WegPinnedItemsVisibility.Always || monitor.isPrimary;
+    const filterByMonitor = temporalVisibility === WegTemporalItemsVisibility.OnMonitor;
 
     const windows = filterByMonitor
       ? interactables.value.filter((w) => w.monitor === monitor.id)
       : interactables.value;
 
-    return dockState.items.filter((item) => {
-      if (item.type !== "AppOrFile") {
-        return showPinned;
-      }
-      if (item.pinned && showPinned) {
-        return true;
-      }
-      return getWindowsForItem(item as any, windows).length > 0;
-    });
-  });
+    if (item.type !== "AppOrFile") {
+      return showPinned;
+    }
+    if (item.pinned && showPinned) {
+      return true;
+    }
+    return getWindowsForItem(item as any, windows).length > 0;
+  }
+
+  // splits the flat items array (left..., left-separator, center..., right-separator, ...right)
+  // into their three groups, same as the toolbar does
+  const groupedItems = $derived(listToGroups(dockState.items));
+  const visibleGroupedItems = $derived.by(() => ({
+    left: groupedItems.left.filter(isItemVisible),
+    center: groupedItems.center.filter(isItemVisible),
+    right: groupedItems.right.filter(isItemVisible),
+  }));
 
   const isEmpty = $derived(
-    visibleItems.filter((c) => c.type !== WegItemType.Separator).length === 0,
+    [
+      ...visibleGroupedItems.left,
+      ...visibleGroupedItems.center,
+      ...visibleGroupedItems.right,
+    ].filter((c) => c.type !== "Separator").length === 0,
   );
 
-  function onContextMenu() {
+  const itemIndexById = $derived.by(() => {
+    const map = new Map<string, number>();
+    dockState.items.forEach((item, i) => map.set(item.id, i));
+    return map;
+  });
+
+  function onContextMenu(e: MouseEvent) {
     const alignX = settingsState.popupAlignX;
     const alignY = settingsState.popupAlignY;
+    const cursor = { x: e.clientX, y: e.clientY };
     invoke(SeelenCommand.TriggerContextMenu, {
-      menu: { ...getSeelenWegMenu($t), alignX, alignY },
+      menu: { ...getSeelenWegMenu($t, cursor), alignX, alignY },
       forwardTo: null,
     });
   }
@@ -127,17 +142,15 @@
         {#if isEmpty}
           <span class="weg-empty-state-label">{$t("weg.empty")}</span>
         {:else}
-          {#each visibleItems as item, index (item.id)}
-            <DraggableItem {item} {index}>
-              <WegItemSwitch {item} />
-            </DraggableItem>
-          {/each}
+          <DockItemsGroup id="left" items={visibleGroupedItems.left} {itemIndexById} />
+          <DockItemsGroup id="center" items={visibleGroupedItems.center} {itemIndexById} />
+          <DockItemsGroup id="right" items={visibleGroupedItems.right} {itemIndexById} />
         {/if}
       </div>
 
       <DragOverlay>
         {#snippet children(source)}
-          {@const overlayItem = visibleItems.find((c) => c.id === source.id)}
+          {@const overlayItem = dockState.items.find((c) => c.id === source.id)}
           {#if overlayItem}
             <WegItemSwitch item={overlayItem} isOverlay={true} />
           {/if}

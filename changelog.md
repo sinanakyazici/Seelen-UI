@@ -13,6 +13,7 @@
 - add keyboard selector plugin to dock.
 - add battery plugin to dock.
 - add volume plugin to dock.
+- Separators for dock.
 
 ### enhancements
 
@@ -29,6 +30,12 @@
 - twm window not being moved when there is a fullscreen app on target monitor.
 - native taskbar autohide being disabled on settings save.
 - icon editor missing translations.
+- dock drag and sorting not working properly.
+- dock full size not working on vertical mode.
+- twm flickering on stacks when manual uniminized a window from a stack in another workspace.
+- wallpaper incorrect size/position after monitor hotplug (stale virtual screen metrics).
+- widgets not being created/destroyed on monitors change.
+- stucked tooltips.
 
 ## [2.7.4]
 
